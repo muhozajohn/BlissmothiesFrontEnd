@@ -12,6 +12,9 @@
   .container {
     @apply mx-auto w-[90%] max-w-full px-5;
   }
+  body {
+    @apply bg-bgColor;
+  }
 }
 @media screen and (max-width: 1024px) {
   .container {

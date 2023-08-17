@@ -2,8 +2,10 @@ import React from 'react'
 
 const Events = () => {
   return (
-    <div>Events</div>
-  )
+    <div className="">
+      <button className=" btn">Explore More</button>
+    </div>
+  );
 }
 
 export default Events

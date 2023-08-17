@@ -9,7 +9,7 @@ export default {
         footerColor: "#645E57",
         overLayColor: "#E7C584",
         headingColor: "#FE5201",
-        textColor: "#000000",
+        textColor: "#D9D9D9",
       },
       boxShadow: {
         panelShadow: "rgba(17,12,46,0.15) 0px 48px 100px 0px",

@@ -1,4 +1,3 @@
-import Logo1 from "../../assets/images/dessert_1.png.webp";
 import logo from "../../assets/images/logo-no-background.png";
 import { FaWhatsapp, FaTwitter, FaInstagram,FaFacebook,FaYoutube,FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -102,13 +101,13 @@ const Footer = () => {
         </div>
       </div>
       <div className=" bg-white ">
-        <div className="container py-5  lg:flex lg:items-center lg:justify-between md:flex items-center md:justify-between ">
+        <div className="container py-5  grid grid-cols-1 lg:grid-cols-3 md:grid-cols-1  gap-3">
           <div>
             <p>Copyright &copy; {year} Blissmothies</p>
           </div>
-          <div><p>Special Thanks To &copy; <Link to="muhoza.vercel.app" target="_blanck">Muhoza John</Link> </p></div>
+          <div className="flex justify-center"><p>Special Thanks To &copy; <Link to="muhoza.vercel.app" target="_blanck">Muhoza John</Link> </p></div>
 
-          <div className="flex items-center gap-4 ">
+          <div className="flex items-center gap-4 justify-end">
             <span className="text-[1.6rem] bg-btnColor text-white px-1 py-1 rounded cursor-pointer hover:text-footerColor">
               <Link to="" target="_blanck"><FaInstagram /></Link>
             </span>

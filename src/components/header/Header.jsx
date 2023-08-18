@@ -2,7 +2,7 @@ import { NavLink, Link } from "react-router-dom";
 import { navLinks } from "../../assets/navLinks";
 import { useEffect, useRef } from "react";
 import { BiMenu } from "react-icons/bi";
-import logo from "../../assets/images/logo-no-background.png";
+import logo from "../../assets/images/logok.png";
 import user from "../../assets/images/d.jpg";
 const Header = () => {
   const headerRef = useRef(null);
@@ -29,7 +29,7 @@ const Header = () => {
       <header className="text-white bg-[rgba(0,0,0,0.8)]  " ref={headerRef}>
         {/* <div className="bg-[rgba(0,0,0,0.8)] "> */}
         <div className="container flex justify-between items-center h-[100px]">
-          <div className="w-16 h-16">
+          <div className="lg:w-32 lg:h-32 w-24 h-24">
             <Link to="/home">
               <img src={logo} alt="" className="" />
             </Link>

@@ -1,4 +1,4 @@
-import logo from "../../assets/images/logo-no-background.png";
+import logo from "../../assets/images/logok.png";
 import { FaWhatsapp, FaTwitter, FaInstagram,FaFacebook,FaYoutube,FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -13,7 +13,7 @@ const Footer = () => {
               Blissfull Smoothies
             </h1>
             <div className="mt-4">
-              <img src={logo} alt="" className="w-1/4 ml-7 " />
+              <img src={logo} alt="" className="w-1/2 ml-7 " />
             </div>
           </div>
           <div>

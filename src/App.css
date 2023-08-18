@@ -32,8 +32,8 @@ body {
 }
 .sticky-header {
   position: sticky;
-  height: 80px;
-  line-height: 80px;
+  height: 100px;
+  line-height: 100px;
   width: 100%;
   top: 0;
   left: 0;

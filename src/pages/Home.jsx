@@ -7,7 +7,7 @@ const Home = () => {
       <nav className="header h-screen ">
         <div className=" h-screen w-full bg-[rgba(0,0,0,0.8)]">
           <div className="container text-white">
-            <div className="h-[35vh]"></div>
+            <div className="h-[10vh] lg:h-[25vh]"></div>
             <div className=" text-center">
               <h1 className=" font-bold lg:text-2xl md:text-[18px] md:leading-8 leading-8 text-btnColor lg:text-white">
                 Treat Yourself
@@ -29,28 +29,42 @@ const Home = () => {
             </div>
           </div>
           <div className="container">
-            <div className="  rounded-xl lg:mt-[6rem] md:mt-[12rem] mt-4 mb-8 w-full lg:w-[80%] mx-auto bg-white flex flex-col lg:flex-row items-center lg:flex gap-8 lg:justify-between px-5 py-3">
+            <div className="  rounded-xl lg:mt-[10rem] md:mt-[10rem] mt-[5rem] mb-8 w-full lg:w-[80%] mx-auto bg-white flex flex-col lg:flex-row items-center lg:flex gap-8 lg:justify-between px-5 py-7">
               <div className="grid grid-cols-1 w-full lg:w-auto  lg:grid-cols-3 gap-5">
                 <div className=" bg-textColor px-4 py-4 w-full lg:w-[13vw] rounded-full flex items-center justify-between">
-                  <p className="text-sm">Date Arrival </p>{" "}
-                  <p>
-                    {" "}
-                    <FaCalendarAlt />{" "}
-                  </p>{" "}
+                  <p className="text-sm">Date Arrival </p>
+                  <p className="flex">
+                    <input
+                      type="date"
+                      className="w-full lg:w-5 bg-transparent "
+                    />
+                  </p>
                 </div>
                 <div className=" bg-textColor px-4 py-4 w-full lg:w-[13vw] rounded-full flex items-center justify-between">
-                  <p className="text-sm">Date Departure </p>{" "}
-                  <p>
-                    {" "}
-                    <FaCalendarAlt />{" "}
-                  </p>{" "}
+                  <p className="text-sm">Date Departure </p>
+                  <p className="flex">
+                    <input
+                      type="date"
+                      className="w-full lg:w-5 bg-transparent "
+                    />
+                  </p>
                 </div>
                 <div className=" bg-textColor px-4 py-4 w-full lg:w-[13vw] rounded-full flex items-center justify-between">
-                  <p className="text-sm"># of Person</p>{" "}
+                  <select
+                    name=""
+                    id=""
+                    className=" bg-transparent border-collapse focus:border-none w-full "
+                  >
+                    <option># of Person</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5+</option>
+                  </select>
                   <p>
-                    {" "}
-                    <FaUser />{" "}
-                  </p>{" "}
+                    <FaUser />
+                  </p>
                 </div>
               </div>
 
@@ -61,7 +75,7 @@ const Home = () => {
           </div>
         </div>
       </nav>
-      <section className="mt-[8rem] lg:mt-3">
+      <section className="mt-[4rem] lg:mt-3">
         <div className="container flex flex-col gap-5">
           <div className="mt-16">
             <h2 className="text-lg font-[800] text-center ">

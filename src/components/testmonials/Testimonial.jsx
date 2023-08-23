@@ -13,7 +13,7 @@ const Testimonial = () => {
           <div className="grid grid-cols-1  gap-6 lg:grid-cols-2">
             <div className="w-[40vw] px-5 py-3 flex flex-col gap-6 ">
               <div>
-                <p className="text-xl font-medium">Testimonials</p>
+                <p className="text-xl font-medium">Testimonials zxus</p>
                 <h2 className="text-2xl font-bold">
                   Satisfied <span className="text-white">Customers</span>{" "}
                 </h2>

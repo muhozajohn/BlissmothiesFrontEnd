@@ -1,6 +1,8 @@
 import { NavLink, Link } from "react-router-dom";
 import { FaUser, FaCalendarAlt } from "react-icons/fa";
 import menuLiks from "../assets/menuLinks";
+import MenuCards from "./MenuCards";
+import Chief from "./Chief";
 const Home = () => {
   return (
     <>
@@ -31,7 +33,7 @@ const Home = () => {
           <div className="container">
             <div className="  rounded-xl lg:mt-[10rem] md:mt-[10rem] mt-[5rem] mb-8 w-full lg:w-[80%] mx-auto bg-white flex flex-col lg:flex-row items-center lg:flex gap-8 lg:justify-between px-5 py-7">
               <div className="grid grid-cols-1 w-full lg:w-auto  lg:grid-cols-3 gap-5">
-                <div className=" bg-textColor px-4 py-4 w-full lg:w-[13vw] rounded-full flex items-center justify-between">
+                <div className=" bg-textColor px-4 py-4 w-full lg:w-[13vw] rounded-xl flex items-center justify-between">
                   <p className="text-sm">Date Arrival </p>
                   <p className="flex">
                     <input
@@ -40,7 +42,7 @@ const Home = () => {
                     />
                   </p>
                 </div>
-                <div className=" bg-textColor px-4 py-4 w-full lg:w-[13vw] rounded-full flex items-center justify-between">
+                <div className=" bg-textColor px-4 py-4 w-full lg:w-[13vw] rounded-xl flex items-center justify-between">
                   <p className="text-sm">Date Departure </p>
                   <p className="flex">
                     <input
@@ -49,7 +51,7 @@ const Home = () => {
                     />
                   </p>
                 </div>
-                <div className=" bg-textColor px-4 py-4 w-full lg:w-[13vw] rounded-full flex items-center justify-between">
+                <div className=" bg-textColor px-4 py-4 w-full lg:w-[13vw] rounded-xl flex items-center justify-between">
                   <select
                     name=""
                     id=""
@@ -68,7 +70,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className=" bg-btnColor flex items-center w-full justify-center cursor-pointer text-white py-4  lg:w-[13vw] rounded-full font-[600] ">
+              <div className=" bg-btnColor flex items-center w-full justify-center cursor-pointer text-white py-4  lg:w-[13vw] rounded-xl font-[600] ">
                 Send Request
               </div>
             </div>
@@ -99,16 +101,22 @@ const Home = () => {
                 <NavLink
                   to={link.path}
                   key={index}
-                  className="btn flex items-center justify-center"
+                  className={(navClass) =>
+                    navClass.isActive
+                      ? " rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center"
+                      : " rounded-xl bg-transparent border border-btnColor text-black px-[30px] py-[10px] font-[600] flex items-center justify-center "
+                  }
+                  // className="rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center"
                 >
-                  {" "}
-                  {link.display}{" "}
+                  {link.display}
                 </NavLink>
               );
             })}
           </div>
+          <MenuCards />
         </div>
       </section>
+      <Chief />
     </>
   );
 };

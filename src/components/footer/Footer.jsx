@@ -13,7 +13,7 @@ const Footer = () => {
               Blissfull Smoothies
             </h1>
             <div className="mt-4">
-              <img src={logo} alt="" className="w-1/2 ml-7 " />
+              <img src={logo} alt="" className="lg:w-1/2 ml-7 w-20 " />
             </div>
           </div>
           <div>

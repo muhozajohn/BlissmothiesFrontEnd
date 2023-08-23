@@ -1,6 +1,6 @@
 export const menuLiks = [
   {
-    path: "/all",
+    path: "/",
     display: "All",
   },
   {

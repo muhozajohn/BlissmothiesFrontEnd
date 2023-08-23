@@ -4,6 +4,7 @@ import menuLiks from "../assets/menuLinks";
 import MenuCards from "./MenuCards";
 import Chief from "./Chief";
 import Deserts from "./Deserts";
+import Testimonial from "../components/testmonials/Testimonial";
 const Home = () => {
   return (
     <>
@@ -118,7 +119,8 @@ const Home = () => {
         </div>
       </section>
       <Chief />
-      <Deserts/>
+      <Deserts />
+      <Testimonial />
     </>
   );
 };

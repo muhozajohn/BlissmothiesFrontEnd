@@ -15,11 +15,15 @@ const Chief = () => {
               @kwizera Emmy
             </small>
             <div className="flex gap-2 items-center relative">
-              <img src={chiefb} alt="" className="lg:w-[20vw] w-1/2 rounded-xl" />
+              <img
+                src={chiefb}
+                alt=""
+                className="lg:w-[20vw] w-1/2 rounded-xl  lg:mt-0 mt-20 "
+              />
               <img
                 src={chiefa}
                 alt=""
-                className=" mt-20 lg:w-[20vw] w-1/2  rounded-xl"
+                className=" lg:mt-20 lg:w-[20vw] w-1/2  rounded-xl"
               />
             </div>
           </div>
@@ -39,8 +43,8 @@ const Chief = () => {
               <span className="text-[20px] font-[400] ">Opening Days: </span>
               Mon - San 8 AM - 12 PM
             </div>
-            <div className="flex px-5 py-3 w-full rounded-xl bg-btnColor flex-col gap-5 text-white">
-              <h1 className="font-[600] text-xl">Getin Touch</h1>
+            <div className="flex px-5 py-3 w-full rounded-xl bg-white flex-col gap-5 text-black">
+              <h1 className="font-[600] text-xl text-btnColor">Getin Touch</h1>
               <p className="flex justify-between items-center">
                 <span className="font-[500] text-xl">Tel: </span>
                 <span className="font-[200] text-sm">+250 785 161 508</span>

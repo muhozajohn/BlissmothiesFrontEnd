@@ -3,6 +3,7 @@ import { FaUser, FaCalendarAlt } from "react-icons/fa";
 import menuLiks from "../assets/menuLinks";
 import MenuCards from "./MenuCards";
 import Chief from "./Chief";
+import Deserts from "./Deserts";
 const Home = () => {
   return (
     <>
@@ -117,6 +118,7 @@ const Home = () => {
         </div>
       </section>
       <Chief />
+      <Deserts/>
     </>
   );
 };

@@ -15,11 +15,11 @@ const Chief = () => {
               @kwizera Emmy
             </small>
             <div className="flex gap-2 items-center relative">
-              <img src={chiefb} alt="" className="w-[20vw] rounded-xl" />
+              <img src={chiefb} alt="" className="lg:w-[20vw] w-1/2 rounded-xl" />
               <img
                 src={chiefa}
                 alt=""
-                className=" mt-20 w-[20vw]  rounded-xl"
+                className=" mt-20 lg:w-[20vw] w-1/2  rounded-xl"
               />
             </div>
           </div>

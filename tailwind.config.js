@@ -6,7 +6,7 @@ export default {
       colors: {
         bgColor: "#FFE2B2",
         btnColor: "#FE5201",
-        footerColor: "#645E57",
+        footerColor: "#0B0A0A",
         overLayColor: "#E7C584",
         headingColor: "#FE5201",
         textColor: "#D9D9D9",

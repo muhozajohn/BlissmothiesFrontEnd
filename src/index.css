@@ -22,7 +22,7 @@
     @apply  w-full bg-[url(./assets/images/hd-bg.png)] bg-cover bg-center bg-no-repeat z-50;
   }
     .btn {
-    @apply  rounded-[50px] bg-btnColor px-[35px] py-[15px] font-[600] text-white;
+    @apply  rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white;
   }
 }
 @media screen and (max-width: 1024px) {

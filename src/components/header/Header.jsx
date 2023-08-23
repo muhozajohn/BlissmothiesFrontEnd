@@ -26,10 +26,10 @@ const Header = () => {
   const toggleMenu = () => menuRef.current.classList.toggle("show-menu");
   return (
     <>
-      <header className="text-white bg-[rgba(0,0,0,0.8)]  " ref={headerRef}>
+      <header className="text-white bg-footerColor  " ref={headerRef}>
         {/* <div className="bg-[rgba(0,0,0,0.8)] "> */}
         <div className="container flex justify-between items-center h-[100px]">
-          <div className="lg:w-32 lg:h-32 w-24 h-24">
+          <div className="lg:w-28 lg:h-28 w-24 h-24">
             <Link to="/home">
               <img src={logo} alt="" className="" />
             </Link>
@@ -53,9 +53,9 @@ const Header = () => {
             </ul>
           </div>
           <div className="flex items-center gap-4">
-            <div className="md:hidden hidden lg:flex w-12 h-12 rounded-full bg-overLayColor cursor-pointer  items-center justify-center">
+            <div className="md:hidden hidden lg:flex w-11 h-11 rounded-full bg-overLayColor cursor-pointer  items-center justify-center">
               {/* <FaUser className="text-btnColor" /> */}
-              <img src={user} alt="" className="w-12 h-12 rounded-full" />
+              <img src={user} alt="" className="w-10 h-10 rounded-full" />
             </div>
 
             <Link to="/book-table">
@@ -64,7 +64,7 @@ const Header = () => {
             </Link>
 
             <span
-              className="md:hidden px-2 py-2 bg-btnColor rounded-xl"
+              className="md:hidden px-1 py-1 bg-btnColor rounded-xl"
               onClick={toggleMenu}
             >
               <BiMenu className="h-8 w-8 cursor-pointer text-white" />

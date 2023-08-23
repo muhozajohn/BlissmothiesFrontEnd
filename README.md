@@ -7,7 +7,7 @@
 
 # 📖 [Blissmothies Coffe shop] <a name="about-project"></a>
 
-**[Blissmothies Coffe shop]** is official Eagle Spiri Acdemy Website
+**[Blissmothies Coffe shop]** is official Blissmothies Website
 
 ## 🛠 Built With <a name="built-with">React, Tailwindcss</a>
 

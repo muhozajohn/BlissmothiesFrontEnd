@@ -1,13 +1,13 @@
 <div align="center">
  
-  <h3><b>Eagle Spirit Academy</b></h3>
+  <h3><b>Keller Blissmothies Coffe shop</b></h3>
 
 </div>
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [Eagle Spirit Academy Web] <a name="about-project"></a>
+# 📖 [Blissmothies Coffe shop] <a name="about-project"></a>
 
-**[Eagle Spirit Academy]** is official Eagle Spiri Acdemy Website
+**[Blissmothies Coffe shop]** is official Eagle Spiri Acdemy Website
 
 ## 🛠 Built With <a name="built-with">React, Tailwindcss</a>
 
@@ -22,8 +22,8 @@ To run this project, follow these steps.
 Clone this repository to your desired folder:
 
 ```sh
-  git clone https://github.com/Reconfort/EagleSpirit.git
-  cd EagleSpirit
+  git clone [https://github.com/muhozajohn/BlissmothiesFrontEnd.git]
+  cd blismothiesfrontend
   npm install
   npm run dev
 ```
@@ -36,7 +36,7 @@ to run the project, open using your favorite code editor and run on the browser 
 
 <!-- AUTHORS -->
 
-## 👥 Authors <a name="authors">Reconfort, John The Saint</a>
+## 👥 Authors <a name="authors">John The Saint</a>
 
 <!-- FUTURE FEATURES -->
 

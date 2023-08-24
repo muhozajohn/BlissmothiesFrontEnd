@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        bgColor: "#FFE2B2",
+        bgColor: "#e7c484b0",
         btnColor: "#FE5201",
         footerColor: "#0B0A0A",
         overLayColor: "#E7C584",

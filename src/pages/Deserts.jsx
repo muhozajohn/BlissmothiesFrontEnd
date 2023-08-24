@@ -13,7 +13,7 @@ const Deserts = () => {
             Popular <span className="text-btnColor">Deserts</span>
           </h2>
         </div>
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 mt-10">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 mt-10">
           <div className="px-5 py-3 bg-transparent border border-black rounded-xl hover:bg-white cursor-pointer flex items-center gap-2 justify-center">
             <img src={D1} alt="" />
             <div>

@@ -1,6 +1,13 @@
 import chiefa from "../assets/images/chiefa.jpg";
 import chiefb from "../assets/images/chiefb.jpg";
-
+import {
+  FaWhatsapp,
+  FaTwitter,
+  FaInstagram,
+  FaFacebook,
+  FaYoutube,
+  FaLinkedin,
+} from "react-icons/fa";
 const Chief = () => {
   return (
     <section>
@@ -8,10 +15,12 @@ const Chief = () => {
         <h2 className="font-[800] text-xl">
           Our chef cooks the most delicious food for you
         </h2>
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 md:grid-cols-2 mt-10">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 md:grid-cols-1 mt-10">
           <div>
-            <h2 className="text-lg font-bold">Chief Food Master </h2>
-            <small className="text-btnColor text-[13px] font-[500]">
+            <h2 className="text-lg font-bold md:text-xl md:font-extrabold">
+              Chief Food Master{" "}
+            </h2>
+            <small className="text-btnColor text-[14px] md:text-lg font-[500]">
               @kwizera Emmy
             </small>
             <div className="flex gap-2 items-center relative">
@@ -43,18 +52,49 @@ const Chief = () => {
               <span className="text-[20px] font-[400] ">Opening Days: </span>
               Mon - San 8 AM - 12 PM
             </div>
-            <div className="flex px-5 py-3 w-full rounded-xl bg-white flex-col gap-5 text-black">
-              <h1 className="font-[600] text-xl text-btnColor">Getin Touch</h1>
-              <p className="flex justify-between items-center">
-                <span className="font-[500] text-xl">Tel: </span>
-                <span className="font-[200] text-sm">+250 785 161 508</span>
+            <div className="flex px-5 py-3 w-full rounded-xl bg-bgColor flex-col gap-5 text-black">
+              <h1 className="font-[600] text-xl text-btnColor md:text-3xl md:font-extrabold">
+                Getin Touch
+              </h1>
+              <p className="flex flex-col lg:flex-row  lg:justify-between md:flex-row md:justify-between">
+                <span className="font-[300] text-xl lg:text-lg md:text-2xl md:font-bold">
+                  Tel:{" "}
+                </span>
+                <span className="font-[200] text-sm lg:text-sm leading-8 md:text-xl">
+                  +250 785 161 508
+                </span>
               </p>
-              <p className="flex justify-between items-center">
-                <span className="font-[500] text-xl">Email: </span>
-                <span className="font-[200] text-sm">
+              <p className="flex flex-col lg:flex-row  lg:justify-between md:flex-row md:justify-between">
+                <span className="font-[300] text-xl lg:text-lg md:text-2xl md:font-bold">
+                  Email:{" "}
+                </span>
+                <span className="font-[200] text-[17px] lg:text-sm leading-8 md:text-xl">
                   kellerblissfullsmoothies@outlook.com
                 </span>
               </p>
+            </div>
+            <div className="flex flex-col gap-6">
+              <h2 className="text-xl font-[800]">Chef Media</h2>
+              <div className="flex items-center lg:gap-6 gap-2">
+                <div className="flex items-center justify-center  text-btnColor px-1 py-2 bg-overLayColor h-12 w-12 rounded-full cursor-pointer hover:bg-btnColor hover:text-white">
+                  <FaInstagram className="font-[800] text-2xl " />
+                </div>
+                <div className="flex items-center justify-center text-btnColor  px-1 py-2 bg-overLayColor h-12 w-12 rounded-full cursor-pointer hover:bg-btnColor hover:text-white">
+                  <FaTwitter className="font-[800] text-2xl " />
+                </div>
+                <div className="flex items-center justify-center text-btnColor  px-1 py-2 bg-overLayColor h-12 w-12 rounded-full cursor-pointer hover:bg-btnColor hover:text-white">
+                  <FaFacebook className="font-[800] text-2xl " />
+                </div>
+                <div className="flex items-center justify-center text-btnColor px-1 py-2 bg-overLayColor h-12 w-12 rounded-full cursor-pointer hover:bg-btnColor hover:text-white">
+                  <FaYoutube className="font-[800] text-2xl " />
+                </div>
+                <div className="flex items-center justify-center text-btnColor  px-1 py-2 bg-overLayColor h-12 w-12 rounded-full cursor-pointer hover:bg-btnColor hover:text-white">
+                  <FaLinkedin className="font-[800] text-2xl " />
+                </div>
+                <div className="flex items-center justify-center text-btnColor  px-1 py-2 bg-overLayColor h-12 w-12 rounded-full cursor-pointer hover:bg-btnColor hover:text-white">
+                  <FaWhatsapp className="font-[800] text-2xl " />
+                </div>
+              </div>
             </div>
           </div>
         </div>

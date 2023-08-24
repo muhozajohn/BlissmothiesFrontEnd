@@ -109,10 +109,10 @@ const Footer = () => {
 
           <div className="flex items-center gap-4 justify-end">
             <span className="text-[1.6rem] bg-btnColor text-white px-1 py-1 rounded cursor-pointer hover:text-footerColor">
-              <Link to="" target="_blanck"><FaInstagram /></Link>
+              <Link to="muhoza" target="_blanck"><FaInstagram /></Link>
             </span>
             <span className="text-[1.6rem] bg-btnColor text-white px-1 py-1 rounded cursor-pointer hover:text-footerColor">
-              <Link to="" target="_blanck"><FaTwitter /></Link>
+              <Link to="" target=""><FaTwitter /></Link>
             </span>
             <span className="text-[1.6rem] bg-btnColor text-white px-1 py-1 rounded cursor-pointer hover:text-footerColor">
               <Link to="" target="_blanck"><FaFacebook /></Link>

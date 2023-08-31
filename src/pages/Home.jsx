@@ -5,6 +5,8 @@ import MenuCards from "./MenuCards";
 import Chief from "./Chief";
 import Deserts from "./Deserts";
 import Testimonial from "../components/testmonials/Testimonial";
+import Events from "./Event";
+import Book from "./Book";
 const Home = () => {
   return (
     <>
@@ -29,7 +31,9 @@ const Home = () => {
               </p>
             </div>
             <div className="mt-10 flex items-center justify-center">
-              <button className="btn">Explore More</button>
+              <Link to="/about">
+                <button className="btn">Explore More</button>
+              </Link>
             </div>
           </div>
           <div className="container">
@@ -121,6 +125,8 @@ const Home = () => {
       <Chief />
       <Deserts />
       <Testimonial />
+      <Events />
+      <Book />
     </>
   );
 };

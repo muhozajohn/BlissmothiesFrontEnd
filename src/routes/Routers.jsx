@@ -6,6 +6,7 @@ import Gallery from "../components/gallery/Gallery";
 import Events from "../components/events/Events";
 import { Routes, Route } from "react-router-dom";
 import Table from "../components/table/Table";
+import OneBlog from "../pages/OneBlog";
 const Routers = () => {
   return (
     <Routes>
@@ -17,6 +18,7 @@ const Routers = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/about" element={<About />} />
       <Route path="/book-table" element={<Table />} />
+      <Route path="/blog" element={<OneBlog />} />
     </Routes>
   );
 };

@@ -78,6 +78,9 @@ body {
   background: linear-gradient(#e7c484c2, #e7c484b0),
     url(./assets/images/overlay.png);
 }
+.bgt {
+  background: url(./assets/images/overlay.png);
+}
 .bgg {
   background-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0.6)),
     url(./assets/images/hd-bg.png);

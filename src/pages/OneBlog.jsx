@@ -1,5 +1,7 @@
 import A from "../assets/images/e.jpg";
 import B from "../assets/images/log1.png";
+import B1 from "../assets/images/logo-white.png";
+import C from "../assets/images/c.jpg";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 const OneBlog = () => {
@@ -112,10 +114,136 @@ const OneBlog = () => {
               </div>
             </div>
 
-            <div className="bg-white  w-full lg:w-[40vw]">
-              <div className="flex flex-col lg:flex-row items-center gap-2">
-                <div className=" bg-black w-full"> 1</div>
-                <div className=" bg-green-500 w-full">2</div>
+            <div className="bg-white  w-full lg:w-[40vw] py-4 px-4 flex flex-col gap-6">
+              <div className="flex flex-col gap-3">
+                <div className="w-full flex flex-col gap-3">
+                  <h2 className="text-lg font-semibold">Foods, And Drinks</h2>
+                  <div className="flex flex-row gap-3 lg:flex-row">
+                    <div className="w-[150px] h-[100px]">
+                      <img src={C} alt="" className="w-full h-full" />
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <div>
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur, adipisicing
+                          elit. Natus, similique.
+                        </p>
+                      </div>
+                      <div className="flex gap-3 ">
+                        <div className="w-[40px] h-[40px] rounded-full">
+                          <img
+                            src={B1}
+                            alt=""
+                            className="w-full h-full rounded-full"
+                          />
+                        </div>
+                        <div className="flex flex-col ">
+                          <h1 className="text-[13px] font-extrabold">Zxus</h1>
+                          <small className="text-[10px] font-bold">
+                            Developer
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-row gap-3 lg:flex-row">
+                    <div className="w-[150px] h-[100px]">
+                      <img src={A} alt="" className="w-full h-full" />
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <div>
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur, adipisicing
+                          elit. Natus, similique.
+                        </p>
+                      </div>
+                      <div className="flex gap-3 ">
+                        <div className="w-[40px] h-[40px] rounded-full">
+                          <img
+                            src={B}
+                            alt=""
+                            className="w-full h-full rounded-full"
+                          />
+                        </div>
+                        <div className="flex flex-col ">
+                          <h1 className="text-[13px] font-extrabold">
+                            Keller{" "}
+                          </h1>
+                          <small className="text-[10px] font-bold">
+                            Founder, ceo
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full flex flex-col gap-3">
+                  <h2 className="text-lg font-semibold">Party, And Events</h2>
+                  <div className="flex flex-row gap-3 lg:flex-row">
+                    <div className="w-[150px] h-[100px]">
+                      <img src={C} alt="" className="w-full h-full" />
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <div>
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur, adipisicing
+                          elit. Natus, similique.
+                        </p>
+                      </div>
+                      <div className="flex gap-3 ">
+                        <div className="w-[40px] h-[40px] rounded-full">
+                          <img
+                            src={B1}
+                            alt=""
+                            className="w-full h-full rounded-full"
+                          />
+                        </div>
+                        <div className="flex flex-col ">
+                          <h1 className="text-[13px] font-extrabold">Zxus</h1>
+                          <small className="text-[10px] font-bold">
+                            Developer
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-row gap-3 lg:flex-row">
+                    <div className="w-[150px] h-[100px]">
+                      <img src={A} alt="" className="w-full h-full" />
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <div>
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur, adipisicing
+                          elit. Natus, similique.
+                        </p>
+                      </div>
+                      <div className="flex gap-3 ">
+                        <div className="w-[40px] h-[40px] rounded-full">
+                          <img
+                            src={B}
+                            alt=""
+                            className="w-full h-full rounded-full"
+                          />
+                        </div>
+                        <div className="flex flex-col ">
+                          <h1 className="text-[13px] font-extrabold">
+                            Keller{" "}
+                          </h1>
+                          <small className="text-[10px] font-bold">
+                            Founder, ceo
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <Link to="/book-table">
+                    <div className="w-[200px] btn flex justify-between items-center">
+                      <p>view More</p>{" "}
+                      <BsArrowRight className="font-bold text-xl" />{" "}
+                    </div>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import Services from "./Services";
 const Events = () => {
   return (
     <section>
@@ -158,6 +159,7 @@ const Events = () => {
           </Swiper>
         </div>
       </div>
+      <Services />
     </section>
   );
 };

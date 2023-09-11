@@ -5,9 +5,9 @@ const Table = () => {
     <div>
       <div className="bgt py-5">
         <div className="container grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white px-5 py-5 flex flex-col gap-5 items-center justify-center">
+          <div className="bg-white lg:px-5 py-5 px-5 flex flex-col gap-5 items-center justify-center">
             <h2 className="text-2xl font-bold">Make Reservation</h2>
-            <form className="grid grid-cols-2 gap-6">
+            <form className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
               <div className="flex flex-col gap-2">
                 <label htmlFor="" className="text-sm">
                   Firstname

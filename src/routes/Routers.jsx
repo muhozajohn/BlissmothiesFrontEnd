@@ -7,6 +7,8 @@ import Events from "../components/events/Events";
 import { Routes, Route } from "react-router-dom";
 import Table from "../components/table/Table";
 import OneBlog from "../pages/OneBlog";
+import Login from "../pages/Login" 
+import Signup from "../pages/Signup";
 const Routers = () => {
   return (
     <Routes>
@@ -19,6 +21,8 @@ const Routers = () => {
       <Route path="/about" element={<About />} />
       <Route path="/book-table" element={<Table />} />
       <Route path="/blog" element={<OneBlog />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
     </Routes>
   );
 };

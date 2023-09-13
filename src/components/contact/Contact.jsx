@@ -9,12 +9,12 @@ const Contact = () => {
         </div>
       </div>
       <section>
-        {/* <div className="container grid grid-cols-1 lg:grid-cols-2 gap-6"> */}
-        <div className="container flex gap-6 items-start justify-start">
-          <div className="w-1/2 h-1/2 lg:h-[80vh] overflow-hidden ">
+        <div className="container grid grid-cols-1 lg:grid-cols-2 gap-6">
+       
+          <div className="h-1/2 lg:h-[80vh] overflow-hidden ">
             <img src={maap} alt="" className="rounded-xl w-full h-full " />
           </div>
-          <div className="flex flex-col gap-6 md:mt-[-28rem] lg:mt-0 mt-[-12rem] w-1/2">
+          <div className="flex flex-col gap-6 md:mt-[-28rem] lg:mt-0  mt-[-13rem]">
             <p className="text-xl font-bold">Contact Us</p>
             <form action="" className="flex flex-col gap-4">
               <input

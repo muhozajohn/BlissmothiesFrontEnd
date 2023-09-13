@@ -53,10 +53,12 @@ const Header = () => {
             </ul>
           </div>
           <div className="flex items-center gap-4">
-            <div className="md:hidden hidden lg:flex w-11 h-11 rounded-full bg-overLayColor cursor-pointer  items-center justify-center">
-              {/* <FaUser className="text-btnColor" /> */}
-              <img src={user} alt="" className="w-10 h-10 rounded-full" />
-            </div>
+            <Link to="/login">
+              <div className="md:hidden hidden lg:flex w-11 h-11 rounded-full bg-overLayColor cursor-pointer  items-center justify-center">
+                {/* <FaUser className="text-btnColor" /> */}
+                <img src={user} alt="" className="w-10 h-10 rounded-full" />
+              </div>
+            </Link>
 
             <Link to="/book-table">
               <span className="btn">Book table</span>

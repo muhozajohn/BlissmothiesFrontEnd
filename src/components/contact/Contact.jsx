@@ -1,4 +1,4 @@
-import maap from "../../assets/images/map.jpg"
+import maap from "../../assets/images/map.jpg";
 
 const Contact = () => {
   return (
@@ -9,27 +9,28 @@ const Contact = () => {
         </div>
       </div>
       <section>
-        <div className="container grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="w-full h-1/2 lg:h-[90vh] overflow-hidden ">
+        {/* <div className="container grid grid-cols-1 lg:grid-cols-2 gap-6"> */}
+        <div className="container flex gap-6 items-start justify-start">
+          <div className="w-1/2 h-1/2 lg:h-[80vh] overflow-hidden ">
             <img src={maap} alt="" className="rounded-xl w-full h-full " />
           </div>
-          <div className="flex flex-col gap-6 md:mt-[-28rem] lg:mt-0 mt-[-12rem]">
-            <h2 className="text-2xl font-bold">Contact Us</h2>
+          <div className="flex flex-col gap-6 md:mt-[-28rem] lg:mt-0 mt-[-12rem] w-1/2">
+            <p className="text-xl font-bold">Contact Us</p>
             <form action="" className="flex flex-col gap-4">
               <input
                 type="text"
                 placeholder="Your Name"
-                className="px-3  py-3 bg-transparent border border-solid border-black placeholder-black  "
+                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  "
               />
               <input
                 type="text"
                 placeholder="Your Email"
-                className="px-3  py-3 bg-transparent border border-solid border-black placeholder-black  "
+                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm "
               />
               <input
                 type="text"
                 placeholder="SubJect"
-                className="px-3  py-3 bg-transparent border border-solid border-black placeholder-black  "
+                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm "
               />
               <textarea
                 name=""
@@ -37,9 +38,11 @@ const Contact = () => {
                 id=""
                 cols="30"
                 rows="10"
-                className="px-3  py-3 bg-transparent border border-solid border-black placeholder-black "
+                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
               ></textarea>
-              <div className="btn w-fit cursor-pointer">Send Message</div>
+              <div className="btn w-fit cursor-pointer rounded-sm">
+                Send Message
+              </div>
             </form>
           </div>
         </div>

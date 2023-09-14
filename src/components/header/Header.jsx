@@ -36,6 +36,7 @@ const Header = () => {
           </div>
           <div className="navigation" ref={menuRef} onClick={toggleMenu}>
             <ul className="flex gap-8 items-center menu">
+              {/* <li>login</li> */}
               {navLinks.map((link, index) => (
                 <li key={index}>
                   <NavLink
@@ -49,7 +50,9 @@ const Header = () => {
                     {link.display}
                   </NavLink>
                 </li>
+                
               ))}
+            <Link to="/login" className="lg:hidden">Login</Link>
             </ul>
           </div>
           <div className="flex items-center gap-4">

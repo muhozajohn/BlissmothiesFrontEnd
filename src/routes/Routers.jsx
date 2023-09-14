@@ -9,6 +9,7 @@ import Table from "../components/table/Table";
 import OneBlog from "../pages/OneBlog";
 import Login from "../pages/Login" 
 import Signup from "../pages/Signup";
+import UserCustomer from "../pages/UserCustomer";
 const Routers = () => {
   return (
     <Routes>
@@ -23,6 +24,7 @@ const Routers = () => {
       <Route path="/blog" element={<OneBlog />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/user" element={<UserCustomer />} />
     </Routes>
   );
 };

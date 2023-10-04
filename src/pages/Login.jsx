@@ -19,13 +19,12 @@ const Login = () => {
               placeholder="Password"
               className="py-3 px-3 border border-gray-400 rounded-sm outline-none active:outline-none text-sm"
             />
-            <Link to="/user">
-            
-            <input
-              type="button"
-              value="Login"
-              className="btn cursor-pointer py-3 px-3 rounded-sm w-full"
-            />
+            <Link to="/Dashboard">
+              <input
+                type="button"
+                value="Login"
+                className="btn cursor-pointer py-3 px-3 rounded-sm w-full"
+              />
             </Link>
             <p className="text-center font-semibold text-sm">
               Don't have an account?{" "}

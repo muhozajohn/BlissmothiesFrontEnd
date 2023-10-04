@@ -2,6 +2,7 @@ import { NavLink, Link } from "react-router-dom";
 import { navLinks } from "../../assets/navLinks";
 import { useEffect, useRef } from "react";
 import { BiMenu } from "react-icons/bi";
+import { FaCartPlus } from "react-icons/fa";
 import logo from "../../assets/images/logok.png";
 import user from "../../assets/images/d.jpg";
 const Header = () => {
@@ -50,9 +51,16 @@ const Header = () => {
                     {link.display}
                   </NavLink>
                 </li>
-                
               ))}
-            <Link to="/login" className="lg:hidden">Login</Link>
+              <Link to="/login" className="lg:hidden">
+                Login
+              </Link>
+              <Link
+                to="/carts-items"
+                className="bg-btnColor rounded-lg px-2 py-2  lg:hidden "
+              >
+                <FaCartPlus className="text-lg font-bold" />
+              </Link>
             </ul>
           </div>
           <div className="flex items-center gap-4">
@@ -61,6 +69,12 @@ const Header = () => {
                 {/* <FaUser className="text-btnColor" /> */}
                 <img src={user} alt="" className="w-10 h-10 rounded-full" />
               </div>
+            </Link>
+            <Link
+              to="/carts-items"
+              className="bg-btnColor rounded-lg px-2 py-2 hidden lg:block "
+            >
+              <FaCartPlus className="text-lg font-bold" />
             </Link>
 
             <Link to="/book-table">

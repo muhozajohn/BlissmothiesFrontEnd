@@ -10,6 +10,7 @@ import OneBlog from "../pages/OneBlog";
 import Login from "../pages/Login" 
 import Signup from "../pages/Signup";
 import UserCustomer from "../pages/UserCustomer";
+import Dashboard from "../pages/Dashboard";
 const Routers = () => {
   return (
     <Routes>
@@ -24,7 +25,8 @@ const Routers = () => {
       <Route path="/blog" element={<OneBlog />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/user" element={<UserCustomer />} />
+      <Route path="/carts-items" element={<UserCustomer />} />
+      <Route path="/Dashboard" element={<Dashboard />} />
     </Routes>
   );
 };

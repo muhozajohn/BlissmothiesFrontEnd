@@ -1,26 +1,26 @@
 export const menuLiks = [
   {
-    path: "/",
+    isActive: "all",
     display: "All",
   },
   {
-    path: "/breakfast",
+    isActive: "breakfast",
     display: "Breakfast",
   },
   {
-    path: "/lunch",
+    isActive: "lunch",
     display: "Lunch",
   },
   {
-    path: "/dinner",
+    isActive: "dinner",
     display: "Dinner",
   },
   {
-    path: "/desserts",
+    isActive: "desserts",
     display: "Desserts",
   },
   {
-    path: "/beverages",
+    isActive: "beverages",
     display: "Beverages",
   },
 ];

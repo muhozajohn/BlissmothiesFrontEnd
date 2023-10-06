@@ -1,4 +1,4 @@
-import logo from "../../assets/images/logok.png";
+  import logo from "../../assets/images/logok.png";
 import { FaWhatsapp, FaTwitter, FaInstagram,FaFacebook,FaYoutube,FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -64,8 +64,7 @@ const Footer = () => {
         <div className="mt-[30px] flex flex-col gap-6 text-white">
           <div>
             <h1 className=" text-sm font-[800] text-white ">
-              {" "}
-              <Link to="/dashbord">Useful Links</Link>{" "}
+              Useful Links
             </h1>
           </div>
           <div>
@@ -74,10 +73,10 @@ const Footer = () => {
                 <Link to="/payment">Payment & Tax</Link>
               </li>
               <li className="text-sm">
-                <Link to="/services">Terms and Service</Link>
+                <Link to="/about">Terms and Service</Link>
               </li>
               <li className="text-sm">
-                <Link to="/setting">Privacy Policy</Link>
+                <Link to="/carts-items">Privacy Policy</Link>
               </li>
               <li className="text-sm">
                 <Link to="/about">About Us</Link>
@@ -112,7 +111,7 @@ const Footer = () => {
               <Link to="muhoza" target="_blanck"><FaInstagram /></Link>
             </span>
             <span className="text-[1.6rem] bg-btnColor text-white px-1 py-1 rounded cursor-pointer hover:text-footerColor">
-              <Link to="" target=""><FaTwitter /></Link>
+              <Link to="" target="_blanck"><FaTwitter /></Link>
             </span>
             <span className="text-[1.6rem] bg-btnColor text-white px-1 py-1 rounded cursor-pointer hover:text-footerColor">
               <Link to="" target="_blanck"><FaFacebook /></Link>

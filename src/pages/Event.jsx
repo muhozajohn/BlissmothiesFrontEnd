@@ -38,12 +38,15 @@ const Events = () => {
                 spaceBetween: 30,
               },
             }}
-        
           >
             <SwiperSlide>
               <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className=" rounded-xl h-[400px] overflow-hidden ">
-                  <img src={PART2} alt="" className="rounded-xl " />
+                  <img
+                    src={PART2}
+                    alt=""
+                    className="rounded-xl h-full w-full"
+                  />
                 </div>
                 <div className="flex flex-col gap-6 text-left">
                   <div>
@@ -72,7 +75,7 @@ const Events = () => {
             <SwiperSlide>
               <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className=" rounded-xl h-[400px] overflow-hidden">
-                  <img src={PART} alt="" className="rounded-xl" />
+                  <img src={PART} alt="" className="rounded-xl h-full w-full" />
                 </div>
                 <div className="flex flex-col gap-6 text-left">
                   <div>
@@ -101,7 +104,7 @@ const Events = () => {
             <SwiperSlide>
               <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className=" rounded-xl h-[400px] overflow-hidden">
-                  <img src={PART} alt="" className="rounded-xl" />
+                  <img src={PART} alt="" className="rounded-xl h-full w-full" />
                 </div>
                 <div className="flex flex-col gap-6 text-left">
                   <div>
@@ -130,7 +133,11 @@ const Events = () => {
             <SwiperSlide>
               <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className=" rounded-xl h-[400px] overflow-hidden ">
-                  <img src={PART1} alt="" className="rounded-xl" />
+                  <img
+                    src={PART1}
+                    alt=""
+                    className="rounded-xl h-full w-full"
+                  />
                 </div>
                 <div className="flex flex-col gap-6 text-left">
                   <div>

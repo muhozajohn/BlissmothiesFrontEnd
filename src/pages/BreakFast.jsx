@@ -4,7 +4,8 @@ import B from "../assets/images/b.jpg";
 import C from "../assets/images/c.jpg";
 import D from "../assets/images/d.jpg";
 import E from "../assets/images/e.jpg";
-const MenuCards = () => {
+
+const BreakFast = () => {
   return (
     <section>
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
@@ -253,4 +254,4 @@ const MenuCards = () => {
   );
 };
 
-export default MenuCards;
+export default BreakFast;

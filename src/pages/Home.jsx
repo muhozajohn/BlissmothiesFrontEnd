@@ -7,6 +7,8 @@ import Deserts from "./Deserts";
 import Testimonial from "../components/testmonials/Testimonial";
 import Events from "./Event";
 import Book from "./Book";
+import Menu from "../components/menu/Menu";
+import MenuContainer from "../components/menu/MenuContainer";
 const Home = () => {
   return (
     <>
@@ -101,26 +103,8 @@ const Home = () => {
               offerings:
             </p>
           </div>
-          <div className="w-full lg:w-[70%] grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-6 ">
-            {menuLiks.map((link, index) => {
-              return (
-                <NavLink
-                  to={link.path}
-                  key={index}
-                  className={(navClass) =>
-                    navClass.isActive
-                      ? " rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center"
-                      : " rounded-xl bg-transparent border border-btnColor text-black px-[30px] py-[10px] font-[600] flex items-center justify-center "
-                  }
-                  // className="rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center"
-                >
-                  {link.display}
-                </NavLink>
-              );
-            })}
-          </div>
-          <MenuCards />
         </div>
+        <MenuContainer />
       </section>
       <Chief />
       <Deserts />

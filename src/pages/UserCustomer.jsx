@@ -18,23 +18,15 @@ const UserCustomer = () => {
             </div>
           </div>
           <div className="px-5 py-5 bg-white rounded-lg mt-4 mb-4">
-            <p className="text-sm">Leave Your Feedback About Our Products</p>
+            <p className="text-sm font-[500]">Leave Your Feedback About Our Products</p>
             <div>
               <form action="" className="flex flex-col gap-3">
-                <label htmlFor="" className="text-sm font-medium">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  placeholder="Title"
-                  className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black-600 outline-none active:outline-none text-sm  "
-                />
-                <label htmlFor="">Comment</label>
+                <label className="mt-4 text-sm  font-[400]">Feedback</label>
                 <textarea
                   name=""
                   id=""
                   cols="30"
-                  rows="5"
+                  rows="10"
                   className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  "
                 ></textarea>
                 <input type="button" value="Submit" className="btn bg-black cursor-pointer"/>

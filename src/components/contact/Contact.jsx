@@ -4,7 +4,8 @@ import PulseLoader from "react-spinners/PulseLoader";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
 const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [name, SetName] = useState("");
@@ -27,7 +28,7 @@ const Contact = () => {
     });
   };
   const eror = () => {
-    toast.error("🦄 Try Agian Plealse!", {
+    toast.error("Try Again Please!", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -40,52 +41,96 @@ const Contact = () => {
   };
   // const [notifyme, SetNotifyMe] = useState(false);
 
-  const handleButtonClick = async () => {
-    const formData = {
-      name,
-      email,
-      subject,
-      message,
-    };
-    try {
-      console.log("helllo mada fucker");
-      setLoading(true);
-      const response = await axios.post(
-        "https://blissmothies.onrender.com/blissmothies/contact/send",
-        formData
-      );
-      if (response.status === 200) {
-        const responsedata = response.data.message;
-        console.log(responsedata);
-        notify();
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-      const errordata = error.message;
-      console.log(errordata);
-      eror();
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
+  // const handleButtonClick = async () => {
+  //   // console.log("Hello Mada Fucker");
+  //   const formData = {
+  //     name,
+  //     email,
+  //     subject,
+  //     message,
+  //   };
+  //   try {
+  //     console.log("helllo mada fucker");
+  //     setLoading(true);
+  //     const response = await axios.post(
+  //       "https://blissmothies.onrender.com/blissmothies/contact/send",
+  //       formData
+  //     );
+  //     if (response.status === 200) {
+  //       const responsedata = response.data.message;
+  //       console.log(responsedata);
+  //       notify();
+  //       setLoading(false);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     const errordata = error.message;
+  //     console.log(errordata);
+  //     eror();
+  //     setLoading(false);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  // const validate = Yup.object().shape({
+  //   name: Yup.string()
+  //     .min(2, "Too Short!")
+  //     .max(50, "Too Long!")
+  //     .required("Required"),
+  //   subject: Yup.string()
+  //     .min(2, "Too Short!")
+  //     .max(50, "Too Long!")
+  //     .required("Required"),
+  //   message: Yup.string()
+  //     .min(2, "Too Short!")
+  //     .max(50, "Too Long!")
+  //     .required("Required"),
+  //   email: Yup.string().email("Invalid email").required("Required"),
+  // });
+
+  const initialValues = {
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   };
+
+  const onSubmit = (values) => {
+    console.log("FormData", values);
+  };
+
+  const validate = (values) => {
+    // values.name values.email values.subject values.message
+    // erors.name erors.email erors.subject erors.message
+    // erors.name  = "This field is required"
+    let errors = {};
+    if (!values.name) {
+      errors.name = "Name Required";
+    }
+    if (!values.email) {
+      errors.email = "Email Required";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+      errors.email = "Invalid email address";
+    }
+    if (!values.subject) {
+      errors.subject = "Subject Required";
+    }
+    if (!values.subject) {
+      errors.message = "Message Required";
+    }
+    return errors;
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validate,
+    // handleButtonClick,
+  });
+
+  console.log("Visted Form", formik.touched);
 
   return (
     <div>
-      {" "}
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
       <div className=" w-full bgg bg-cover bg-no-repeat bg-center h-[40vh]   top-0 z-[-10] rounded-b-xl">
         <div className=" w-full h-full rounded-b-3xl flex justify-center items-center">
           <h1 className="text-white font-semibold text-5xl">Contact</h1>
@@ -99,47 +144,102 @@ const Contact = () => {
           <div className="flex flex-col gap-6 md:mt-[-28rem] lg:mt-0  mt-[-13rem]">
             <p className="text-xl font-bold">Contact Us</p>
 
-            <form action="" className="flex flex-col gap-4">
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
+
+            <form
+              action=""
+              className="flex flex-col gap-4"
+              onSubmit={formik.handleSubmit}
+            >
+              {" "}
+              {formik.errors.name ? (
+                <div className=" text-sm text-red-800 font-extralight ">
+                  {" "}
+                  {formik.errors.name}{" "}
+                </div>
+              ) : null}
               <input
                 type="text"
+                name="name"
+                id="name"
                 placeholder="Your Name"
-                onChange={(e) => SetName(e.target.value)}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.name}
                 className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  "
               />
+              {formik.errors.email ? (
+                <div className=" text-sm text-red-800 font-extralight ">
+                  {" "}
+                  {formik.errors.email}{" "}
+                </div>
+              ) : null}
               <input
                 type="text"
+                name="email"
+                id="email"
                 placeholder="Your Email"
-                onChange={(e) => SetEmail(e.target.value)}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
                 className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm "
               />
+              {formik.errors.subject ? (
+                <div className=" text-sm text-red-800 font-extralight ">
+                  {" "}
+                  {formik.errors.subject}{" "}
+                </div>
+              ) : null}
               <input
                 type="text"
+                name="subject"
+                id="subject"
                 placeholder="SubJect"
-                onChange={(e) => SetSubject(e.target.value)}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.subject}
                 className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm "
               />
+              {formik.errors.message ? (
+                <div className=" text-sm text-red-800 font-extralight ">
+                  {" "}
+                  {formik.errors.message}{" "}
+                </div>
+              ) : null}
               <textarea
-                name=""
+                name="message"
+                id="message"
                 placeholder="Message"
-                id=""
                 cols="30"
                 rows="10"
-                onChange={(e) => SetMessage(e.target.value)}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.message}
                 className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
               ></textarea>
-              <div className="btn w-full flex justify-center items-center lg:w-fit cursor-pointer rounded-sm">
-                <button
-                  type="button"
-                  onClick={handleButtonClick}
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <PulseLoader size={5} color={"#ffffff"} loading={loading} />
-                  ) : (
-                    "Send Message"
-                  )}
-                </button>
-              </div>
+              <button
+                className="btn w-full flex justify-center items-center lg:w-fit cursor-pointer rounded-sm"
+                // onClick={handleButtonClick}
+                // disabled={loading}
+                type="submit"
+              >
+                {loading ? (
+                  <PulseLoader size={5} color={"#ffffff"} loading={loading} />
+                ) : (
+                  "Send Message"
+                )}
+              </button>
             </form>
           </div>
         </div>

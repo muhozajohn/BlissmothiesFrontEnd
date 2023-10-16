@@ -2,9 +2,15 @@ import A from "../assets/images/e.jpg";
 import B from "../assets/images/log1.png";
 import B1 from "../assets/images/logo-white.png";
 import C from "../assets/images/c.jpg";
+import { useState } from "react";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 const OneBlog = () => {
+  const [isOpen, setisOpen] = useState(false);
+  const handleOpen = () => {
+    setisOpen(!isOpen);
+  };
   return (
     <section>
       <div className="container flex flex-col gap-10">
@@ -15,7 +21,7 @@ const OneBlog = () => {
           <div className="lg:py-[3px] lg:w-[10vw] w-[30vw] mx-auto bg-btnColor py-[2px] mt-3"></div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-3">
-          <div className="lg:h-[80vh] overflow-hidden ">
+          <div className="h-full ">
             <img src={A} alt="" className="h-full w-full rounded-xl" />
           </div>
           <div className="bg-transparent flex flex-col gap-5">
@@ -40,14 +46,70 @@ const OneBlog = () => {
                 dignissimos vitae molestias perspiciatis, quaerat voluptate?
               </p>
             </div>
-            <div className="flex items-center gap-5">
-              <div className="w-12 h-12 rounded-full">
-                <img src={B} alt="" className=" rounded-full h-full w-full " />
+            <div className="flex flex-col lg:flex-row gap-5">
+              <div className="flex items-center gap-5">
+                <div className="w-12 h-12 rounded-full">
+                  <img
+                    src={B}
+                    alt=""
+                    className=" rounded-full h-full w-full "
+                  />
+                </div>
+                <div>
+                  <h4 className="text-lg">keller</h4>
+                  <p className="text-[10px]">Ceo,Admin</p>
+                </div>
               </div>
-              <div>
-                <h4 className="text-lg">keller</h4>
-                <p className="text-[10px]">Ceo,Admin</p>
+
+              {/* <div className="flex flex-col items-center gap-6 "> */}
+              <div
+                className=" bg-orange-300 rounded-s w-full px-3 py-3 lg:w-[32vw] cursor-pointer"
+                onClick={handleOpen}
+              >
+                <div className="flex items-center justify-between ">
+                  <h2 className="text-sm font-bold text-btnColor">Comments</h2>
+                  <h2
+                    className={` ${
+                      isOpen && "border-none bg-btnColor  text-white"
+                    } flex h-7 w-7 items-center text-white justify-center rounded border border-solid border-btnColor lg:h-7 lg:w-8`}
+                  >
+                    {" "}
+                    {isOpen ? (
+                      <AiOutlineMinus className=" text-2xl font-[800]" />
+                    ) : (
+                      <AiOutlinePlus className=" text-2xl font-[800]" />
+                    )}
+                  </h2>
+                </div>
+                {isOpen ? (
+                  <div className="mt-6 px-3 py-3">
+                    {" "}
+                    <div>
+                      <h4 className="text-lg">keller</h4>
+                      <p className="text-[10px]">Ceo,Admin</p>
+                    </div>
+                  </div>
+                ) : null}
+                {/* </div> */}
               </div>
+            </div>
+            <div className="flex flex-col">
+              <form action="" className="flex flex-col gap-4">
+                <label className="text-sm font-medium">
+                  Leave Your Comment
+                </label>
+                <textarea
+                  name="comment"
+                  id="comment"
+                  cols="30"
+                  rows="6"
+                  className=" py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm "
+                ></textarea>
+                <button type="submit" className="btn">
+                  {" "}
+                  Submit{" "}
+                </button>
+              </form>
             </div>
           </div>
         </div>

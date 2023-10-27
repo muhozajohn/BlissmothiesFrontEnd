@@ -4,22 +4,30 @@ import Welcome from "./Welcome";
 const WelcomCard = () => {
   const dataz = [
     {
-      title: "Mugabo",
-      content: "Umugabo Wimishinga",
+      title: "Revenue",
+      content: "+7,4% Since last Month",
+      number: 200,
     },
     {
-      title: "Gahembe",
-      content: "Umugabo Wimishinga",
+      title: "Orders",
+      content: "+10.4% Since last Month",
+      number: 20800,
     },
     {
-      title: "Gahembe",
-      content: "Umugabo Wimishinga",
+      title: "Customers",
+      content: "+4.7% Since last Month",
+      number: 370,
     },
   ];
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 ">
       {dataz.map((item, index) => (
-        <Welcome key={index} title={item.title} content={item.content} />
+        <Welcome
+          key={index}
+          title={item.title}
+          content={item.content}
+          number={item.number}
+        />
       ))}
     </div>
   );

@@ -1,4 +1,4 @@
-import { BiLogOutCircle } from "react-icons/bi";
+import { RiLogoutCircleRLine } from "react-icons/ri";
 import { MdSpaceDashboard } from "react-icons/md";
 import { GiHelp } from "react-icons/gi";
 import {
@@ -47,7 +47,7 @@ export const DashLink = [
   {
     path: "/Logout",
     display: "Logout",
-    icon: <BiLogOutCircle />,
+    icon: <RiLogoutCircleRLine />,
   },
 ];
 

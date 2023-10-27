@@ -7,7 +7,7 @@ const DashLayout = () => {
     <div>
       <Nav />
       <div className=" py-3 bg-white flex h-screen">
-        <div className=" bg-white px-4 py-2 lg:w-[200px] h-full fixed mt-[60px] shadow-xl hidden lg:block ">
+        <div className=" bg-white px-4 py-2 lg:w-[200px] h-full fixed mt-[60px] shadow-lg hidden lg:block ">
           <ul className="mt-3 flex flex-col">
             {DashLink.map((link, index) => (
               <li key={index} className="hover:bg-slate-100 px-2 py-2">

@@ -6,7 +6,7 @@ const WelcomCard = () => {
     {
       title: "Revenue",
       content: "+7,4% Since last Month",
-      number: 200,
+      number: "$200",
     },
     {
       title: "Orders",

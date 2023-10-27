@@ -1,6 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import { FaUser, FaCalendarAlt } from "react-icons/fa";
-import menuLiks from "../assets/menuLinks";
+import menuLiks from "../assets/dashLinks";
 import MenuCards from "./MenuCards";
 import Chief from "./Chief";
 import Deserts from "./Deserts";

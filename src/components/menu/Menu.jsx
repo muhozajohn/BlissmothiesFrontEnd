@@ -8,7 +8,7 @@ const Menu = () => {
     setIsloading(true);
     setTimeout(() => {
       setIsloading(false);
-    }, 5000);
+    }, 3000);
   }, []);
   return (
     <div>

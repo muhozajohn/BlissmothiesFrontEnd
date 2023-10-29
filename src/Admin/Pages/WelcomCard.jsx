@@ -1,32 +1,44 @@
 import React from "react";
 import Welcome from "./Welcome";
-
+import { MdEmail, MdPointOfSale, MdTaxiAlert } from "react-icons/md";
+import { IoIosPeople } from "react-icons/io";
+import { BsCircle } from "react-icons/bs";
 const WelcomCard = () => {
   const dataz = [
     {
-      title: "Revenue",
-      content: "+7,4% Since last Month",
-      number: "$200",
+      number: "200",
+      icon: <MdEmail />,
+      iconP: <BsCircle />,
+      content: "Sent Emails",
     },
     {
-      title: "Orders",
-      content: "+10.4% Since last Month",
       number: 20800,
+      icon: <IoIosPeople />,
+      iconP: <BsCircle />,
+      content: "Clients",
     },
     {
-      title: "Customers",
-      content: "+4.7% Since last Month",
-      number: 370,
+      number: 320,
+      icon: <MdPointOfSale />,
+      iconP: <BsCircle />,
+      content: "Sales Obtained",
+    },
+    {
+      number: 3700,
+      icon: <MdTaxiAlert />,
+      iconP: <BsCircle />,
+      content: "Traffic Recieved",
     },
   ];
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 ">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 ">
       {dataz.map((item, index) => (
         <Welcome
           key={index}
-          title={item.title}
-          content={item.content}
+          icon={item.icon}
           number={item.number}
+          content={item.content}
+          iconP={item.iconP}
         />
       ))}
     </div>

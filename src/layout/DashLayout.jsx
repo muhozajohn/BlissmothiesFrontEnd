@@ -6,7 +6,7 @@ const DashLayout = () => {
   return (
     <div>
       <Nav />
-      <div className=" py-3 bg-white flex h-screen">
+      <div className=" py-3 bg-white flex h-auto">
         <div className=" bg-white px-4 py-2 lg:w-[200px] h-full fixed mt-[60px] shadow-lg hidden lg:block ">
           <ul className="mt-3 flex flex-col">
             {DashLink.map((link, index) => (

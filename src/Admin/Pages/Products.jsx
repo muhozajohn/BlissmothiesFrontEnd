@@ -1,7 +1,7 @@
 import React from "react";
 import ProductsTable from "../components/Table/ProductsTable";
 import { BsFilterRight } from "react-icons/bs";
-import NewProduct from "../components/modals/newProduct";
+import NewProduct from "../components/modals/NewProduct";
 
 const Products = () => {
   return (

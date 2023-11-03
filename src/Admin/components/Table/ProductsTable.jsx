@@ -47,9 +47,9 @@ const ProductsTable = () => {
               <tbody>
                 <tr className="border-b  transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-300">
                   <td className="whitespace-nowrap px-6 py-4 font-medium">
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2">
                       <img src={Pd} alt="" className="h-8" />
-                      <div>
+                      <div className=" text-xs font-medium ">
                         <h2>Milk shake</h2>
                         <span>#dinners</span>
                       </div>

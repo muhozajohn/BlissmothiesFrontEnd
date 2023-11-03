@@ -1,13 +1,10 @@
-import { NavLink, Link } from "react-router-dom";
-import { FaUser, FaCalendarAlt } from "react-icons/fa";
-import menuLiks from "../assets/dashLinks";
-import MenuCards from "./MenuCards";
+import {  Link } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 import Chief from "./Chief";
 import Deserts from "./Deserts";
 import Testimonial from "../components/testmonials/Testimonial";
 import Events from "./Event";
 import Book from "./Book";
-import Menu from "../components/menu/Menu";
 import MenuContainer from "../components/menu/MenuContainer";
 const Home = () => {
   return (

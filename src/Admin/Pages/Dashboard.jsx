@@ -103,14 +103,14 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="shadow-lg bg-orange-200 px-2 py-2 rounded-md  flex flex-col gap-6 justify-between ">
-          <h2 className="text-sm font-bold">Campain</h2>
+          <h2 className="text-sm font-bold">Sales Quantity</h2>
 
           <div className="h-32  w-full">
             <BarCharts />
           </div>
         </div>
         <div className="shadow-lg bg-orange-100 px-2 py-2 rounded-md  flex flex-col gap-2 justify-between ">
-          <h2 className="text-sm font-bold">Campain</h2>
+          <h2 className="text-sm font-bold">Geographic Based Traffic</h2>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2041615.6317652569!2d28.560627062552978!3d-1.9403937215968883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19c29654e73840e3%3A0x7490b026cbcca103!2sRuanda!5e0!3m2!1ses!2srw!4v1698873512626!5m2!1ses!2srw"
             // width="600"

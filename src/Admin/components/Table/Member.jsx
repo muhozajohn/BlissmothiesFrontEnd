@@ -71,7 +71,7 @@ const Member = () => {
                         <img
                           src={item.userProfile}
                           alt=""
-                          className="h-8 rounded-md"
+                          className="w-12 rounded-md"
                         />
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">

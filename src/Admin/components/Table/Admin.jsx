@@ -1,6 +1,33 @@
-import React from 'react'
-
+import React, { useEffect, useState } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
+import axios from "axios";
 const Admin = () => {
+  const [loading, setIsloading] = useState(false);
+  const [users, setUsers] = useState([]);
+  console.log("User data: ", users);
+  useEffect(() => {
+    const getAdmin = async () => {
+      try {
+        setIsloading(true);
+        const userData = await axios.get(
+          "https://blissmothies.onrender.com/blissmothies/users/read"
+        );
+        const response = await userData.data.data;
+
+        if (response) setIsloading(false);
+
+        // Filter the data to include only items with the role of "admin"
+        const filteredUsers = response.filter(
+          (admin) => admin.role === "admin"
+        );
+        setUsers(filteredUsers);
+      } catch (error) {
+        setIsloading(false);
+        console.error("Error fetching data: ", error);
+      }
+    };
+    getAdmin();
+  }, []);
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -16,30 +43,57 @@ const Admin = () => {
                     Profile
                   </th>
                   <th scope="col" className="whitespace-nowrap px-6 py-4">
-                   Username
+                    Username
                   </th>
                   <th scope="col" className="whitespace-nowrap px-6 py-4">
                     Email
                   </th>
                   <th scope="col" className="whitespace-nowrap px-6 py-4">
-                    Password
+                    Gender
                   </th>
+
                   <th scope="col" className="whitespace-nowrap px-6 py-4">
                     Role
                   </th>
-        
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-300">
-                  <td className="whitespace-nowrap px-6 py-4 font-medium">1</td>
-                  <td className="whitespace-nowrap px-6 py-4">Zxus</td>
-                  <td className="whitespace-nowrap px-6 py-4">keller</td>
-                  <td className="whitespace-nowrap px-6 py-4">20</td>
-                  <td className="whitespace-nowrap px-6 py-4">01/ 02 /2023</td>
-                  <td className="whitespace-nowrap px-6 py-4">Admin</td>
-                </tr>
-           
+                {users.length ? (
+                  users.map((item, index) => (
+                    <tr
+                      key={index}
+                      className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-300"
+                    >
+                      <td className="whitespace-nowrap px-6 py-4 font-medium">
+                        {index + 1}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        <img
+                          src={item.userProfile}
+                          alt=""
+                          className="h-8 rounded-md"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        {item.fullName}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        {item.email}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        {item.gender}
+                      </td>
+
+                      <td className="whitespace-nowrap px-6 py-4">
+                        {item.role}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <div className=" mt-5 flex justify-center items-center w-full text-center  ">
+                    <PulseLoader color="#F06C05" loading={loading} size={10} />
+                  </div>
+                )}
               </tbody>
             </table>
           </div>
@@ -47,6 +101,6 @@ const Admin = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Admin
+export default Admin;

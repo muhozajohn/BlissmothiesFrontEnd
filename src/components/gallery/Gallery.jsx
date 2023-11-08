@@ -1,14 +1,27 @@
-import A from "../../assets/images/a.jpg";
-import B from "../../assets/images/b.jpg";
-import C from "../../assets/images/c.jpg";
-import D from "../../assets/images/d.jpg";
-import E from "../../assets/images/e.jpg";
-import chiefa from "../../assets/images/chiefa.jpg";
-import chiefb from "../../assets/images/chiefb.jpg";
-import chiefc from "../../assets/images/chiefc.jpg";
-import F from "../../assets/images/overlay.png";
-
+import axios from "axios";
+import { useEffect, useState } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 const Gallery = () => {
+  const [album, setAlbum] = useState([]);
+  const [loading, setIsloading] = useState(false);
+  console.log("Album", album);
+  useEffect(() => {
+    const getAlbum = async () => {
+      try {
+        setIsloading(true);
+        const geetIt = await axios.get(
+          "https://blissmothies.onrender.com/blissmothies/album/read"
+        );
+        const response = await geetIt.data.data;
+        if (response) setIsloading(false);
+        setAlbum(response);
+      } catch (error) {
+        setIsloading(false);
+        console.log("Failed to get Data", error);
+      }
+    };
+    getAlbum();
+  }, []);
   return (
     <div>
       <div className=" w-full bgg bg-cover bg-no-repeat bg-center h-[40vh]   top-0 z-[-10] rounded-b-xl">
@@ -18,20 +31,15 @@ const Gallery = () => {
       </div>
       <div className="container">
         <div className="w-full gap-5 p-5 columns-1 md:columns-2 lg:columns-3 xl:columns-5 space-y-5 ">
-          <img src={A} alt="" />
-          <img src={B} alt="" />
-          <img src={C} alt="" />
-          <img src={C} alt="" />
-          <img src={D} alt="" />
-          <img src={D} alt="" />
-          <img src={chiefc} alt="" />
-          <img src={chiefa} alt="" />
-          <img src={chiefa} alt="" />
-          <img src={chiefc} alt="" />
-          <img src={chiefb} alt="" />
-          <img src={E} alt="" />
-          <img src={F} alt="" />
-          <img src={F} alt="" />
+          {album.length ? (
+            album.map((item, index) => (
+              <img key={index} src={item.galleryImage} alt="" />
+            ))
+          ) : (
+            <section className="flex justify-center items-center w-full text-center  ">
+              <PulseLoader color="#F06C05" loading={loading} size={10} />
+            </section>
+          )}
         </div>
       </div>
     </div>

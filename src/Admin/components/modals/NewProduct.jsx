@@ -1,4 +1,5 @@
 import { IoMdAddCircle } from "react-icons/io";
+import { HiTemplate } from "react-icons/hi";
 import { FaTimes } from "react-icons/fa";
 import { useState } from "react";
 const NewProduct = () => {
@@ -13,6 +14,7 @@ const NewProduct = () => {
         className="bg-blue-600 text-white px-5 py-3 rounded-md fixed bottom-0 right-0 m-6 flex gap-2 items-center"
         onClick={handleModal}
       >
+        <HiTemplate />
         Add New Product
         <IoMdAddCircle className=" text-btnColor font-extrabold text-lg " />
       </button>

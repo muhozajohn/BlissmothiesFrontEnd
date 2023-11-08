@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import maap from "../../assets/images/map.jpg";
 import PulseLoader from "react-spinners/PulseLoader";
 import axios from "axios";
@@ -7,10 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useFormik } from "formik";
 const Contact = () => {
   const [loading, setLoading] = useState(false);
-  const [name, SetName] = useState("");
-  const [email, SetEmail] = useState("");
-  const [subject, SetSubject] = useState("");
-  const [message, SetMessage] = useState("");
 
   const notify = () => {
     toast.success("Message Sent Succesfully!", {
@@ -37,27 +33,23 @@ const Contact = () => {
     });
   };
 
-  const handleButtonClick = async (e) => {
-    console.log("Hello Mada Fucker");
+  const onSubmit = async (e) => {
     const formData = {
-      name,
-      email,
-      subject,
-      message,
+      name: formik.values.name,
+      email: formik.values.email,
+      subject: formik.values.subject,
+      message: formik.values.message,
     };
-
-    console.log(formData);
     try {
-      // console.log("helllo mada fucker");
       setLoading(true);
       const response = await axios.post(
-        // "https://blissmothies.onrender.com/blissmothies/contact/send",
-        "http://localhost:4300/blissmothies/contact/send",
+        "https://blissmothies.onrender.com/blissmothies/contact/send",
+
         formData
       );
       if (response.status === 200) {
-        const responsedata = response.data.message;
-        console.log(responsedata);
+        const responsedata = response.data.data;
+        console.log("responsedata", responsedata);
         notify();
         setLoading(false);
       }
@@ -72,55 +64,11 @@ const Contact = () => {
     }
   };
 
-  // const sendData = async (formData) => {
-  //   try {
-  //     const request = await fetch(
-  //       "https://blissmothies.onrender.com/blissmothies/contact/send",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-type": "application/json",
-  //         },
-  //         body: JSON.stringify(formData),
-  //       }
-  //     );
-  //     const result = await request.json();
-  //     console.log("Success:", result);
-  //     if (request.status === 200) {
-  //       alert(result.message);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     if (request.status === 500) {
-  //       alert(result.message);
-  //     }
-  //   }
-  // };
-
-  // const formData = {
-  //   name,
-  //   email,
-  //   subject,
-  //   message,
-  // };
-  // sendData(formData);
-  // const validateSchema = Yup.object({
-  //   name: Yup.string().required("Name Required"),
-  //   subject: Yup.string().required("Subject Required"),
-  //   message: Yup.string().required("Message Required"),
-  //   email: Yup.string().email("Invalid email").required("Email Required"),
-  // });
-
   const initialValues = {
     name: "",
     email: "",
     subject: "",
     message: "",
-  };
-
-  const onSubmit = (values) => {
-    console.log("FormData", values);
-    handleButtonClick();
   };
 
   const validate = (values) => {
@@ -139,7 +87,12 @@ const Contact = () => {
     if (!values.subject) {
       errors.subject = "Subject Required";
     }
+
     if (!values.subject) {
+      errors.message = "Message Required"; // Should be "errors.message" instead of "errors.subject"
+    }
+
+    if (!values.message) {
       errors.message = "Message Required";
     }
     return errors;
@@ -149,8 +102,6 @@ const Contact = () => {
     initialValues,
     onSubmit,
   });
-
-  console.log("Visted Form", formik.touched);
 
   return (
     <div>
@@ -181,6 +132,95 @@ const Contact = () => {
             />
 
             <form
+              action=""
+              className="flex flex-col gap-4"
+              onSubmit={(e) => {
+                e.preventDefault();
+                formik.handleSubmit(formik.valu);
+              }}
+            >
+              {" "}
+              {formik.touched.name && formik.errors.name ? (
+                <div className=" text-sm text-red-800 font-extralight ">
+                  {" "}
+                  {formik.errors.name}{" "}
+                </div>
+              ) : null}
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Your Name"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.name}
+                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  "
+              />
+              {formik.touched.email && formik.errors.email ? (
+                <div className=" text-sm text-red-800 font-extralight ">
+                  {" "}
+                  {formik.errors.email}{" "}
+                </div>
+              ) : null}
+              <input
+                type="text"
+                name="email"
+                id="email"
+                placeholder="Your Email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm "
+              />
+              {formik.touched.subject && formik.errors.subject ? (
+                <div className=" text-sm text-red-800 font-extralight ">
+                  {" "}
+                  {formik.errors.subject}{" "}
+                </div>
+              ) : null}
+              <input
+                type="text"
+                name="subject"
+                id="subject"
+                placeholder="SubJect"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.subject}
+                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm "
+              />
+              {formik.touched.message && formik.errors.message ? (
+                <div className=" text-sm text-red-800 font-extralight ">
+                  {" "}
+                  {formik.errors.message}{" "}
+                </div>
+              ) : null}
+              <textarea
+                name="message"
+                id="message"
+                placeholder="Message"
+                cols="30"
+                rows="10"
+                onChange={formik.handleChange}
+                onBlur={() => {
+                  formik.handleBlur;
+                }}
+                value={formik.values.message}
+                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
+              ></textarea>
+              <button
+                className="btn w-full flex justify-center items-center lg:w-fit cursor-pointer rounded-sm"
+                // onClick={handleButtonClick}
+                disabled={loading}
+                type="submit"
+              >
+                {loading ? (
+                  <PulseLoader size={5} color={"#ffffff"} loading={loading} />
+                ) : (
+                  "Send Message"
+                )}
+              </button>
+            </form>
+            {/* <form
               action=""
               className="flex flex-col gap-4"
               onSubmit={formik.handleSubmit}
@@ -263,7 +303,7 @@ const Contact = () => {
                   "Send Message"
                 )}
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       </section>

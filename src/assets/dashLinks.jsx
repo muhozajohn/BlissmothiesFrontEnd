@@ -1,5 +1,6 @@
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { MdSpaceDashboard } from "react-icons/md";
+import { BsFillImageFill } from "react-icons/bs";
 import { GiHelp } from "react-icons/gi";
 import {
   AiFillFolderOpen,
@@ -33,6 +34,11 @@ export const DashLink = [
     path: "/Reports",
     display: "Reports",
     icon: <AiFillFileText />,
+  },
+  {
+    path: "/Album",
+    display: "Gallery",
+    icon: <BsFillImageFill />,
   },
   {
     path: "/GetHelp",

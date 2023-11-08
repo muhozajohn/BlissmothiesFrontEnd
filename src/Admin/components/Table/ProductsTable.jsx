@@ -2,20 +2,27 @@ import { AiFillDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { FaTimes } from "react-icons/fa";
 import axios from "axios";
+import PulseLoader from "react-spinners/PulseLoader";
 import { useEffect, useState } from "react";
 const ProductsTable = () => {
   // getProduct
   const [product, setProduct] = useState([]);
+  const [loading, setIsloading] = useState(false);
   console.log("Product items", product);
   useEffect(() => {
     const getMenu = async () => {
       try {
+        setIsloading(true);
         const getMenuData = await axios.get(
           "https://blissmothies.onrender.com/blissmothies/menu/read"
         );
         const response = await getMenuData.data.data;
+        if (response) {
+          setIsloading(false);
+        }
         setProduct(response);
       } catch (error) {
+        setIsloading(false);
         console.log("Failed to fetch Data", error);
       }
     };
@@ -49,7 +56,19 @@ const ProductsTable = () => {
       console.log("Failed To Delete Data", error);
     }
   };
-
+  const [single, setSingle] = useState({});
+  console.log("Singlezz", single);
+  const singleProduct = async () => {
+    try {
+      const singlePost = await axios.get(
+        `https://blissmothies.onrender.com/blissmothies/menu/read/${id}`
+      );
+      const result = await singlePost.data.data;
+      setSingle(result);
+    } catch (error) {
+      console.log("Error while getin Single blog", error);
+    }
+  };
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -86,49 +105,58 @@ const ProductsTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {product.map((item, index) => (
-                  <tr
-                    key={index}
-                    className="border-b  transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-300"
-                  >
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">
-                      <div className="flex items-center gap-2">
-                        <img src={item.image} alt="" className="w-12" />
-                        <div className=" text-xs font-medium ">
-                          <h2>{item.title}</h2>
-                          <span>#{item.category}s</span>
+                {product.length ? (
+                  product.map((item, index) => (
+                    <tr
+                      key={index}
+                      className="border-b  transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-300"
+                    >
+                      <td className="whitespace-nowrap px-6 py-4 font-medium">
+                        <div className="flex items-center gap-2">
+                          <img src={item.image} alt="" className="w-12" />
+                          <div className=" text-xs font-medium ">
+                            <h2>{item.title}</h2>
+                            <span>#{item.category}s</span>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4">Zxus</td>
-                    <td className="whitespace-nowrap px-6 py-4">
-                      {item.category}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4">
-                      ${item.price}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4">
-                      {item.createdAt}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4">Available</td>
-                    <td className="whitespace-nowrap px-6 py-4">
-                      <div className="flex items-center gap-1">
-                        <div
-                          className="rounded-sm py-2 px-2 bg-blue-600 text-white w-fit"
-                          onClick={handleModal}
-                        >
-                          <FiEdit />
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">Zxus</td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        {item.category}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        ${item.price}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        {item.createdAt}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">Available</td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        <div className="flex items-center gap-1">
+                          <div
+                            className="rounded-sm py-2 px-2 bg-blue-600 text-white w-fit"
+                            onClick={handleModal}
+                          >
+                            <FiEdit />
+                          </div>
+                          <div
+                            className="rounded-sm py-2 px-2 bg-btnColor text-white w-fit"
+                            onClick={(e) => {
+                              console.log("hello Stu");
+                              deleteData(item._id);
+                            }}
+                          >
+                            <AiFillDelete />
+                          </div>
                         </div>
-                        <div
-                          className="rounded-sm py-2 px-2 bg-btnColor text-white w-fit"
-                          onClick={deleteData}
-                        >
-                          <AiFillDelete />
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <div className=" mt-5 flex justify-center items-center w-full text-center  ">
+                    <PulseLoader color="#F06C05" loading={loading} size={10} />
+                  </div>
+                )}
               </tbody>
             </table>
           </div>
@@ -143,6 +171,7 @@ const ProductsTable = () => {
                 className=" w-full h-full "
                 id="imageInput"
                 accept="image/*"
+                value={single.image}
               />
               <p className="lg:block hidden absolute">Upload Product Image</p>
             </div>
@@ -150,6 +179,7 @@ const ProductsTable = () => {
               <input
                 type="text"
                 placeholder="Title"
+                value={single.title}
                 className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
               />
               <div className="flex flex-col lg:flex-row items-center gap-4 justify-between ">

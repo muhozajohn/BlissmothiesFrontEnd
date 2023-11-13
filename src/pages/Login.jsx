@@ -1,13 +1,15 @@
 import axios from "axios";
+import { useFormik } from "formik";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   // tosty
   const notify = () => {
@@ -38,8 +40,8 @@ const Login = () => {
   const signIn = async () => {
     try {
       const formData = {
-        email,
-        password,
+        email: formik.values.email,
+        password: formik.values.password,
       };
       setLoading(true);
       const loginData = await axios.post(
@@ -48,7 +50,7 @@ const Login = () => {
       );
       if (loginData.status === 200) {
         localStorage.setItem("token", loginData.data.token);
-        localStorage.setItem("image", loginData.data.userProfile);
+        localStorage.setItem("image", loginData.data.users.userProfile);
         setLoading(false);
         notify();
         setTimeout(() => {
@@ -62,6 +64,28 @@ const Login = () => {
       console.log("Failed To Login", error);
     }
   };
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+  const validate = (values) => {
+    let errors = {};
+    if (!values.password) {
+      errors.password = "Password Required";
+    }
+    if (!values.email) {
+      errors.email = "Email Required";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+      errors.email = "Invalid email address";
+    }
+    return errors;
+  };
+  const formik = useFormik({
+    validate,
+    initialValues,
+    signIn,
+  });
+  // console.log("Formik Values", formik.touched);
   return (
     <section>
       <ToastContainer
@@ -81,18 +105,38 @@ const Login = () => {
           <p className="font-bold text-xl">
             !Hello! <span className="text-btnColor">Welcome</span> Back
           </p>
-          <form action="" className="flex flex-col gap-6 mt-6">
+          <form
+            action=""
+            onSubmit={(e) => {
+              formik.handleSubmit;
+            }}
+            className="flex flex-col gap-6 mt-6"
+          >
+            {formik.touched.email && formik.errors.email ? (
+              <div className=" text-sm text-red-800 font-extralight ">
+                {formik.errors.email}
+              </div>
+            ) : null}
             <input
               type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
               placeholder="Username"
               className="py-3 px-3 border border-solid border-gray-400 rounded-sm outline-none active:outline-none text-sm"
             />
+            {formik.touched.password && formik.errors.password ? (
+              <div className=" text-sm text-red-800 font-extralight ">
+                {formik.errors.password}
+              </div>
+            ) : null}
             <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
               type="password"
+              id="password"
               placeholder="Password"
               className="py-3 px-3 border border-gray-400 rounded-sm outline-none active:outline-none text-sm"
             />

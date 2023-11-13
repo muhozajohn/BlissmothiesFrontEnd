@@ -135,8 +135,8 @@ const Contact = () => {
               action=""
               className="flex flex-col gap-4"
               onSubmit={(e) => {
-                e.preventDefault();
-                formik.handleSubmit(formik.valu);
+                // e.preventDefault();
+                formik.handleSubmit(formik.values);
               }}
             >
               {" "}

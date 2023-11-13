@@ -4,8 +4,11 @@ import { useEffect, useRef } from "react";
 import { BiMenu } from "react-icons/bi";
 import { FaCartPlus } from "react-icons/fa";
 import logo from "../../assets/images/logok.png";
-import user from "../../assets/images/d.jpg";
 const Header = () => {
+  const storedImage = localStorage.getItem("image");
+  const imageUrl = storedImage
+    ? storedImage
+    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const handleStickyHeader = () => {
@@ -28,7 +31,6 @@ const Header = () => {
   return (
     <>
       <header className="text-white bg-footerColor  " ref={headerRef}>
-        {/* <div className="bg-[rgba(0,0,0,0.8)] "> */}
         <div className="container flex justify-between items-center h-[100px]">
           <div className="lg:w-28 lg:h-28 w-24 h-24">
             <Link to="/home">
@@ -37,7 +39,6 @@ const Header = () => {
           </div>
           <div className="navigation" ref={menuRef} onClick={toggleMenu}>
             <ul className="flex gap-8 items-center menu">
-              {/* <li>login</li> */}
               {navLinks.map((link, index) => (
                 <li key={index}>
                   <NavLink
@@ -65,9 +66,8 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-4">
             <Link to="/login">
-              <div className="md:hidden hidden lg:flex w-11 h-11 rounded-full bg-overLayColor cursor-pointer  items-center justify-center">
-                {/* <FaUser className="text-btnColor" /> */}
-                <img src={user} alt="" className="w-10 h-10 rounded-full" />
+              <div className="md:hidden hidden lg:flex w-10 h-10 rounded-full bg-white cursor-pointer  items-center justify-center">
+                <img src={imageUrl} alt="" className="w-9 h-9 rounded-full" />
               </div>
             </Link>
             <Link

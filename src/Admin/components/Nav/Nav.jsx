@@ -1,5 +1,4 @@
 import logo from "../../../assets/images/logok.png";
-import log1 from "../../../assets/images/logo-white.png";
 import { SiMinutemailer } from "react-icons/si";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaCartPlus } from "react-icons/fa";
@@ -11,7 +10,7 @@ import DashLink from "../../../assets/dashLinks";
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpeni, setIsOpeni] = useState(false);
-
+  const IPICA = localStorage.getItem("image");
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -112,7 +111,7 @@ const Nav = () => {
             </div>
 
             <Link to="/Settings">
-              <img src={log1} alt="" className=" h-[40px] rounded-full " />
+              <img src={IPICA} alt="" className=" h-9 w-9 rounded-full " />
             </Link>
           </div>
         </div>

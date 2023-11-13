@@ -6,13 +6,29 @@ import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Testimonial = () => {
+  const [testimonials, Settestimonials] = useState([]);
+  console.log("All test", testimonials);
+  useEffect(() => {
+    const getTestimonials = async () => {
+      try {
+        const getAll = await axios.get(
+          "http://localhost:4300/blissmothies/Testmoniols/read"
+        );
+        const reaponse = await getAll.data.data;
+        Settestimonials(reaponse);
+      } catch (error) {
+        console.log("Failed to Getin ", error);
+      }
+    };
+    getTestimonials();
+  }, []);
   return (
     <section className="w-full bg bg-cover bg-no-repeat bg-center ">
-      {/* <div className=" w-full bg-opacity-75 top-0"> */}
       <div className="container mt-0">
         <div className="text-center lg:mb-20 mb-10">
           <p className="text-sm font-bold">Testimanials</p>
@@ -53,102 +69,31 @@ const Testimonial = () => {
                 }}
                 className="swiper"
               >
-                <SwiperSlide>
-                  <div className=" w-full bg-bgColor py-5 px-5 rounded-xl">
-                    <div className="w-[4rem] h-[4rem] bg-white rounded-full px-1 py-1 flex items-center justify-center">
-                      <img
-                        src={C}
-                        alt=""
-                        className=" rounded-full w-full h-full"
-                      />
+                {testimonials.map((item, index) => (
+                  <SwiperSlide key={index}>
+                    <div className=" w-full bg-bgColor py-5 px-5 rounded-xl">
+                      <div className="w-[4rem] h-[4rem] bg-white rounded-full px-1 py-1 flex items-center justify-center">
+                        <img
+                          src={item.profile}
+                          alt=""
+                          className=" rounded-full w-full h-full"
+                        />
+                      </div>
+                      <div>
+                        <h2 className="font-[800] text-2xl">{item.name}</h2>
+                        <small className="text-sm font-medium">
+                          {item.title}
+                        </small>
+                      </div>
+                      <div className="text-[4rem] font-[800] ">“</div>
+                      <div className="mt-[-1rem]">
+                        <p className=" leading-8 font-[500]">
+                          “ {item.comment}”
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h2 className="font-[800] text-2xl">Keller Fencer</h2>
-                      <small className="text-sm font-medium">Ceo,Founder</small>
-                    </div>
-                    <div className="text-[4rem] font-[800] ">“</div>
-                    <div className="mt-[-1rem]">
-                      <p className=" leading-8 font-[500]">
-                        “ As CEO of a coffee shop, I prioritize staying current
-                        with industry trends and fostering a positive work
-                        environment for my staff to ensure our continued
-                        success.”
-                      </p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className=" w-full bg-bgColor py-5 px-5 rounded-xl">
-                    <div className="w-[4rem] h-[4rem] bg-white rounded-full px-1 py-1 flex items-center justify-center">
-                      <img
-                        src={B}
-                        alt=""
-                        className=" rounded-full w-full h-full"
-                      />
-                    </div>
-                    <div>
-                      <h2 className="font-[800] text-2xl">Zxus DeSaint</h2>
-                      <small className="text-sm font-medium">Developer</small>
-                    </div>
-                    <div className="text-[4rem] font-[800] ">“</div>
-                    <div className="mt-[-1rem]">
-                      <p className=" leading-8 font-[500]">
-                        “ As CEO of a coffee shop, I prioritize staying current
-                        with industry trends and fostering a positive work
-                        environment for my staff to ensure our continued
-                        success.”
-                      </p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className=" w-full bg-bgColor py-5 px-5 rounded-xl">
-                    <div className="w-[4rem] h-[4rem] bg-textColor rounded-full px-1 py-1 flex items-center justify-center">
-                      <img
-                        src={C}
-                        alt=""
-                        className=" rounded-full w-full h-full"
-                      />
-                    </div>
-                    <div>
-                      <h2 className="font-[800] text-2xl">Keller Fencer</h2>
-                      <small className="text-sm font-medium">Ceo,Founder</small>
-                    </div>
-                    <div className="text-[4rem] font-[800] ">“</div>
-                    <div className="mt-[-1rem]">
-                      <p className=" leading-8 font-[500]">
-                        “ As CEO of a coffee shop, I prioritize staying current
-                        with industry trends and fostering a positive work
-                        environment for my staff to ensure our continued
-                        success.”
-                      </p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className=" w-full bg-bgColor py-5 px-5 rounded-xl">
-                    <div className="w-[4rem] h-[4rem] bg-textColor rounded-full px-1 py-1 flex items-center justify-center">
-                      <img
-                        src={B}
-                        alt=""
-                        className=" rounded-full w-full h-full"
-                      />
-                    </div>
-                    <div>
-                      <h2 className="font-[800] text-2xl">Zxus DeSaint</h2>
-                      <small className="text-sm font-medium">Developer</small>
-                    </div>
-                    <div className="text-[4rem] font-[800] ">“</div>
-                    <div className="mt-[-1rem]">
-                      <p className=" leading-8 font-[500]">
-                        “ As CEO of a coffee shop, I prioritize staying current
-                        with industry trends and fostering a positive work
-                        environment for my staff to ensure our continued
-                        success.”
-                      </p>
-                    </div>
-                  </div>
-                </SwiperSlide>
+                  </SwiperSlide>
+                ))}
               </Swiper>
             </div>
           </div>
@@ -159,7 +104,6 @@ const Testimonial = () => {
                 Foods,Chef <span className="text-white">Photo Galleries</span>{" "}
               </h2>
             </div>
-            {/* <div className="w-full gap-1 columns-1 md:columns-2 lg:columns-3 xl:columns-5 space-y-1"> */}
             <div className="w-full grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-6 mt-3">
               <div className="h-48 w-full overflow-hidden flex justify-center items-center rounded-xl">
                 <img src={B} alt="" className=" rounded-xl w-full" />

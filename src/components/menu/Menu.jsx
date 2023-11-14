@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import MenuContainer from "./MenuContainer";
 import PulseLoader from "react-spinners/PulseLoader";
-
 const Menu = () => {
   const [loading, setIsloading] = useState(false);
   useEffect(() => {
@@ -21,7 +20,7 @@ const Menu = () => {
 
       {loading ? (
         <section className="flex justify-center items-center w-full text-center  ">
-          <PulseLoader color="#F06C05" loading={loading} size={20} />
+          <PulseLoader color="#F06C05" loading={loading} size={10} />
         </section>
       ) : (
         <MenuContainer />

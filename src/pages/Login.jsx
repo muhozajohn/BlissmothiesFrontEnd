@@ -8,8 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   // tosty
   const notify = () => {

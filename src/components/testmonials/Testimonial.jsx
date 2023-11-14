@@ -17,7 +17,7 @@ const Testimonial = () => {
     const getTestimonials = async () => {
       try {
         const getAll = await axios.get(
-          "http://localhost:4300/blissmothies/Testmoniols/read"
+          "https://blissmothies.onrender.com/blissmothies/Testmoniols/read"
         );
         const reaponse = await getAll.data.data;
         Settestimonials(reaponse);

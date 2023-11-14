@@ -2,7 +2,7 @@ import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
 import axios from "axios";
-const Launch = () => {
+const Supper = () => {
   const [menu, setMenu] = useState([]);
   const [loading, setIsloading] = useState(false);
   useEffect(() => {
@@ -10,11 +10,12 @@ const Launch = () => {
       try {
         setIsloading(true);
         const getMenu = await axios.get(
-          "https://blissmothies.onrender.com/blissmothies/menu/read"
+          // "https://blissmothies.onrender.com/blissmothies/menu/read"
+          "http://localhost:4300/blissmothies/menu/read"
         );
         const response = await getMenu.data.data;
-        const Launch = response.filter((menu) => menu.category === "Launch");
-        setMenu(Launch);
+        const Supper = response.filter((menu) => menu.category === "Supper");
+        setMenu(Supper);
         setIsloading(false);
       } catch (error) {
         console.log("Failed to Get Menu", error);
@@ -69,4 +70,4 @@ const Launch = () => {
   );
 };
 
-export default Launch;
+export default Supper;

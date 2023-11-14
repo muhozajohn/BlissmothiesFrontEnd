@@ -6,6 +6,7 @@ import Launch from "../../pages/Launch";
 import Dinner from "../../pages/Dinner";
 import Desserts from "../../pages/Desserts";
 import Beverages from "../../pages/Beverages";
+import Supper from "../../pages/Supper";
 const MenuContainer = () => {
   const [activeTab, setActiveTab] = useState("all");
   return (
@@ -61,6 +62,16 @@ const MenuContainer = () => {
             }
           >
             <Link>Desserts</Link>
+          </li>
+          <li
+            onClick={() => setActiveTab("Supper")}
+            className={
+              activeTab === "Supper"
+                ? `rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center`
+                : "rounded-xl bg-transparent border border-btnColor text-black px-[30px] py-[10px] font-[600] flex items-center justify-center "
+            }
+          >
+            <Link>Supper</Link>
           </li>
           <li
             onClick={() => setActiveTab("Beverages")}
@@ -144,6 +155,7 @@ const MenuContainer = () => {
         {activeTab === "Dinner" && <Dinner />}
         {activeTab === "Desserts" && <Desserts />}
         {activeTab === "Beverages" && <Beverages />}
+        {activeTab === "Supper" &&  <Supper /> }
       </div>
     </>
   );

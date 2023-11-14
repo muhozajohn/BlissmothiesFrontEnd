@@ -1,27 +1,27 @@
 import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
-import { useEffect, useState } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
+import { useEffect, useState } from "react";
 import axios from "axios";
 const Dinner = () => {
   const [dinners, setDinners] = useState([]);
   const [loading, setIsloading] = useState(false);
   useEffect(() => {
-    setIsloading(true);
-    setTimeout(() => {
-      setIsloading(false);
-    }, 3000);
-  }, []);
-  console.log("dinners", dinners);
-  useEffect(() => {
-    const dinnersData = async () => {
-      const getAll = await fetch(
-        // "https://blissmothies.onrender.com/blissmothies/menu/read"
-        "http://localhost:4300/blissmothies/menu/read/"
-      )
-      const response = await getAll.json()
-      setDinners(response.data);
+    const getAll = async () => {
+      try {
+        setIsloading(true);
+        const getMenu = await axios.get(
+          "https://blissmothies.onrender.com/blissmothies/menu/read"
+        );
+        const response = await getMenu.data.data;
+        const Dinners = response.filter((menu) => menu.category === "Dinner");
+        setDinners(Dinners);
+        setIsloading(false);
+      } catch (error) {
+        console.log("Failed to Get Menu", error);
+        setIsloading(false);
+      }
     };
-    dinnersData();
+    getAll();
   }, []);
   return (
     <section>

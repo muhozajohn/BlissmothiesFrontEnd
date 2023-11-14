@@ -1,7 +1,12 @@
 import React from "react";
 import OrdersTable from "../components/Table/OrdersTable";
 import { BsFilterRight } from "react-icons/bs";
+import { Navigate } from "react-router-dom";
 const Orders = () => {
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  if (!isAuthenticated) {
+    return <Navigate to="/home" />;
+  }
   return (
     <div>
       <div className="px-2 flex items-center justify-between">

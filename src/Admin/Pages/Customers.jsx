@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import Member from "../components/Table/Member";
 import Admin from "../components/Table/Admin";
 
+import { Navigate } from "react-router-dom";
 const Customers = () => {
- const [activeTab, setActiveTab] = useState("customer");
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  if (!isAuthenticated) {
+    return <Navigate to="/home" />;
+  }
+  const [activeTab, setActiveTab] = useState("customer");
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between px-2 py-2 ">

@@ -5,7 +5,12 @@ import PulseLoader from "react-spinners/PulseLoader";
 import GalleryModal from "../components/modals/GalleryModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Navigate } from "react-router-dom";
 const GalleryD = () => {
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  if (!isAuthenticated) {
+    return <Navigate to="/home" />;
+  }
   const [album, setAlbum] = useState([]);
   const [loading, setIsloading] = useState(false);
   console.log("Album", album);

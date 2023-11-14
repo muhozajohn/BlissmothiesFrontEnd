@@ -3,7 +3,12 @@ import ProductsTable from "../components/Table/ProductsTable";
 import { BsFilterRight } from "react-icons/bs";
 import NewProduct from "../components/modals/NewProduct";
 
+import { Navigate } from "react-router-dom";
 const Products = () => {
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  if (!isAuthenticated) {
+    return <Navigate to="/home" />;
+  }
   return (
     <div>
       <div className="px-1 flex items-center justify-between">

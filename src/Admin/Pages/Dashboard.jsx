@@ -4,7 +4,12 @@ import { BsFillArrowDownSquareFill } from "react-icons/bs";
 import LineChartData from "../components/Charts/LineChart";
 import PieCharts from "../components/Charts/PieCharts";
 import BarCharts from "../components/Charts/BarCharts";
+import { Navigate } from "react-router-dom";
 const Dashboard = () => {
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  if (!isAuthenticated) {
+    return <Navigate to="/home" />;
+  }
   return (
     <div className="flex flex-col justify-between gap-2">
       <div className="w-full">

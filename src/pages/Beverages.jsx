@@ -9,8 +9,9 @@ const Beverages = () => {
     const getAll = async () => {
       try {
         setIsloading(true);
-        const getMenu = await axios.get;
-        "https://blissmothies.onrender.com/blissmothies/menu/read"();
+        const getMenu = await axios.get(
+          "https://blissmothies.onrender.com/blissmothies/menu/read"
+        );
         const response = await getMenu.data.data;
         const Beverages = response.filter(
           (menu) => menu.category === "Beverages"

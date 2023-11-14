@@ -4,14 +4,14 @@ import PulseLoader from "react-spinners/PulseLoader";
 import axios from "axios";
 const Supper = () => {
   const [menu, setMenu] = useState([]);
+  console.log("Suppers ", menu);
   const [loading, setIsloading] = useState(false);
   useEffect(() => {
     const getAll = async () => {
       try {
         setIsloading(true);
         const getMenu = await axios.get(
-          // "https://blissmothies.onrender.com/blissmothies/menu/read"
-          "http://localhost:4300/blissmothies/menu/read"
+          "https://blissmothies.onrender.com/blissmothies/menu/read"
         );
         const response = await getMenu.data.data;
         const Supper = response.filter((menu) => menu.category === "Supper");

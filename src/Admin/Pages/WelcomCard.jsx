@@ -3,7 +3,12 @@ import Welcome from "./Welcome";
 import { MdEmail, MdPointOfSale, MdTaxiAlert } from "react-icons/md";
 import { IoIosPeople } from "react-icons/io";
 import { BsCircle } from "react-icons/bs";
+import { Navigate } from "react-router-dom";
 const WelcomCard = () => {
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  if (!isAuthenticated) {
+    return <Navigate to="/home" />;
+  }
   const dataz = [
     {
       number: "200",

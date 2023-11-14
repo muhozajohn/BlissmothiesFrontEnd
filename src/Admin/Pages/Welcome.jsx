@@ -1,4 +1,9 @@
+import { Navigate } from "react-router-dom";
 const Welcome = ({ id, number, icon, content, iconP }) => {
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  if (!isAuthenticated) {
+    return <Navigate to="/home" />;
+  }
   return (
     <div className="flex  gap-1 shadow-md px-2 py-3 rounded-md items-center justify-between ">
       <div>

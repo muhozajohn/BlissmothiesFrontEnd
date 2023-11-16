@@ -10,10 +10,16 @@ const Book = () => {
           </h4>
           <h2 className="text-xl font-bold">Book A Table Now</h2>
         </div>
-        <div className="w-full lg:w-1/2 mx-auto text-center">
+        <div className="w-full lg:w-full mx-auto text-center">
           <p>
-            Far far away, behind the word mountains, far from the countries
-            Vokalia and Consonantia, there live the blind texts
+            At [Blissmothies], we understand that your dining experience
+            should be seamless and enjoyable from start to finish. That's why we
+            offer a convenient and efficient table booking system to enhance
+            your visit. Our "Table Bookings" feature allows you to reserve a
+            table in advance, ensuring that you have a designated space ready
+            for you upon arrival. Whether you're planning a quick lunch, a
+            family dinner, or a gathering with friends, our reservation system
+            is designed to make your dining experience hassle-free
           </p>
         </div>
         <div>

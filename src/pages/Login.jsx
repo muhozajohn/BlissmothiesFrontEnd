@@ -46,15 +46,23 @@ const Login = () => {
         "https://blissmothies.onrender.com/blissmothies/users/login/",
         formData
       );
+
       if (loginData.status === 200) {
         localStorage.setItem("token", loginData.data.token);
         localStorage.setItem("image", loginData.data.users.userProfile);
         setLoading(false);
         notify();
         setTimeout(() => {
-          navigate("/Dashboard");
-          //  window.location.reload();
+          if (loginData.data.users.role === "admin") {
+            navigate("/Dashboard");
+          } else if (loginData.data.users.role === "user") {
+            navigate("/");
+          } else {
+            // Handle other roles if needed
+            console.error("Unknown user role:", loginData.data.users.role);
+          }
         }, 3000);
+        // Check the user's role and navigate accordingly
       }
     } catch (error) {
       setLoading(false);
@@ -62,6 +70,7 @@ const Login = () => {
       console.log("Failed To Login", error);
     }
   };
+
   const initialValues = {
     email: "",
     password: "",

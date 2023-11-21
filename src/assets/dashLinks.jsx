@@ -16,6 +16,11 @@ export const DashLink = [
     icon: <MdSpaceDashboard />,
   },
   {
+    path: "/Manage",
+    display: "Manage",
+    icon: <MdSpaceDashboard />,
+  },
+  {
     path: "/Orders",
     display: "Orders",
     icon: <AiFillFolderOpen />,

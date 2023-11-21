@@ -1,7 +1,6 @@
-import React, { useState } from "react";
 import Member from "../components/Table/Member";
 import Admin from "../components/Table/Admin";
-
+import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 const Customers = () => {
   const isAuthenticated = localStorage.getItem("token") !== null;

@@ -23,6 +23,7 @@ import Logout from "../Admin/Pages/Logout";
 import Settings from "../Admin/Pages/Settings";
 import Emails from "../Admin/Pages/Emails";
 import GalleryD from "../Admin/Pages/GalleryD";
+import Manage from "../Admin/Pages/Manage";
 const Routers = () => {
   return (
     <>
@@ -54,6 +55,7 @@ const Routers = () => {
           <Route path="/Settings" element={<Settings />} />
           <Route path="/Album" element={<GalleryD />} />
           <Route path="/Emails" element={<Emails />} />
+          <Route path="/Manage" element={<Manage />} />
         </Route>
       </Routes>
     </>

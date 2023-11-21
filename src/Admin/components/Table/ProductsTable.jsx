@@ -1,8 +1,10 @@
 import { AiFillDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { FaTimes } from "react-icons/fa";
-import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import PulseLoader from "react-spinners/PulseLoader";
+import axios from "axios";
 import { useEffect, useState } from "react";
 const ProductsTable = () => {
   // getProduct
@@ -45,20 +47,74 @@ const ProductsTable = () => {
   console.log("Token", token);
   const deleteData = async (id) => {
     try {
+      setIsloading(true);
       const removeData = await axios.delete(
         `https://blissmothies.onrender.com/blissmothies/menu/delete/${id}`,
         config
       );
       if (removeData.status === 200) {
-        alert(removeData.data.message);
+        notiffy();
+        setIsloading(false);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       }
     } catch (error) {
+      eror();
+      setIsloading(false);
       console.log("Failed To Delete Data", error);
     }
   };
+
+  // tosty
+  const notiffy = () => {
+    toast.success("Deleted Succesfully!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const notify = () => {
+    toast.success("Updated Succesfully!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
+  const eror = () => {
+    toast.error("Try Again Please!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  // updateMenu
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
+  const [price, setPrice] = useState("");
+  const [content, setContent] = useState("");
+  const [category, setCategory] = useState("");
   const [single, setSingle] = useState({});
-  console.log("Singlezz", single);
-  const singleProduct = async () => {
+
+  const singleProduct = async (id) => {
+    handleModal();
     try {
       const singlePost = await axios.get(
         `https://blissmothies.onrender.com/blissmothies/menu/read/${id}`
@@ -69,8 +125,54 @@ const ProductsTable = () => {
       console.log("Error while getin Single blog", error);
     }
   };
+
+  // update Data
+  const updateMenus = async (id) => {
+    const imageInput = document.getElementById("imageInput");
+    const galleryImage = imageInput.files[0]; // Get the selected image file
+    const formData = new FormData();
+    formData.append("Title", title);
+    formData.append("Price", price);
+    formData.append("Category", category);
+    formData.append("Content", content);
+    formData.append("image", galleryImage);
+    console.log("FormData", formData);
+    try {
+      setIsloading(true);
+      const upData = await axios.put(
+        `https://blissmothies.onrender.com/blissmothies/menu/update/${id}`,
+        config,
+        formData
+      );
+
+      if (upData.status === 201) {
+        notify();
+        setIsloading(false);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      }
+    } catch (error) {
+      eror();
+      setIsloading(false);
+      console.log("Failed to Update Data", error);
+    }
+  };
+
   return (
     <div className="flex flex-col">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div className="overflow-hidden">
@@ -135,18 +237,27 @@ const ProductsTable = () => {
                         <div className="flex items-center gap-1">
                           <div
                             className="rounded-sm py-2 px-2 bg-blue-600 text-white w-fit"
-                            onClick={handleModal}
+                            onClick={(e) => {
+                              singleProduct(item._id);
+                            }}
                           >
                             <FiEdit />
                           </div>
                           <div
                             className="rounded-sm py-2 px-2 bg-btnColor text-white w-fit"
                             onClick={(e) => {
-                              console.log("hello Stu");
                               deleteData(item._id);
                             }}
                           >
-                            <AiFillDelete />
+                            {loading ? (
+                              <PulseLoader
+                                color="#FFF"
+                                loading={loading}
+                                size={3}
+                              />
+                            ) : (
+                              <AiFillDelete />
+                            )}
                           </div>
                         </div>
                       </td>
@@ -165,40 +276,61 @@ const ProductsTable = () => {
       {modal && (
         <div className="bg-slate-900/70 fixed backdrop-blur-sm left-0 top-0 w-screen h-screen z-[200] flex justify-center items-center">
           <form className="bg-white w-[90%] md:w-[60%] p-6 rounded-xl flex flex-col md:flex-row gap-6">
-            <div className="w-full py-2 px-2 md:w-1/2 flex justify-center items-center border border-solid border-gray-500 rounded-sm">
+            <div className="w-full py-2 px-2 md:w-1/2 flex justify-center flex-col gap-3 items-center border border-solid border-gray-500 rounded-sm">
               <input
                 type="file"
-                className=" w-full h-full "
                 id="imageInput"
                 accept="image/*"
-                value={single.image}
+                onChange={(e) => setImage(e.target.value)}
+                className=" ml-10 "
               />
-              <p className="lg:block hidden absolute">Upload Product Image</p>
+
+              <img
+                src={image ? image : single.image}
+                alt=""
+                className="lg:w-full w-1/2"
+              />
             </div>
             <div className="flex flex-col w-full md:w-1/2 gap-2">
               <input
                 type="text"
                 placeholder="Title"
-                value={single.title}
+                value={title ? title : single.title}
+                onChange={(e) => setTitle(e.target.value)}
                 className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
               />
               <div className="flex flex-col lg:flex-row items-center gap-4 justify-between ">
                 <input
                   type="text"
                   placeholder="Price"
+                  value={price ? price : single.price}
+                  onChange={(e) => setPrice(e.target.value)}
                   className=" w-full lg:w-1/2  py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
                 />
                 <select
                   name=""
                   id=""
+                  onChange={(e) => setCategory(e.target.value)}
                   className="w-full lg:w-1/2 py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
                 >
-                  <option value="">--- Category ---</option>
-                  <option>Breakfast</option>
-                  <option>Launch</option>
-                  <option>Desserts</option>
-                  <option>Dinner</option>
-                  <option>Beverages</option>
+                  <option value={category ? category : single.category}>
+                    {category ? category : single.category}
+                  </option>
+                  <option value={category ? category : single.category}>
+                    Breakfast
+                  </option>
+                  <option value={category ? category : single.category}>
+                    Launch
+                  </option>
+                  <option value={category ? category : single.category}>
+                    Desserts
+                  </option>
+                  <option value={category ? category : single.category}>
+                    Dinner
+                  </option>
+                  <option value={category ? category : single.category}>
+                    Beverages
+                  </option>
                 </select>
               </div>
 
@@ -207,14 +339,28 @@ const ProductsTable = () => {
                 id=""
                 cols="30"
                 rows="10"
+                value={content ? content : single.content}
+                onChange={(e) => setContent(e.target.value)}
                 placeholder="Description"
                 className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
               ></textarea>
-              <input
-                type="submit"
+
+              <button
                 className="w-full bg-blue-600 p-3 text-white rounded-lg cursor-pointer"
-                value={`Add New Product`}
-              />
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log("single cliked");
+                  updateMenus(single._id);
+                }}
+                disabled={loading}
+                type="submit"
+              >
+                {loading ? (
+                  <PulseLoader size={5} color={"#ffffff"} loading={loading} />
+                ) : (
+                  "Update Menu"
+                )}
+              </button>
             </div>
           </form>
           <button

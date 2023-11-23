@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import PulseLoader from "react-spinners/PulseLoader";
 import { FaComments } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import PulseLoader from "react-spinners/PulseLoader";
 import axios from "axios";
 import formatDate from "../date/Date";
 
@@ -50,7 +50,13 @@ const Blog = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
           {currentPosts.length ? (
             currentPosts.map((item, index) => (
-              <Link key={index} to="/blog">
+              <Link
+                key={index}
+                to="/blog"
+                onClick={(e) => {
+                  localStorage.setItem("blogId", item._id);
+                }}
+              >
                 <div className="flex flex-col gap-6 bg-white rounded-xl">
                   <div className="h-[200px] overflow-hidden">
                     <img
@@ -88,7 +94,7 @@ const Blog = () => {
               key={number}
               className={`bg-white  border border-orange-500 cursor-pointer font-medium py-1 px-3 rounded-lg text-btnColor ${
                 currentPage === number
-                  ? "bg-red-600 text-white"
+                  ? "bg-orange-800 text-white"
                   : "hover:bg-btnColor hover:text-white hover:border-white"
               }`}
               onClick={() => paginate(number)}

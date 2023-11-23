@@ -1,127 +1,101 @@
-import A from "../../assets/images/a.jpg";
-import B from "../../assets/images/chiefa.jpg";
-import C from "../../assets/images/chiefb.jpg";
-import D from "../../assets/images/chiefc.jpg";
+import { useEffect, useState } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 import { FaComments } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import formatDate from "../date/Date";
+
 const Blog = () => {
+  const [blog, setBlog] = useState([]);
+  const [loading, setIsloading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 4;
+
+  useEffect(() => {
+    const getBlog = async () => {
+      try {
+        setIsloading(true);
+        const getAll = await axios.get(
+          "https://blissmothies.onrender.com/blissmothies/blog/read"
+        );
+        const response = await getAll.data.blog;
+        setBlog(response);
+        setIsloading(false);
+      } catch (error) {
+        console.log("Failed to Retrieve Blog", error);
+        setIsloading(false);
+      }
+    };
+    getBlog();
+  }, []);
+
+  // pagination
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = blog.slice(indexOfFirstPost, indexOfLastPost);
+
+  const pageNumbers = Array.from(
+    { length: Math.ceil(blog.length / postsPerPage) },
+    (_, i) => i + 1
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <section>
       <div className="container flex flex-col gap-6">
         <h1 className="font-bold text-center text-2xl">Blogs</h1>
-        <div className="border border-orange-500 w-8 mt-[-1rem]  mx-auto"></div>
+        <div className="border border-orange-500 w-8 mt-[-1rem] mx-auto"></div>
         <h2 className="font-extrabold text-center text-3xl">Recent Posts</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-          <Link to="/blog">
-            <div className="flex flex-col gap-6 bg-white rounded-xl">
-              <div className=" h-[200px] overflow-hidden">
-                <img src={A} alt="" className="w-full h-full rounded-t-xl" />
-              </div>
-              <div className="px-3">
-                <p className="text-gray-500 flex justify-between items-center text-xs font-semibold">
-                  {" "}
-                  <span>sept. 06 , 2019</span> <span>admin</span>{" "}
-                </p>
-                <h2 className="text-sm font-extrabold">
-                  Best Food in East Africa
-                </h2>
-              </div>
-              <div className="px-3 pb-5 flex items-center justify-between">
-                <h4 className="text-sm font-semibold ">Read More</h4>
-                <span className="flex items-center gap-3">
-                  {/* <FaCommentDollar /> */}
-                  <FaComments className="text-gray-500" />
-                  <p className="text-xs">20+</p>
-                </span>
-              </div>
+          {currentPosts.length ? (
+            currentPosts.map((item, index) => (
+              <Link key={index} to="/blog">
+                <div className="flex flex-col gap-6 bg-white rounded-xl">
+                  <div className="h-[200px] overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt=""
+                      className="w-full h-full rounded-t-xl"
+                    />
+                  </div>
+                  <div className="px-3">
+                    <p className="text-gray-500 flex justify-between items-center text-xs font-semibold">
+                      <span> {formatDate(item.createdAt)} </span>
+                      <span>{item.author.fullName}</span>
+                    </p>
+                    <h2 className="text-sm font-extrabold">{item.title}</h2>
+                  </div>
+                  <div className="px-3 pb-5 flex items-center justify-between">
+                    <h4 className="text-sm font-semibold ">Read More</h4>
+                    <span className="flex items-center gap-3">
+                      <FaComments className="text-gray-500" />
+                      <p className="text-xs">20+</p>
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <div className="mt-5 flex justify-center items-center w-full text-center">
+              <PulseLoader color="#F06C05" loading={loading} size={10} />
             </div>
-          </Link>
-          <Link to="/blog">
-            <div className="flex flex-col gap-6 bg-white rounded-xl">
-              <div className=" h-[200px] overflow-hidden">
-                <img src={B} alt="" className="w-full h-full rounded-t-xl" />
-              </div>
-              <div className="px-3">
-                <p className="text-gray-500 flex justify-between items-center text-xs font-semibold">
-                  {" "}
-                  <span>sept. 06 , 2019</span> <span>admin</span>{" "}
-                </p>
-                <h2 className="text-sm font-extrabold">
-                  Best Food in East Africa
-                </h2>
-              </div>
-              <div className="px-3 pb-5 flex items-center justify-between">
-                <h4 className="text-sm font-semibold ">Read More</h4>
-                <span className="flex items-center gap-3">
-                  {/* <FaCommentDollar /> */}
-                  <FaComments className="text-gray-500" />
-                  <p className="text-xs">20+</p>
-                </span>
-              </div>
-            </div>
-          </Link>
-          <Link to="/blog">
-            <div className="flex flex-col gap-6 bg-white rounded-xl">
-              <div className=" h-[200px] overflow-hidden">
-                <img src={C} alt="" className="w-full h-full rounded-t-xl" />
-              </div>
-              <div className="px-3">
-                <p className="text-gray-500 flex justify-between items-center text-xs font-semibold">
-                  {" "}
-                  <span>sept. 06 , 2019</span> <span>admin</span>{" "}
-                </p>
-                <h2 className="text-sm font-extrabold">
-                  Best Food in East Africa
-                </h2>
-              </div>
-              <div className="px-3 pb-5 flex items-center justify-between">
-                <h4 className="text-sm font-semibold ">Read More</h4>
-                <span className="flex items-center gap-3">
-                  {/* <FaCommentDollar /> */}
-                  <FaComments className="text-gray-500" />
-                  <p className="text-xs">20+</p>
-                </span>
-              </div>
-            </div>
-          </Link>
-          <Link to="/blog">
-            <div className="flex flex-col gap-6 bg-white rounded-xl">
-              <div className=" h-[200px] overflow-hidden">
-                <img src={D} alt="" className="w-full h-full rounded-t-xl" />
-              </div>
-              <div className="px-3">
-                <p className="text-gray-500 flex justify-between items-center text-xs font-semibold">
-                  {" "}
-                  <span>sept. 06 , 2019</span> <span>admin</span>{" "}
-                </p>
-                <h2 className="text-sm font-extrabold">
-                  Best Food in East Africa
-                </h2>
-              </div>
-              <div className="px-3 pb-5 flex items-center justify-between">
-                <h4 className="text-sm font-semibold ">Read More</h4>
-                <span className="flex items-center gap-3">
-                  {/* <FaCommentDollar /> */}
-                  <FaComments className="text-gray-500" />
-                  <p className="text-xs">20+</p>
-                </span>
-              </div>
-            </div>
-          </Link>
+          )}
         </div>
         <div className="border border-orange-700 rounded-xl px-4 py-1 w-full lg:w-1/2 mx-auto flex justify-center items-center gap-1">
-          <div className=" bg-white border border-orange-500 cursor-pointer font-medium py-1 px-3 rounded-lg text-btnColor hover:bg-btnColor hover:text-white hover:border-white">
-            1
-          </div>
-          <div className=" bg-white border border-orange-500 cursor-pointer font-medium py-1 px-3 rounded-lg text-btnColor hover:bg-btnColor hover:text-white hover:border-white">
-            2
-          </div>
-          <div className=" bg-white border border-orange-500 cursor-pointer font-medium py-1 px-3 rounded-lg text-btnColor hover:bg-btnColor hover:text-white hover:border-white">
-            3
-          </div>
-          <div className=" bg-white border border-orange-500 cursor-pointer font-medium py-1 px-3 rounded-lg text-btnColor hover:bg-btnColor hover:text-white hover:border-white">
-            4
-          </div>
+          {pageNumbers.map((number) => (
+            <div
+              key={number}
+              className={`bg-white  border border-orange-500 cursor-pointer font-medium py-1 px-3 rounded-lg text-btnColor ${
+                currentPage === number
+                  ? "bg-red-600 text-white"
+                  : "hover:bg-btnColor hover:text-white hover:border-white"
+              }`}
+              onClick={() => paginate(number)}
+            >
+              {number}
+            </div>
+          ))}
         </div>
       </div>
     </section>

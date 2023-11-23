@@ -2,15 +2,37 @@ import A from "../assets/images/e.jpg";
 import B from "../assets/images/log1.png";
 import B1 from "../assets/images/logo-white.png";
 import C from "../assets/images/c.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
+import axios from "axios";
+import formatDate from "../components/date/Date";
 const OneBlog = () => {
   const [isOpen, setisOpen] = useState(false);
   const handleOpen = () => {
     setisOpen(!isOpen);
   };
+  const [blog, setBlog] = useState({});
+  const identity = localStorage.getItem("blogId");
+  useEffect(() => {
+    const getBlog = async () => {
+      try {
+        // setIsloading(true);
+        const getAll = await axios.get(
+          `https://blissmothies.onrender.com/blissmothies/blog/read/${identity}`
+        );
+        const response = await getAll.data.data;
+        setBlog(response);
+        // setIsloading(false);
+      } catch (error) {
+        console.log("Failed to Retrieve Blog", error);
+        // setIsloading(false);
+      }
+    };
+    getBlog();
+  }, [identity]);
+
   return (
     <section>
       <div className="container flex flex-col gap-10">
@@ -22,46 +44,39 @@ const OneBlog = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-3">
           <div className="h-full ">
-            <img src={A} alt="" className="h-full w-full rounded-xl" />
+            <img src={blog.image} alt="" className="h-full w-full rounded-xl" />
           </div>
           <div className="bg-transparent flex flex-col gap-5">
             <div className="flex gap-3 items-center">
-              <h4 className="text-lg font-bold">Foods, Drinks -</h4>
-              <span className="text-sm font-semibold">Jully 2 , 2023</span>
+              <h4 className="text-lg font-bold">{blog.category} -</h4>
+              <span className="text-sm font-semibold">
+                {formatDate(blog.createdAt)}
+              </span>
             </div>
             <div className="text-3xl font-bold">
-              <h2>Gilled Beef with Eggs</h2>
+              <h2> {blog.title}</h2>
             </div>
             <div>
               <h2 className="font-bold">Ingridents:</h2>
-              <p className="text-sm font-semibold">
-                Meats, Eggs, Rice,Tomate....
-              </p>
+              <p className="text-sm font-semibold">{blog.ingridents}</p>
             </div>
             <div>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Quisquam dolorum, sed harum dicta deserunt nobis expedita natus,
-                illum non culpa consequuntur architecto fugit deleniti
-                dignissimos vitae molestias perspiciatis, quaerat voluptate?
-              </p>
+              <p>{blog.content}</p>
             </div>
             <div className="flex flex-col lg:flex-row gap-5">
               <div className="flex items-center gap-5">
                 <div className="w-12 h-12 rounded-full">
                   <img
-                    src={B}
+                    src={blog?.author?.userProfile}
                     alt=""
                     className=" rounded-full h-full w-full "
                   />
                 </div>
                 <div>
-                  <h4 className="text-lg">keller</h4>
+                  <h4 className="text-lg">{blog?.author?.fullName}</h4>
                   <p className="text-[10px]">Ceo,Admin</p>
                 </div>
               </div>
-
-              {/* <div className="flex flex-col items-center gap-6 "> */}
               <div
                 className=" bg-orange-300 rounded-s w-full px-3 py-3 lg:w-[32vw] cursor-pointer"
                 onClick={handleOpen}
@@ -83,11 +98,31 @@ const OneBlog = () => {
                 </div>
                 {isOpen ? (
                   <div className="mt-6 px-3 py-3">
-                    {" "}
-                    <div>
-                      <h4 className="text-lg">keller</h4>
-                      <p className="text-[10px]">Ceo,Admin</p>
-                    </div>
+                    {blog.comments.map((item, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between"
+                      >
+                        <div>
+                          <p>{item.postComment}</p>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full">
+                            <img
+                              src={item?.author?.userProfile}
+                              alt=""
+                              className=" rounded-full h-full w-full "
+                            />
+                          </div>
+                          <div>
+                            <h4 className="text-sm">
+                              {item?.author?.fullName}
+                            </h4>
+                            <p className="text-[10px]">Customer,User</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 ) : null}
                 {/* </div> */}

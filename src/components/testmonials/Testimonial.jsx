@@ -9,20 +9,23 @@ import "swiper/css/pagination";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import PulseLoader from "react-spinners/PulseLoader";
 const Testimonial = () => {
   const [testimonials, Settestimonials] = useState([]);
-  console.log("All test", testimonials);
+  const [loading, setIsloading] = useState(false);
   useEffect(() => {
     const getTestimonials = async () => {
       try {
+        setIsloading(true);
         const getAll = await axios.get(
           "https://blissmothies.onrender.com/blissmothies/Testmoniols/read"
         );
         const reaponse = await getAll.data.data;
         Settestimonials(reaponse);
+        setIsloading(false);
       } catch (error) {
         console.log("Failed to Getin ", error);
+        setIsloading(false);
       }
     };
     getTestimonials();
@@ -69,31 +72,37 @@ const Testimonial = () => {
                 }}
                 className="swiper"
               >
-                {testimonials.map((item, index) => (
-                  <SwiperSlide key={index}>
-                    <div className=" w-full bg-bgColor py-5 px-5 rounded-xl">
-                      <div className="w-[4rem] h-[4rem] bg-white rounded-full px-1 py-1 flex items-center justify-center">
-                        <img
-                          src={item.profile}
-                          alt=""
-                          className=" rounded-full w-full h-full"
-                        />
+                {testimonials.length ? (
+                  testimonials.map((item, index) => (
+                    <SwiperSlide key={index}>
+                      <div className=" w-full bg-bgColor py-5 px-5 rounded-xl">
+                        <div className="w-[4rem] h-[4rem] bg-white rounded-full px-1 py-1 flex items-center justify-center">
+                          <img
+                            src={item.profile}
+                            alt=""
+                            className=" rounded-full w-full h-full"
+                          />
+                        </div>
+                        <div>
+                          <h2 className="font-[800] text-2xl">{item.name}</h2>
+                          <small className="text-sm font-medium">
+                            {item.title}
+                          </small>
+                        </div>
+                        <div className="text-[4rem] font-[800] ">“</div>
+                        <div className="mt-[-1rem]">
+                          <p className=" leading-8 font-[500]">
+                            “ {item.comment}”
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h2 className="font-[800] text-2xl">{item.name}</h2>
-                        <small className="text-sm font-medium">
-                          {item.title}
-                        </small>
-                      </div>
-                      <div className="text-[4rem] font-[800] ">“</div>
-                      <div className="mt-[-1rem]">
-                        <p className=" leading-8 font-[500]">
-                          “ {item.comment}”
-                        </p>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                ))}
+                    </SwiperSlide>
+                  ))
+                ) : (
+                  <div className="mt-5 flex justify-center items-center w-full text-center">
+                    <PulseLoader color="#F06C05" loading={loading} size={15} />
+                  </div>
+                )}
               </Swiper>
             </div>
           </div>

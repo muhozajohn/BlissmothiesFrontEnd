@@ -3,6 +3,10 @@ import { AiFillDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { FaTimes } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import formatDate from "../../../components/date/Date";
+import PulseLoader from "react-spinners/PulseLoader";
+import { ToastContainer, toast } from "react-toastify";
 const Blog = () => {
   // modal
   const [modal, setModal] = useState(false);
@@ -10,8 +14,84 @@ const Blog = () => {
   const handleModal = () => {
     setModal(!modal);
   };
+  const [blog, setBlog] = useState([]);
+  console.log("blogs", blog);
+  useEffect(() => {
+    const getBlog = async () => {
+      try {
+        setIsloading(true);
+        const getAll = await axios.get(
+          "https://blissmothies.onrender.com/blissmothies/blog/read"
+        );
+        const response = await getAll.data.blog;
+        setBlog(response);
+        setIsloading(false);
+      } catch (error) {
+        console.log("Failed to Retrieve Blog", error);
+        setIsloading(false);
+      }
+    };
+    getBlog();
+  }, []);
+  // Delete Blog
+  const notify = () => {
+    toast.success("Deleted Succesfully!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
+  const eror = () => {
+    toast.error("Try Again Please!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+  const removeProduct = async (id) => {
+    try {
+      setIsloading(true);
+      const deleted = await axios.delete(
+        `https://blissmothies.onrender.com/blissmothies/blog/delete/${id}`
+      );
+      if (deleted.status === 200) {
+        notify();
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+        setIsloading(false);
+      }
+    } catch (error) {
+      console.log("Failed to Delete", error);
+      eror();
+      setIsloading(false);
+    }
+  };
   return (
     <div className="flex flex-col gap-5">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="flex flex-col">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -49,48 +129,87 @@ const Blog = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-300">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">
-                      2
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4">Muhoza</td>
-                    <td className="whitespace-nowrap px-6 py-4">keller</td>
-                    <td className="whitespace-nowrap px-6 py-4">20</td>
-                    <td className="whitespace-nowrap px-6 py-4">
-                      01/ 02 /2023
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">
-                      {" "}
-                      14:300 pm{" "}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4">
-                      01/ 02 /2023
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4">Kigali</td>
-                    <td className="whitespace-nowrap px-6 py-4">
-                      {" "}
-                      <div className="flex items-center gap-1">
-                        <div
-                          className="rounded-sm py-2 px-2 bg-blue-600 text-white w-fit"
-                          //   onClick={(e) => {
-                          //     // singleProduct(item._id);
-                          //     handleModal;
-                          //   }}
-                          onClick={handleModal}
-                        >
-                          <FiEdit />
-                        </div>
-                        <div
-                          className="rounded-sm py-2 px-2 bg-btnColor text-white w-fit"
-                          onClick={(e) => {
-                            // deleteData(item._id);
-                          }}
-                        >
-                          <AiFillDelete />
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+                  {blog.length ? (
+                    blog.map((item, index) => (
+                      <tr
+                        key={index}
+                        className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-300"
+                      >
+                        <td className="whitespace-nowrap px-6 py-4 font-medium">
+                          {index + 1}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          <img
+                            src={item.image}
+                            alt=""
+                            className="w-8 rounded-md h-8"
+                          />
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          {item.title}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          {item.content.length > 20
+                            ? `${item.category.substring(0, 20)}...`
+                            : item.content}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          {item.content.length > 20
+                            ? `${item.content.substring(0, 20)}...`
+                            : item.content}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4 font-medium">
+                          {item.comments.length}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          {formatDate(item.createdAt)}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          {item?.author?.fullName}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          {" "}
+                          <div className="flex items-center gap-1">
+                            <div
+                              className="rounded-sm py-2 px-2 bg-blue-600 text-white w-fit"
+                              //   onClick={(e) => {
+                              //     // singleProduct(item._id);
+                              //     handleModal;
+                              //   }}
+                              onClick={handleModal}
+                            >
+                              <FiEdit />
+                            </div>
+                            <div
+                              disabled={loading}
+                              className="rounded-sm py-2 px-2 bg-btnColor text-white w-fit"
+                              onClick={(e) => {
+                                removeProduct(item._id);
+                              }}
+                            >
+                              {loading ? (
+                                <PulseLoader
+                                  color="#FFF"
+                                  loading={loading}
+                                  size={3}
+                                />
+                              ) : (
+                                <AiFillDelete />
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <div className="mt-5 flex justify-center items-center w-full text-center">
+                      <PulseLoader
+                        color="#F06C05"
+                        loading={loading}
+                        size={10}
+                      />
+                    </div>
+                  )}
                 </tbody>
               </table>
             </div>

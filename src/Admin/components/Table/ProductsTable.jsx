@@ -10,7 +10,6 @@ const ProductsTable = () => {
   // getProduct
   const [product, setProduct] = useState([]);
   const [loading, setIsloading] = useState(false);
-  console.log("Product items", product);
   useEffect(() => {
     const getMenu = async () => {
       try {

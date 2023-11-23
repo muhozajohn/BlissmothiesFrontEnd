@@ -18,16 +18,13 @@ const OneBlog = () => {
   useEffect(() => {
     const getBlog = async () => {
       try {
-        // setIsloading(true);
         const getAll = await axios.get(
           `https://blissmothies.onrender.com/blissmothies/blog/read/${identity}`
         );
         const response = await getAll.data.data;
         setBlog(response);
-        // setIsloading(false);
       } catch (error) {
         console.log("Failed to Retrieve Blog", error);
-        // setIsloading(false);
       }
     };
     getBlog();

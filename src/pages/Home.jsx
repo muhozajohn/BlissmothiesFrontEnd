@@ -1,4 +1,4 @@
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import Chief from "./Chief";
 import Deserts from "./Deserts";
@@ -6,7 +6,28 @@ import Testimonial from "../components/testmonials/Testimonial";
 import Events from "./Event";
 import Book from "./Book";
 import MenuContainer from "../components/menu/MenuContainer";
+import PulseLoader from "react-spinners/PulseLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react";
 const Home = () => {
+  const [loading, IsLoading] = useState(false);
+  const [DateArrival, seTDateArrival] = useState("");
+  const [DateDeparture, seTDateDeparture] = useState("");
+  const [peaple, seTpeaple] = useState("");
+  const formData = {
+    DateArrival,
+    DateDeparture,
+    peaple,
+  };
+
+  const sendReq = async () => {
+    try {
+    } catch (error) {
+      console.log("Failed to request", error);
+    }
+  };
+
   return (
     <>
       <nav className="header h-screen ">
@@ -42,6 +63,8 @@ const Home = () => {
                   <p className="text-sm">Date Arrival </p>
                   <p className="flex">
                     <input
+                      value={DateArrival}
+                      onChange={(e) => seTDateArrival(e.target.value)}
                       type="date"
                       className="w-full lg:w-5 bg-transparent "
                     />
@@ -51,6 +74,8 @@ const Home = () => {
                   <p className="text-sm">Date Departure </p>
                   <p className="flex">
                     <input
+                      value={DateDeparture}
+                      onChange={(e) => seTDateDeparture(e.target.value)}
                       type="date"
                       className="w-full lg:w-5 bg-transparent "
                     />
@@ -60,6 +85,8 @@ const Home = () => {
                   <select
                     name=""
                     id=""
+                    value={peaple}
+                    onChange={(e) => seTpeaple(e.target.value)}
                     className=" bg-transparent border-collapse focus:border-none w-full "
                   >
                     <option># of Person</option>
@@ -75,7 +102,11 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className=" bg-btnColor flex items-center w-full justify-center cursor-pointer text-white py-4  lg:w-[13vw] rounded-xl font-[600] ">
+              <div
+                className=" bg-btnColor flex items-center w-full justify-center cursor-pointer text-white py-4  lg:w-[13vw] rounded-xl font-[600] "
+                onClick={sendReq}
+              >
+                {}
                 Send Request
               </div>
             </div>

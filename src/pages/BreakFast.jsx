@@ -52,7 +52,11 @@ const BreakFast = () => {
                   className="w-20 h-20 absolute rounded-2xl right-0 top-[-1.7rem]"
                 />
               </div>
-              <p className="mt-3 leading-6">{item.content}</p>
+              <p className="mt-3 leading-6">
+                {item.content.length > 100
+                  ? `${item.content.substring(0, 100)}.....`
+                  : item.content}
+              </p>
               <div className="flex justify-between items-center">
                 <p>${item.price}</p>
                 <div className="flex items-center justify-center border border-black px-2 rounded-xl py-1 cursor-pointer hover:bg-btnColor hover:border-btnColor hover:text-white">

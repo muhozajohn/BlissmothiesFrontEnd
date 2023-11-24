@@ -26,19 +26,15 @@ const Dinner = () => {
   return (
     <section>
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-        {dinners.length < 1 ? (
-          <div className="flex justify-center items-center w-full text-center  ">
-            <PulseLoader color="#F06C05" loading={loading} size={10} />
-          </div>
-        ) : (
-          dinners.map((index, item) => (
+        {dinners.length ? (
+          dinners.map((item, index) => (
             <div
               className="px-4 py-4 relative bg-white rounded-lg flex flex-col gap-5"
-              key={item}
+              key={index}
             >
               <div className="flex justify-between items-center relative">
                 <div>
-                  <h5 className="text-[14px] font-[600]">{index.title}</h5>
+                  <h5 className="text-[14px] font-[600]">{item.title}</h5>
                   <div className="flex gap-3 items-center cursor-pointer text-[12px]">
                     <span className="flex flex-col">
                       <AiOutlineHeart />
@@ -49,20 +45,28 @@ const Dinner = () => {
                   </div>
                 </div>
                 <img
-                  src={index.image}
+                  src={item.image}
                   alt=""
                   className="w-20 h-20 absolute rounded-2xl right-0 top-[-1.7rem]"
                 />
               </div>
-              <p className="mt-3 leading-6">{index.content}</p>
+              <p className="mt-3 leading-6">
+                {item.content.length > 100
+                  ? `${item.content.substring(0, 100)}.....`
+                  : item.content}
+              </p>
               <div className="flex justify-between items-center">
-                <p>{index.price}</p>
+                <p>${item.price}</p>
                 <div className="flex items-center justify-center border border-black px-2 rounded-xl py-1 cursor-pointer hover:bg-btnColor hover:border-btnColor hover:text-white">
                   Add to Cart
                 </div>
               </div>
             </div>
           ))
+        ) : (
+          <div className="flex justify-center items-center w-full text-center  ">
+            <PulseLoader color="#F06C05" loading={loading} size={10} />
+          </div>
         )}
       </div>
     </section>

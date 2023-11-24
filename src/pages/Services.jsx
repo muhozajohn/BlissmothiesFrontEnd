@@ -15,13 +15,16 @@ const Services = () => {
   useEffect(() => {
     const getAll = async () => {
       try {
+        setIsloading(true);
         const getEvent = await axios.get(
           "https://blissmothies.onrender.com/blissmothies/services/read"
         );
         const response = await getEvent.data.data;
         setServices(response);
+        setIsloading(false);
       } catch (error) {
         console.log("Failed to Get Services", error);
+        setIsloading(false);
       }
     };
     getAll();
@@ -43,7 +46,7 @@ const Services = () => {
               </div>
             ))
           ) : (
-            <div className="flex justify-center items-center w-full text-center  ">
+            <div className="flex justify-center items-center w-full text-center mx-auto  ">
               <PulseLoader color="#F06C05" loading={loading} size={10} />
             </div>
           )}

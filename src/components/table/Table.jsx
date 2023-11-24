@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Blog from "../blog/Blog";
 const Table = () => {
+  const [DateArrival, seTDateArrival] = useState("");
+  const [DateDeparture, seTDateDeparture] = useState("");
+  const [peaple, seTpeaple] = useState("");
+  const formData = {
+    DateArrival,
+    DateDeparture,
+    peaple,
+  };
+
   return (
     <div>
       <div className="bgt py-5">
@@ -70,7 +79,6 @@ const Table = () => {
                 <label htmlFor="" className="text-sm font-semibold">
                   Person
                 </label>
-                {/* <input type="date" placeholder="phone" className="rounded-xl border border-black px-3 py-3 w-full" /> */}
                 <select
                   name=""
                   id=""
@@ -86,7 +94,9 @@ const Table = () => {
                 </select>
               </div>
             </form>
-            <div className="btn py-3 cursor-pointer rounded-sm">Make Reservation</div>
+            <div className="btn w-full text-center py-3 cursor-pointer rounded-sm">
+              Make Reservation
+            </div>
           </div>
         </div>
       </div>

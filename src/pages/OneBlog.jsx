@@ -8,13 +8,46 @@ import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import axios from "axios";
 import formatDate from "../components/date/Date";
+import PulseLoader from "react-spinners/PulseLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const OneBlog = () => {
   const [isOpen, setisOpen] = useState(false);
+  const [loading, IsLoading] = useState(false);
   const handleOpen = () => {
     setisOpen(!isOpen);
   };
   const [blog, setBlog] = useState({});
   const identity = localStorage.getItem("blogId");
+  const token = localStorage.getItem("token");
+  const [postComment, setComment] = useState("");
+  // make comment
+  const formData = {
+    postComment,
+  };
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const makeComment = async (id) => {
+    try {
+      IsLoading(true);
+      const makePost = await axios.post(
+        `https://blissmothies.onrender.com/blissmothies/blog/comment/${id}`,
+        formData,
+        config
+      );
+      if (makePost.status === 200) {
+        notify();
+        IsLoading(false);
+      }
+    } catch (error) {
+      console.log("Cant add comment", error);
+      eror();
+      IsLoading(false);
+    }
+  };
   useEffect(() => {
     const getBlog = async () => {
       try {
@@ -29,9 +62,45 @@ const OneBlog = () => {
     };
     getBlog();
   }, [identity]);
+  const notify = () => {
+    toast.success("Comment Added Well!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
 
+  const eror = () => {
+    toast.error("Try Again Please!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
   return (
     <section>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="container flex flex-col gap-10">
         <div>
           <h2 className="text-center lg:text-2xl lg:font-bold mx-auto lg:w-[40vw] w-full text-xl font-semibold">
@@ -98,13 +167,13 @@ const OneBlog = () => {
                     {blog.comments.map((item, index) => (
                       <div
                         key={index}
-                        className="flex items-center justify-between"
+                        className="flex items-center justify-between border-b-2  "
                       >
                         <div>
                           <p>{item.postComment}</p>
                         </div>
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full">
+                        <div className="flex items-center mt-2 gap-3 ">
+                          <div className="w-6 h-6 rounded-full">
                             <img
                               src={item?.author?.userProfile}
                               alt=""
@@ -112,10 +181,10 @@ const OneBlog = () => {
                             />
                           </div>
                           <div>
-                            <h4 className="text-sm">
+                            <h4 className="text-[10px]">
                               {item?.author?.fullName}
                             </h4>
-                            <p className="text-[10px]">Customer,User</p>
+                            <p className="text-[8px]">Customer,User</p>
                           </div>
                         </div>
                       </div>
@@ -131,15 +200,27 @@ const OneBlog = () => {
                   Leave Your Comment
                 </label>
                 <textarea
+                  value={postComment}
+                  onChange={(e) => setComment(e.target.value)}
                   name="comment"
                   id="comment"
                   cols="30"
                   rows="6"
                   className=" py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm "
                 ></textarea>
-                <button type="submit" className="btn">
-                  {" "}
-                  Submit{" "}
+                <button
+                  // type="submit"
+                  className="btn"
+                  disabled={loading}
+                  onClick={(e) => {
+                    makeComment(blog._id);
+                  }}
+                >
+                  {loading ? (
+                    <PulseLoader color="#FFF" loading={loading} size={8} />
+                  ) : (
+                    "Submit"
+                  )}
                 </button>
               </form>
             </div>

@@ -34,14 +34,14 @@ const MenuContainer = () => {
             <Link>Breakfast</Link>
           </li>
           <li
-            onClick={() => setActiveTab("launch")}
+            onClick={() => setActiveTab("lunch")}
             className={
-              activeTab === "launch"
+              activeTab === "lunch"
                 ? `rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center`
                 : "rounded-xl bg-transparent border border-btnColor text-black px-[30px] py-[10px] font-[600] flex items-center justify-center "
             }
           >
-            <Link>Launch</Link>
+            <Link>Lunch</Link>
           </li>
           <li
             onClick={() => setActiveTab("Dinner")}
@@ -54,14 +54,14 @@ const MenuContainer = () => {
             <Link>Dinner</Link>
           </li>
           <li
-            onClick={() => setActiveTab("Desserts")}
+            onClick={() => setActiveTab("Deserts")}
             className={
-              activeTab === "Desserts"
+              activeTab === "Deserts"
                 ? `rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center`
                 : "rounded-xl bg-transparent border border-btnColor text-black px-[30px] py-[10px] font-[600] flex items-center justify-center "
             }
           >
-            <Link>Desserts</Link>
+            <Link>Deserts</Link>
           </li>
           <li
             onClick={() => setActiveTab("Supper")}
@@ -84,7 +84,7 @@ const MenuContainer = () => {
             <Link>Beverages</Link>
           </li>
         </ul>
-        <ul className="flex flex-col lg:hidden">
+        {/* <ul className="flex flex-col lg:hidden">
           <li
             onClick={() => setActiveTab("all")}
             className={
@@ -106,14 +106,14 @@ const MenuContainer = () => {
             <Link>Breakfast</Link>
           </li>
           <li
-            onClick={() => setActiveTab("launch")}
+            onClick={() => setActiveTab("lunch")}
             className={
-              activeTab === "launch"
+              activeTab === "lunch"
                 ? ` font-[600] text-btnColor flex items-center `
                 : " text-black font-[600] flex items-center "
             }
           >
-            <Link>Launch</Link>
+            <Link>Lunch</Link>
           </li>
           <li
             onClick={() => setActiveTab("Dinner")}
@@ -145,17 +145,17 @@ const MenuContainer = () => {
           >
             <Link>Beverages</Link>
           </li>
-        </ul>
+        </ul> */}
       </div>
 
       <div className="container">
         {activeTab === "all" && <MenuCards />}
         {activeTab === "breakfast" && <BreakFast />}
-        {activeTab === "launch" && <Launch />}
+        {activeTab === "lunch" && <Launch />}
         {activeTab === "Dinner" && <Dinner />}
-        {activeTab === "Desserts" && <Desserts />}
+        {activeTab === "Deserts" && <Desserts />}
         {activeTab === "Beverages" && <Beverages />}
-        {activeTab === "Supper" &&  <Supper /> }
+        {activeTab === "Supper" && <Supper />}
       </div>
     </>
   );

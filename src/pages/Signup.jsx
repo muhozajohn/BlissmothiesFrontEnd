@@ -59,6 +59,7 @@ const Signup = () => {
       if (signUpData.status === 201) {
         setLoading(false);
         notify();
+        formik.resetForm();
         setTimeout(() => {
           navigate("/login");
         }, 3000);

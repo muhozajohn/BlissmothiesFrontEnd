@@ -52,6 +52,16 @@ body {
     background-color: #00000084;
     display: none;
   }
+  .navMenu {
+    width: 100%;
+    height: 100%;
+    /* top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 100; */
+    /* background-color: #00000084; */
+    display: none;
+  }
   .menu {
     width: 15rem;
     height: 100%;
@@ -63,6 +73,14 @@ body {
       url(./assets/images/hd-bg.png);
     background-size: cover;
     z-index: 200;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 20px;
+  }
+  .menuNav {
+    width: 15rem;
+    height: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;

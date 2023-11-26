@@ -10,6 +10,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
+import axios from "axios";
 const Home = () => {
   const [loading, IsLoading] = useState(false);
   const [DateArrival, seTDateArrival] = useState("");
@@ -23,13 +24,60 @@ const Home = () => {
 
   const sendReq = async () => {
     try {
+      IsLoading(true);
+      const AddRequest = await axios.post(
+        "https://blissmothies.onrender.com/blissmothies/reservation/send",
+        formData
+      );
+      if (AddRequest.status === 201) {
+        notify();
+        IsLoading(false);
+      }
     } catch (error) {
       console.log("Failed to request", error);
+      eror();
+      IsLoading(false);
     }
   };
 
+  const notify = () => {
+    toast.success("Request Sent Succesfully!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  const eror = () => {
+    toast.error("Try Again Please!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <nav className="header h-screen ">
         <div className=" h-screen w-full bg-[rgba(0,0,0,0.8)]">
           <div className="container text-white">
@@ -57,37 +105,38 @@ const Home = () => {
             </div>
           </div>
           <div className="container">
-            <div className="  rounded-xl lg:mt-[10rem] md:mt-[10rem] mt-[5rem] mb-8 w-full lg:w-[80%] mx-auto bg-white flex flex-col lg:flex-row items-center lg:flex gap-8 lg:justify-between px-5 py-7">
+            <div className="  rounded-xl lg:mt-[11rem] md:mt-[10rem] mt-[5rem] mb-8 w-full lg:w-[80%] mx-auto bg-white flex flex-col lg:flex-row items-center lg:flex gap-8 lg:justify-between px-5 py-5">
               <div className="grid grid-cols-1 w-full lg:w-auto  lg:grid-cols-3 gap-5">
-                <div className=" bg-textColor px-4 py-4 w-full lg:w-[13vw] rounded-xl flex items-center justify-between">
-                  <p className="text-sm">Date Arrival </p>
-                  <p className="flex">
-                    <input
-                      value={DateArrival}
-                      onChange={(e) => seTDateArrival(e.target.value)}
-                      type="date"
-                      className="w-full lg:w-5 bg-transparent "
-                    />
-                  </p>
+                <div className=" bg-textColor px-4 py-1 w-full lg:w-[13vw] rounded-xl flex flex-col items-left justify-between">
+                  <p className="text-sm font-semibold">Date Arrival </p>
+
+                  <input
+                    value={DateArrival}
+                    onChange={(e) => seTDateArrival(e.target.value)}
+                    type="date"
+                    className="w-full h-full bg-transparent outline-none active:outline-none text-xs"
+                  />
                 </div>
-                <div className=" bg-textColor px-4 py-4 w-full lg:w-[13vw] rounded-xl flex items-center justify-between">
-                  <p className="text-sm">Date Departure </p>
-                  <p className="flex">
-                    <input
-                      value={DateDeparture}
-                      onChange={(e) => seTDateDeparture(e.target.value)}
-                      type="date"
-                      className="w-full lg:w-5 bg-transparent "
-                    />
-                  </p>
+                <div className=" bg-textColor px-4 py-1 w-full lg:w-[13vw] rounded-xl flex flex-col items-left justify-between">
+                  <p className="text-sm font-semibold">Date Departure </p>
+
+                  <input
+                    value={DateDeparture}
+                    onChange={(e) => seTDateDeparture(e.target.value)}
+                    type="date"
+                    className="w-full h-full bg-transparent outline-none active:outline-none text-xs"
+                  />
                 </div>
-                <div className=" bg-textColor px-4 py-4 w-full lg:w-[13vw] rounded-xl flex items-center justify-between">
+                <div className=" bg-textColor px-4 py-1 w-full lg:w-[13vw] rounded-xl flex flex-col items-left justify-between">
+                  <p className="flex gap-1 text-sm font-semibold">
+                    <FaUser /> #People
+                  </p>
                   <select
                     name=""
                     id=""
                     value={peaple}
                     onChange={(e) => seTpeaple(e.target.value)}
-                    className=" bg-transparent border-collapse focus:border-none w-full "
+                    className=" w-full h-full bg-transparent outline-none active:outline-none text-xs"
                   >
                     <option># of Person</option>
                     <option>1</option>
@@ -96,18 +145,18 @@ const Home = () => {
                     <option>4</option>
                     <option>5+</option>
                   </select>
-                  <p>
-                    <FaUser />
-                  </p>
                 </div>
               </div>
 
               <div
-                className=" bg-btnColor flex items-center w-full justify-center cursor-pointer text-white py-4  lg:w-[13vw] rounded-xl font-[600] "
+                className=" bg-btnColor flex items-center w-full justify-center cursor-pointer text-white py-3  lg:w-[13vw] rounded-xl font-[600] "
                 onClick={sendReq}
               >
-                {}
-                Send Request
+                {loading ? (
+                  <PulseLoader size={5} color={"#ffffff"} loading={loading} />
+                ) : (
+                  "Send Request"
+                )}
               </div>
             </div>
           </div>

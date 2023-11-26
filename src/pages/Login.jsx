@@ -49,13 +49,14 @@ const Login = () => {
 
       if (loginData.status === 200) {
         localStorage.setItem("token", loginData.data.token);
-        localStorage.setItem("image", loginData.data.users.userProfile);
         setLoading(false);
         notify();
         setTimeout(() => {
           if (loginData.data.users.role === "admin") {
+            localStorage.setItem("image", loginData.data.users.userProfile);
             navigate("/Dashboard");
           } else if (loginData.data.users.role === "user") {
+            localStorage.setItem("userP", loginData.data.users.userProfile);
             navigate("/");
           } else {
             // Handle other roles if needed

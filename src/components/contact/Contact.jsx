@@ -33,7 +33,7 @@ const Contact = () => {
     });
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async () => {
     const formData = {
       name: formik.values.name,
       email: formik.values.email,
@@ -44,13 +44,13 @@ const Contact = () => {
       setLoading(true);
       const response = await axios.post(
         "https://blissmothies.onrender.com/blissmothies/contact/send",
-
         formData
       );
       if (response.status === 200) {
         const responsedata = response.data.data;
         console.log("responsedata", responsedata);
         notify();
+        formik.resetForm();
         setLoading(false);
       }
     } catch (error) {
@@ -134,16 +134,11 @@ const Contact = () => {
             <form
               action=""
               className="flex flex-col gap-4"
-              onSubmit={(e) => {
-                // e.preventDefault();
-                formik.handleSubmit(formik.values);
-              }}
+              onSubmit={formik.handleSubmit}
             >
-              {" "}
               {formik.touched.name && formik.errors.name ? (
                 <div className=" text-sm text-red-800 font-extralight ">
-                  {" "}
-                  {formik.errors.name}{" "}
+                  {formik.errors.name}
                 </div>
               ) : null}
               <input
@@ -158,8 +153,7 @@ const Contact = () => {
               />
               {formik.touched.email && formik.errors.email ? (
                 <div className=" text-sm text-red-800 font-extralight ">
-                  {" "}
-                  {formik.errors.email}{" "}
+                  {formik.errors.email}
                 </div>
               ) : null}
               <input
@@ -174,8 +168,7 @@ const Contact = () => {
               />
               {formik.touched.subject && formik.errors.subject ? (
                 <div className=" text-sm text-red-800 font-extralight ">
-                  {" "}
-                  {formik.errors.subject}{" "}
+                  {formik.errors.subject}
                 </div>
               ) : null}
               <input
@@ -190,8 +183,7 @@ const Contact = () => {
               />
               {formik.touched.message && formik.errors.message ? (
                 <div className=" text-sm text-red-800 font-extralight ">
-                  {" "}
-                  {formik.errors.message}{" "}
+                  {formik.errors.message}
                 </div>
               ) : null}
               <textarea
@@ -201,15 +193,12 @@ const Contact = () => {
                 cols="30"
                 rows="10"
                 onChange={formik.handleChange}
-                onBlur={() => {
-                  formik.handleBlur;
-                }}
+                onBlur={formik.handleBlur}
                 value={formik.values.message}
                 className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
               ></textarea>
               <button
                 className="btn w-full flex justify-center items-center lg:w-fit cursor-pointer rounded-sm"
-                // onClick={handleButtonClick}
                 disabled={loading}
                 type="submit"
               >
@@ -220,90 +209,6 @@ const Contact = () => {
                 )}
               </button>
             </form>
-            {/* <form
-              action=""
-              className="flex flex-col gap-4"
-              onSubmit={formik.handleSubmit}
-            >
-              {" "}
-              {formik.touched.name && formik.errors.name ? (
-                <div className=" text-sm text-red-800 font-extralight ">
-                  {" "}
-                  {formik.errors.name}{" "}
-                </div>
-              ) : null}
-              <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Your Name"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.name}
-                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  "
-              />
-              {formik.touched.email && formik.errors.email ? (
-                <div className=" text-sm text-red-800 font-extralight ">
-                  {" "}
-                  {formik.errors.email}{" "}
-                </div>
-              ) : null}
-              <input
-                type="text"
-                name="email"
-                id="email"
-                placeholder="Your Email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm "
-              />
-              {formik.touched.subject && formik.errors.subject ? (
-                <div className=" text-sm text-red-800 font-extralight ">
-                  {" "}
-                  {formik.errors.subject}{" "}
-                </div>
-              ) : null}
-              <input
-                type="text"
-                name="subject"
-                id="subject"
-                placeholder="SubJect"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.subject}
-                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm "
-              />
-              {formik.touched.message && formik.errors.message ? (
-                <div className=" text-sm text-red-800 font-extralight ">
-                  {" "}
-                  {formik.errors.message}{" "}
-                </div>
-              ) : null}
-              <textarea
-                name="message"
-                id="message"
-                placeholder="Message"
-                cols="30"
-                rows="10"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.message}
-                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
-              ></textarea>
-              <button
-                className="btn w-full flex justify-center items-center lg:w-fit cursor-pointer rounded-sm"
-                // onClick={handleButtonClick}
-                disabled={loading}
-                type="submit"
-              >
-                {loading ? (
-                  <PulseLoader size={5} color={"#ffffff"} loading={loading} />
-                ) : (
-                  "Send Message"
-                )}
-              </button>
-            </form> */}
           </div>
         </div>
       </section>

@@ -5,7 +5,7 @@ import { BiMenu } from "react-icons/bi";
 import { FaCartPlus } from "react-icons/fa";
 import logo from "../../assets/images/logok.png";
 const Header = () => {
-  const storedImage = localStorage.getItem("image");
+  const storedImage = localStorage.getItem("userP");
   const imageUrl = storedImage
     ? storedImage
     : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
@@ -79,7 +79,6 @@ const Header = () => {
 
             <Link to="/book-table">
               <span className="btn">Book table</span>
-              {/* <button className="btn">Book Table</button> */}
             </Link>
 
             <span
@@ -90,7 +89,6 @@ const Header = () => {
             </span>
           </div>
         </div>
-        {/* </div> */}
       </header>
     </>
   );

@@ -21,7 +21,7 @@ const Products = () => {
           >
             <option>All</option>
             <option>Breakfast</option>
-            <option>Launch</option>
+            <option>Lunch</option>
             <option>Desserts</option>
             <option>Dinner</option>
             <option>Beverages</option>

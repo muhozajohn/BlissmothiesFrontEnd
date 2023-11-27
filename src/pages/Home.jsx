@@ -20,16 +20,25 @@ const Home = () => {
     DateDeparture,
     peaple,
   };
-
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const sendReq = async () => {
     try {
       IsLoading(true);
       const AddRequest = await axios.post(
         "https://blissmothies.onrender.com/blissmothies/reservation/send",
-        formData
+        formData,
+        config
       );
       if (AddRequest.status === 201) {
         notify();
+        seTDateArrival("")
+        seTDateDeparture("");
+        seTpeaple("");
         IsLoading(false);
       }
     } catch (error) {

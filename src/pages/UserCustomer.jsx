@@ -1,15 +1,87 @@
 import { useState } from "react";
 import Profile from "../assets/images/a.jpg";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import PulseLoader from "react-spinners/PulseLoader";
+import axios from "axios";
 const UserCustomer = () => {
+  const userP = localStorage.getItem("userP");
+  const [loading, isLoading] = useState(false);
   const value = 1;
   const [itemCount, setItemCount] = useState(value);
+  const [comment, SetComment] = useState("");
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const formData = {
+    comment,
+  };
+
+  const TestMonial = async () => {
+    try {
+      isLoading(true);
+      const commenting = await axios.post(
+        "https://blissmothies.onrender.com/blissmothies/Testmoniols/create",
+        formData,
+        config
+      );
+      if (commenting.status === 201) {
+        notify();
+        SetComment("");
+        isLoading(false);
+      }
+    } catch (error) {
+      console.log("failed", error);
+      eror();
+      isLoading(false);
+    }
+  };
+  const notify = () => {
+    toast.success("Testimonial Added Well!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
+  const eror = () => {
+    toast.error("Try Again Please!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
   return (
     <section>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="container grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
           <div className="px-5 py-5 flex flex-col gap-6 lg:flex-row  bg-white rounded-lg">
-            <img src={Profile} alt="" className="rounded-xl w-full lg:w-1/2" />
+            <img src={userP} alt="" className="rounded-xl w-full lg:w-1/2" />
 
             <div className="mt-4">
               <p className=" text-sm font-[600] ">Keller Emmy</p>
@@ -18,7 +90,9 @@ const UserCustomer = () => {
             </div>
           </div>
           <div className="px-5 py-5 bg-white rounded-lg mt-4 mb-4">
-            <p className="text-sm font-[500]">Leave Your Feedback About Our Products</p>
+            <p className="text-sm font-[500]">
+              Leave Your Feedback About Our Products
+            </p>
             <div>
               <form action="" className="flex flex-col gap-3">
                 <label className="mt-4 text-sm  font-[400]">Feedback</label>
@@ -27,9 +101,22 @@ const UserCustomer = () => {
                   id=""
                   cols="30"
                   rows="10"
+                  value={comment}
+                  onChange={(e) => SetComment(e.target.value)}
                   className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  "
                 ></textarea>
-                <input type="button" value="Submit" className="btn bg-black cursor-pointer"/>
+                <button
+                  className="btn bg-black cursor-pointer"
+                  onClick={TestMonial}
+                  disabled={loading}
+                  type="submit"
+                >
+                  {loading ? (
+                    <PulseLoader size={5} color={"#ffffff"} loading={loading} />
+                  ) : (
+                    "Submit"
+                  )}
+                </button>
               </form>
             </div>
           </div>
@@ -156,8 +243,7 @@ const UserCustomer = () => {
               </span>
             </div>
           </div>
-        
-         
+
           <hr />
           <div className="flex  lg:flex-row justify-between ">
             <div>

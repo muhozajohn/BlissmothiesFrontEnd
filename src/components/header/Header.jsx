@@ -82,7 +82,7 @@ const Header = () => {
             </Link>
 
             <span
-              className="md:hidden px-1 py-1 bg-btnColor rounded-xl"
+              className="lg:hidden px-1 py-1 bg-btnColor rounded-xl"
               onClick={toggleMenu}
             >
               <BiMenu className="h-8 w-8 cursor-pointer text-white" />

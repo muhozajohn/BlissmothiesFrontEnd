@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
-import Chief from "./Chief";
 import Deserts from "./Deserts";
 import Testimonial from "../components/testmonials/Testimonial";
 import Events from "./Event";
@@ -183,7 +182,6 @@ const Home = () => {
         </div>
         <MenuContainer />
       </section>
-      <Chief />
       <Deserts />
       <Testimonial />
       <Events />

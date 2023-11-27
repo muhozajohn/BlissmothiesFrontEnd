@@ -105,12 +105,13 @@ const ProductsTable = () => {
   };
 
   // updateMenu
-  const [title, setTitle] = useState(product.title);
-  const [image, setImage] = useState(product.image);
-  const [price, setPrice] = useState(product.price);
-  const [content, setContent] = useState(product.content);
-  const [category, setCategory] = useState(product.category);
   const [single, setSingle] = useState({});
+
+  const [title, setTitle] = useState();
+  const [image, setImage] = useState();
+  const [price, setPrice] = useState();
+  const [content, setContent] = useState();
+  const [category, setCategory] = useState();
 
   const singleProduct = async (id) => {
     handleModal();
@@ -119,7 +120,14 @@ const ProductsTable = () => {
         `https://blissmothies.onrender.com/blissmothies/menu/read/${id}`
       );
       const result = await singlePost.data.data;
-      setSingle(result);
+
+      if (result) {
+        setSingle(result);
+        setPrice(result.price);
+        setCategory(result.category);
+        setContent(result.content);
+        setImage(result.image);
+      }
     } catch (error) {
       console.log("Error while getin Single blog", error);
     }
@@ -221,7 +229,9 @@ const ProductsTable = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4">Zxus</td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        {item.owner}
+                      </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {item.category}
                       </td>

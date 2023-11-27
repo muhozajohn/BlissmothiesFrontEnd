@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Book = () => {
   return (
-    <section className="bg">
+    <section className="bg ">
       <div className="container text-right flex items-center flex-col gap-6">
         <div className="text-center">
           <h4 className="font-semibold">

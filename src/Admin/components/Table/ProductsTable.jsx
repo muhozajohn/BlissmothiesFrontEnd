@@ -105,11 +105,11 @@ const ProductsTable = () => {
   };
 
   // updateMenu
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
-  const [price, setPrice] = useState("");
-  const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
+  const [title, setTitle] = useState(product.title);
+  const [image, setImage] = useState(product.image);
+  const [price, setPrice] = useState(product.price);
+  const [content, setContent] = useState(product.content);
+  const [category, setCategory] = useState(product.category);
   const [single, setSingle] = useState({});
 
   const singleProduct = async (id) => {
@@ -130,18 +130,18 @@ const ProductsTable = () => {
     const imageInput = document.getElementById("imageInput");
     const galleryImage = imageInput.files[0]; // Get the selected image file
     const formData = new FormData();
-    formData.append("Title", title);
-    formData.append("Price", price);
-    formData.append("Category", category);
-    formData.append("Content", content);
+    formData.append("title", title);
+    formData.append("price", price);
+    formData.append("category", category);
+    formData.append("content", content);
     formData.append("image", galleryImage);
     console.log("FormData", formData);
     try {
       setIsloading(true);
       const upData = await axios.put(
         `https://blissmothies.onrender.com/blissmothies/menu/update/${id}`,
-        config,
-        formData
+        formData,
+        config
       );
 
       if (upData.status === 201) {
@@ -217,7 +217,7 @@ const ProductsTable = () => {
                           <img src={item.image} alt="" className="w-12" />
                           <div className=" text-xs font-medium ">
                             <h2>{item.title}</h2>
-                            <span>#{item.category}s</span>
+                            <span>#{item.category}</span>
                           </div>
                         </div>
                       </td>
@@ -283,12 +283,13 @@ const ProductsTable = () => {
                 onChange={(e) => setImage(e.target.value)}
                 className=" ml-10 "
               />
-
-              <img
-                src={image ? image : single.image}
-                alt=""
-                className="lg:w-full w-1/2"
-              />
+              <div className="lg:h-1/2 lg:w-1/2 h-10 w-10 overflow-hidden ">
+                <img
+                  src={image ? image : single.image}
+                  alt=""
+                  className="w-full h-full"
+                />
+              </div>
             </div>
             <div className="flex flex-col w-full md:w-1/2 gap-2">
               <input
@@ -309,27 +310,16 @@ const ProductsTable = () => {
                 <select
                   name=""
                   id=""
+                  value={category ? category : single.category}
                   onChange={(e) => setCategory(e.target.value)}
                   className="w-full lg:w-1/2 py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
                 >
-                  <option value={category ? category : single.category}>
-                    {category ? category : single.category}
-                  </option>
-                  <option value={category ? category : single.category}>
-                    Breakfast
-                  </option>
-                  <option value={category ? category : single.category}>
-                    Launch
-                  </option>
-                  <option value={category ? category : single.category}>
-                    Desserts
-                  </option>
-                  <option value={category ? category : single.category}>
-                    Dinner
-                  </option>
-                  <option value={category ? category : single.category}>
-                    Beverages
-                  </option>
+                  <option>{category ? category : single.category}</option>
+                  <option>Breakfast</option>
+                  <option>Lunch</option>
+                  <option>Desserts</option>
+                  <option>Dinner</option>
+                  <option>Beverages</option>
                 </select>
               </div>
 
@@ -363,10 +353,10 @@ const ProductsTable = () => {
             </div>
           </form>
           <button
-            className="bg-white text-gray-900 px-5 py-3 rounded-md fixed top-0 right-0 m-10 z-[300]"
+            className="bg-black lg:bg-white text-gray-900 px-5 py-3 rounded-md fixed top-0 right-0 m-10 z-[300]"
             onClick={handleModal}
           >
-            <FaTimes />
+            <FaTimes className=" lg:text-black text-btnColor " />
           </button>
         </div>
       )}

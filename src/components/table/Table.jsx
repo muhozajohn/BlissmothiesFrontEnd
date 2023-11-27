@@ -4,18 +4,9 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useFormik } from "formik";
 const Table = () => {
   const [loading, IsLoading] = useState(false);
-  const [DateArrival, seTDateArrival] = useState("");
-  const [peaple, seTpeaple] = useState("");
-  const [time, seTtime] = useState("");
-  const [tel, seTtel] = useState("");
-  const formData = {
-    DateArrival,
-    peaple,
-    time,
-    tel,
-  };
   const token = localStorage.getItem("token");
   const config = {
     headers: {
@@ -24,6 +15,12 @@ const Table = () => {
   };
   const sendReq = async () => {
     try {
+      const formData = {
+        DateArrival: formik.values.DateArrival,
+        peaple: formik.values.peaple,
+        time: formik.values.time,
+        tel: formik.values.tel,
+      };
       IsLoading(true);
       const AddRequest = await axios.post(
         "https://blissmothies.onrender.com/blissmothies/reservation/send",
@@ -33,6 +30,7 @@ const Table = () => {
       );
       if (AddRequest.status === 201) {
         notify();
+        formik.resetForm(); 
         IsLoading(false);
       }
     } catch (error) {
@@ -67,6 +65,42 @@ const Table = () => {
     });
   };
 
+  // formValidation
+  const initialValues = {
+    DateArrival: "",
+    people: "",
+    time: "",
+    tel: "",
+    firstname: "",
+    lastname: "",
+  };
+  const validate = (values) => {
+    let errors = {};
+    if (!values.DateArrival) {
+      errors.DateArrival = "Date Required";
+    }
+    if (!values.people) {
+      errors.people = "People Required";
+    }
+    if (!values.time) {
+      errors.time = "Time Required";
+    }
+    if (!values.firstname) {
+      errors.firstname = "firstname Required";
+    }
+    if (!values.lastname) {
+      errors.lastname = "lastname Required";
+    }
+    if (!values.tel) {
+      errors.tel = "Tel Required";
+    }
+    return errors;
+  };
+  const formik = useFormik({
+    validate,
+    initialValues,
+    sendReq,
+  });
   return (
     <div>
       <ToastContainer
@@ -85,14 +119,28 @@ const Table = () => {
         <div className="container grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white lg:px-5 py-5 px-5 flex flex-col gap-5 items-center justify-center">
             <h2 className="text-2xl font-bold">Make Reservation</h2>
-            <form className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+            <form
+              className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full"
+              onSubmit={(e) => {
+                formik.handleSubmit;
+              }}
+            >
               <div className="flex flex-col gap-2">
                 <label htmlFor="" className="text-sm font-semibold">
                   Firstname
                 </label>
+                {formik.touched.firstname || formik.errors.firstname ? (
+                  <div className=" text-sm text-red-800 font-extralight ">
+                    {formik.errors.firstname}
+                  </div>
+                ) : null}
                 <input
                   type="text"
                   placeholder="Firstname"
+                  id="firstname"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.firstname}
                   className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  w-full"
                 />
               </div>
@@ -100,8 +148,17 @@ const Table = () => {
                 <label htmlFor="" className="text-sm font-semibold">
                   Lastname
                 </label>
+                {formik.touched.lastname && formik.errors.lastname ? (
+                  <div className=" text-sm text-red-800 font-extralight ">
+                    {formik.errors.lastname}
+                  </div>
+                ) : null}
                 <input
                   type="text"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.lastname}
+                  id="lastname"
                   placeholder="Lastname"
                   className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  w-full"
                 />
@@ -110,11 +167,18 @@ const Table = () => {
                 <label htmlFor="" className="text-sm font-semibold">
                   Phone
                 </label>
+                {formik.touched.tel && formik.errors.tel ? (
+                  <div className=" text-sm text-red-800 font-extralight ">
+                    {formik.errors.tel}
+                  </div>
+                ) : null}
                 <input
                   type="text"
                   placeholder="Phone"
-                  value={tel}
-                  onChange={(e) => seTtel(e.target.value)}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.tel}
+                  id="tel"
                   className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  w-full"
                 />
               </div>
@@ -122,11 +186,18 @@ const Table = () => {
                 <label htmlFor="" className="text-sm font-semibold">
                   Date
                 </label>
+                {formik.touched.DateArrival && formik.errors.DateArrival ? (
+                  <div className=" text-sm text-red-800 font-extralight ">
+                    {formik.errors.DateArrival}
+                  </div>
+                ) : null}
                 <input
                   type="date"
-                  value={DateArrival}
-                  onChange={(e) => seTDateArrival(e.target.value)}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.DateArrival}
                   placeholder="phone"
+                  id="DateArrival"
                   className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  w-full"
                 />
               </div>
@@ -134,11 +205,17 @@ const Table = () => {
                 <label htmlFor="" className="text-sm font-semibold">
                   Time
                 </label>
+                {formik.touched.time && formik.errors.time ? (
+                  <div className=" text-sm text-red-800 font-extralight ">
+                    {formik.errors.time}
+                  </div>
+                ) : null}
                 <select
                   name=""
-                  id=""
-                  value={time}
-                  onChange={(e) => seTtime(e.target.value)}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.time}
+                  id="phone"
                   placeholder="phone"
                   className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  w-full"
                 >
@@ -154,11 +231,17 @@ const Table = () => {
                 <label htmlFor="" className="text-sm font-semibold">
                   Person
                 </label>
+                {formik.touched.peaple && formik.errors.peaple ? (
+                  <div className=" text-sm text-red-800 font-extralight ">
+                    {formik.errors.peaple}
+                  </div>
+                ) : null}
                 <select
                   name=""
-                  id=""
-                  value={peaple}
-                  onChange={(e) => seTpeaple(e.target.value)}
+                  id="peaple"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.peaple}
                   placeholder="phone"
                   className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  w-full"
                 >

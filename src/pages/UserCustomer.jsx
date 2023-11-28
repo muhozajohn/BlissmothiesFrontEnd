@@ -77,9 +77,9 @@ const UserCustomer = () => {
       try {
         isLoading(true);
         const getAllCart = await axios.get(
-          // `https://blissmothies.onrender.com/blissmothies/cart/Readcart`
-          `http://localhost:4300/blissmothies/cart/Readcart`,
+          `https://blissmothies.onrender.com/blissmothies/cart/Readcart`,
           config
+          // `http://localhost:4300/blissmothies/cart/Readcart`,
         );
         const response = await getAllCart.data.data;
         if (response) {

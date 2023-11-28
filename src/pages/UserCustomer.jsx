@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PulseLoader from "react-spinners/PulseLoader";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 const UserCustomer = () => {
   const userP = localStorage.getItem("userP");
@@ -72,6 +73,13 @@ const UserCustomer = () => {
     const getCart = async () => {
       try {
         isLoading(true);
+
+        // Check if the user is logged in
+        if (!token) {
+          SetCart([]); // Set an empty cart for non-logged-in users
+          isLoading(false);
+          return;
+        }
         const getAllCart = await axios.get(
           `https://blissmothies.onrender.com/blissmothies/cart/Readcart`
         );
@@ -91,14 +99,13 @@ const UserCustomer = () => {
       }
     };
     getCart();
-  }, []);
+  }, [token]); // Added token as a dependency
   // delete
   const removeCart = async (id) => {
     try {
       isLoading(true);
       const deleteCart = await axios.delete(
         `https://blissmothies.onrender.com/blissmothies/cart/delete/${id}`,
-
         config
       );
       if (deleteCart.status === 200) {
@@ -112,7 +119,14 @@ const UserCustomer = () => {
     }
   };
   const shiping = 3.5;
+  if (!token) {
+    return null; // Render null for non-logged-in users
+  }
 
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  if (!isAuthenticated) {
+    return <Navigate to="/home" />;
+  }
   return (
     <section>
       <ToastContainer
@@ -171,51 +185,55 @@ const UserCustomer = () => {
             </div>
           </div>
         </div>
-        <div className="px-5 py-5 flex flex-col gap-6  bg-white rounded-lg h-full ">
+        <div className="px-5 py-5 flex flex-col gap-6  justify-between  bg-white rounded-lg h-full ">
           <div className="text-lg font-[800] ">CART Items</div>
-          {cart.map((cartItem, index) => (
-            <div className="flex  lg:flex-row justify-between " key={index}>
-              <div className="flex items-start gap-6">
-                <img
-                  src={cartItem.productId[0]?.image}
-                  alt=""
-                  className="rounded-xl  w-1/5"
-                />
-                <div className="flex flex-col">
-                  <p className="text-sm font-[600]">
-                    {cartItem.productId[0]?.title}
-                  </p>
-                  <small className=" mt-[-1] text-xs">Add More Items</small>
-                  <div className="flex gap-2 mt-2 items-start ">
-                    <button
-                      onClick={() => setItemCount((prev) => prev - 1)}
-                      className="bg-black text-white font-sm px-2"
+          {cart.length
+            ? cart.map((cartItem, index) => (
+                <div className="flex  lg:flex-row justify-between " key={index}>
+                  <div className="flex items-start gap-6">
+                    <img
+                      src={cartItem.productId[0]?.image}
+                      alt=""
+                      className="rounded-xl  w-1/5"
+                    />
+                    <div className="flex flex-col">
+                      <p className="text-sm font-[600]">
+                        {cartItem.productId[0]?.title}
+                      </p>
+                      <small className=" mt-[-1] text-xs">Add More Items</small>
+                      <div className="flex gap-2 mt-2 items-start ">
+                        <button
+                          onClick={() => setItemCount((prev) => prev - 1)}
+                          className="bg-black text-white font-sm px-2"
+                        >
+                          -
+                        </button>
+                        <h1 className="text-lg font-[600]">{itemCount}</h1>
+                        <button
+                          onClick={() => setItemCount((prev) => prev + 1)}
+                          className="bg-orange-600 text-white font-sm px-2"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h1 className="text-ld font-[600]">
+                      ${cartItem.productId[0]?.price}
+                    </h1>
+                    <span
+                      className="text-sm font-bold text-red-700 cursor-pointer "
+                      onClick={(e) => {
+                        removeCart(cartItem._id);
+                      }}
                     >
-                      -
-                    </button>
-                    <h1 className="text-lg font-[600]">{itemCount}</h1>
-                    <button
-                      onClick={() => setItemCount((prev) => prev + 1)}
-                      className="bg-orange-600 text-white font-sm px-2"
-                    >
-                      +
-                    </button>
+                      {loading ? <p>wait.....</p> : "Remove"}
+                    </span>
                   </div>
                 </div>
-              </div>
-              <div>
-                <h1 className="text-ld font-[600]">
-                  ${cartItem.productId[0]?.price}
-                </h1>
-                <span
-                  className="text-sm font-bold text-red-700 cursor-pointer "
-                  onClick={removeCart}
-                >
-                  {loading ? <p>wait...</p> : "Remove"}
-                </span>
-              </div>
-            </div>
-          ))}
+              ))
+            : null}
 
           <hr />
           <div className="flex  lg:flex-row justify-between ">

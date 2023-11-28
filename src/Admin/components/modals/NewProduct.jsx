@@ -141,8 +141,9 @@ const NewProduct = () => {
                   <option value="">--- Category ---</option>
                   <option>Breakfast</option>
                   <option>Lunch</option>
-                  <option>Desserts</option>
+                  <option>Deserts</option>
                   <option>Dinner</option>
+                  <option>Supper</option>
                   <option>Beverages</option>
                 </select>
               </div>

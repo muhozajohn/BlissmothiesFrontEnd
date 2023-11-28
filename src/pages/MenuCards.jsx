@@ -1,6 +1,8 @@
 import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 const MenuCards = () => {
   const [menu, setMenu] = useState([]);
@@ -22,8 +24,72 @@ const MenuCards = () => {
     };
     getAll();
   }, []);
+
+  // add To cart
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const AddToCart = async (id) => {
+    try {
+      setIsloading(true);
+      const add = await axios.post(
+        `https://blissmothies.onrender.com/blissmothies/cart/add/${id}`,
+        {},
+        config
+      );
+      if (add.status === 201) {
+        notify();
+        setIsloading(false);
+      }
+    } catch (error) {
+      console.log("Failed to Add it", error);
+      eror();
+      setIsloading(false);
+    }
+  };
+  // tosty
+  const notify = () => {
+    toast.success("Well Cart Added!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
+  const eror = () => {
+    toast.error("Please! First Login", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
   return (
     <section>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {menu.length ? (
           menu.map((item, index) => (
@@ -56,8 +122,17 @@ const MenuCards = () => {
               </p>
               <div className="flex justify-between items-center">
                 <p>${item.price}</p>
-                <div className="flex items-center justify-center border border-black px-2 rounded-xl py-1 cursor-pointer hover:bg-btnColor hover:border-btnColor hover:text-white">
-                  Add to Cart
+                <div
+                  className="flex items-center justify-center border border-black px-2 rounded-xl py-1 cursor-pointer hover:bg-btnColor hover:border-btnColor hover:text-white"
+                  onClick={(e) => {
+                    AddToCart(item._id);
+                  }}
+                >
+                  {loading ? (
+                    <PulseLoader color="#F06C05" loading={loading} size={10} />
+                  ) : (
+                    "Add to Cart"
+                  )}
                 </div>
               </div>
             </div>

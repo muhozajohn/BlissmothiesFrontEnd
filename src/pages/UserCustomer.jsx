@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Profile from "../assets/images/a.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -64,6 +64,28 @@ const UserCustomer = () => {
       theme: "colored",
     });
   };
+
+  // getCart
+  const [cart, SetCart] = useState([]);
+  console.log("Alll Cart", cart);
+  useEffect(() => {
+    const getCart = async () => {
+      try {
+        const getAllCart = await axios.get(
+          `https://blissmothies.onrender.com/blissmothies/cart/Readcart`
+        );
+        const response = await getAllCart.data.data;
+        if (response) {
+          SetCart(response);
+        }
+      } catch (error) {
+        console.log("Failed to Get Data", eror);
+        isLoading(false);
+      }
+    };
+    getCart();
+  }, []);
+
   return (
     <section>
       <ToastContainer
@@ -80,15 +102,30 @@ const UserCustomer = () => {
       />
       <div className="container grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
-          <div className="px-5 py-5 flex flex-col gap-6 lg:flex-row  bg-white rounded-lg">
+          {/* {cart.map((cartP, index) => ( */}
+          <div
+            // key={index}
+            className="px-5 py-5 flex flex-col gap-6 lg:flex-row  bg-white rounded-lg"
+          >
             <img src={userP} alt="" className="rounded-xl w-full lg:w-1/2" />
 
             <div className="mt-4">
-              <p className=" text-sm font-[600] ">Keller Emmy</p>
-              <p className=" text-sm ">keller@gmail.com</p>
-              <p className="text-sm ">Male</p>
+              <p className=" text-sm font-[600] ">
+                {/* {result.cartOwner.fullName} */}
+                They Call Me Zxus
+              </p>
+              <p className=" text-sm ">
+                {/* {result.cartOwner.email} */}
+                zxus@gmail.com
+                </p>
+              <p className="text-sm ">
+                {/* {result.cartOwner.gender} */}
+                male
+                </p>
             </div>
           </div>
+          {/* ))} */}
+
           <div className="px-5 py-5 bg-white rounded-lg mt-4 mb-4">
             <p className="text-sm font-[500]">
               Leave Your Feedback About Our Products
@@ -123,126 +160,47 @@ const UserCustomer = () => {
         </div>
         <div className="px-5 py-5 flex flex-col gap-6  bg-white rounded-lg h-full ">
           <div className="text-lg font-[800] ">CART Items</div>
-          <div className="flex  lg:flex-row justify-between ">
-            <div className="flex gap-6">
-              <img src={Profile} alt="" className="rounded-xl  w-1/5" />
-              <div className="flex flex-col">
-                <p className="text-sm font-[700]">Jinja Tea</p>
-                <small className=" mt-[-1] text-[12px]">Add More Items</small>
-                <div className="flex gap-2 mt-2">
-                  <button
-                    onClick={() => setItemCount((prev) => prev - 1)}
-                    className="bg-black text-white font-extrabold px-2"
-                  >
-                    -
-                  </button>
-                  <h1 className="text-lg font-[600]">{itemCount}</h1>
-                  <button
-                    onClick={() => setItemCount((prev) => prev + 1)}
-                    className="bg-orange-600 text-white font-extrabold px-2"
-                  >
-                    +
-                  </button>
+          {cart.map((cartItem, index) => (
+            <div className="flex  lg:flex-row justify-between " key={index}>
+              <div className="flex items-start gap-6">
+                
+                <img
+                  src={cartItem.productId[0]?.image}
+                  alt=""
+                  className="rounded-xl  w-1/5"
+                />
+                <div className="flex flex-col">
+                  <p className="text-sm font-[600]">
+                    {cartItem.productId[0]?.title}
+                  </p>
+                  <small className=" mt-[-1] text-xs">Add More Items</small>
+                  <div className="flex gap-2 mt-2 items-start ">
+                    <button
+                      onClick={() => setItemCount((prev) => prev - 1)}
+                      className="bg-black text-white font-sm px-2"
+                    >
+                      -
+                    </button>
+                    <h1 className="text-lg font-[600]">{itemCount}</h1>
+                    <button
+                      onClick={() => setItemCount((prev) => prev + 1)}
+                      className="bg-orange-600 text-white font-sm px-2"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <h1 className="text-ld font-[600]">$200</h1>
-              <span className="text-sm font-bold text-red-700 cursor-pointer">
-                Remove
-              </span>
-            </div>
-          </div>
-          <div className="flex  lg:flex-row justify-between ">
-            <div className="flex gap-6">
-              <img src={Profile} alt="" className="rounded-xl  w-1/5" />
-              <div className="flex flex-col">
-                <p className="text-sm font-[700]">Jinja Tea</p>
-                <small className=" mt-[-1] text-[12px]">Add More Items</small>
-                <div className="flex gap-2 mt-2">
-                  <button
-                    onClick={() => setItemCount((prev) => prev - 1)}
-                    className="bg-black text-white font-extrabold px-2"
-                  >
-                    -
-                  </button>
-                  <h1 className="text-lg font-[600]">{itemCount}</h1>
-                  <button
-                    onClick={() => setItemCount((prev) => prev + 1)}
-                    className="bg-orange-600 text-white font-extrabold px-2"
-                  >
-                    +
-                  </button>
-                </div>
+              <div>
+                <h1 className="text-ld font-[600]">
+                  ${cartItem.productId[0].price}
+                </h1>
+                <span className="text-sm font-bold text-red-700 cursor-pointer">
+                  Remove
+                </span>
               </div>
             </div>
-            <div>
-              <h1 className="text-ld font-[600]">$200</h1>
-              <span className="text-sm font-bold text-red-700 cursor-pointer">
-                Remove
-              </span>
-            </div>
-          </div>
-          <div className="flex  lg:flex-row justify-between ">
-            <div className="flex gap-6">
-              <img src={Profile} alt="" className="rounded-xl  w-1/5" />
-              <div className="flex flex-col">
-                <p className="text-sm font-[700]">Jinja Tea</p>
-                <small className=" mt-[-1] text-[12px]">Add More Items</small>
-                <div className="flex gap-2 mt-2">
-                  <button
-                    onClick={() => setItemCount((prev) => prev - 1)}
-                    className="bg-black text-white font-extrabold px-2"
-                  >
-                    -
-                  </button>
-                  <h1 className="text-lg font-[600]">{itemCount}</h1>
-                  <button
-                    onClick={() => setItemCount((prev) => prev + 1)}
-                    className="bg-orange-600 text-white font-extrabold px-2"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h1 className="text-ld font-[600]">$200</h1>
-              <span className="text-sm font-bold text-red-700 cursor-pointer">
-                Remove
-              </span>
-            </div>
-          </div>
-          <div className="flex  lg:flex-row justify-between ">
-            <div className="flex gap-6">
-              <img src={Profile} alt="" className="rounded-xl  w-1/5" />
-              <div className="flex flex-col">
-                <p className="text-sm font-[700]">Jinja Tea</p>
-                <small className=" mt-[-1] text-[12px]">Add More Items</small>
-                <div className="flex gap-2 mt-2">
-                  <button
-                    onClick={() => setItemCount((prev) => prev - 1)}
-                    className="bg-black text-white font-extrabold px-2"
-                  >
-                    -
-                  </button>
-                  <h1 className="text-lg font-[600]">{itemCount}</h1>
-                  <button
-                    onClick={() => setItemCount((prev) => prev + 1)}
-                    className="bg-orange-600 text-white font-extrabold px-2"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h1 className="text-ld font-[600]">$200</h1>
-              <span className="text-sm font-bold text-red-700 cursor-pointer">
-                Remove
-              </span>
-            </div>
-          </div>
+          ))}
 
           <hr />
           <div className="flex  lg:flex-row justify-between ">

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Profile from "../assets/images/a.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PulseLoader from "react-spinners/PulseLoader";
@@ -10,6 +9,7 @@ const UserCustomer = () => {
   const value = 1;
   const [itemCount, setItemCount] = useState(value);
   const [comment, SetComment] = useState("");
+  const [totalAmount, setTotalAmount] = useState(0);
   const token = localStorage.getItem("token");
   const config = {
     headers: {
@@ -71,20 +71,47 @@ const UserCustomer = () => {
   useEffect(() => {
     const getCart = async () => {
       try {
+        isLoading(true);
         const getAllCart = await axios.get(
           `https://blissmothies.onrender.com/blissmothies/cart/Readcart`
         );
         const response = await getAllCart.data.data;
         if (response) {
           SetCart(response);
+          let amount = 0;
+          response.forEach((item) => {
+            amount += parseFloat(item.productId[0].price);
+          });
+          setTotalAmount(amount);
+          isLoading(false);
         }
       } catch (error) {
-        console.log("Failed to Get Data", eror);
+        console.log("Failed to Get Data", error);
         isLoading(false);
       }
     };
     getCart();
   }, []);
+  // delete
+  const removeCart = async (id) => {
+    try {
+      isLoading(true);
+      const deleteCart = await axios.delete(
+        `https://blissmothies.onrender.com/blissmothies/cart/delete/${id}`,
+
+        config
+      );
+      if (deleteCart.status === 200) {
+        isLoading(false);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      }
+    } catch (error) {
+      console.log("Failed to Delete", error);
+    }
+  };
+  const shiping = 3.5;
 
   return (
     <section>
@@ -102,29 +129,15 @@ const UserCustomer = () => {
       />
       <div className="container grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
-          {/* {cart.map((cartP, index) => ( */}
-          <div
-            // key={index}
-            className="px-5 py-5 flex flex-col gap-6 lg:flex-row  bg-white rounded-lg"
-          >
+          <div className="px-5 py-5 flex flex-col gap-6 lg:flex-row  bg-white rounded-lg">
             <img src={userP} alt="" className="rounded-xl w-full lg:w-1/2" />
 
             <div className="mt-4">
-              <p className=" text-sm font-[600] ">
-                {/* {result.cartOwner.fullName} */}
-                They Call Me Zxus
-              </p>
-              <p className=" text-sm ">
-                {/* {result.cartOwner.email} */}
-                zxus@gmail.com
-                </p>
-              <p className="text-sm ">
-                {/* {result.cartOwner.gender} */}
-                male
-                </p>
+              <p className=" text-sm font-[600] ">They Call Me Zxus</p>
+              <p className=" text-sm ">zxus@gmail.com</p>
+              <p className="text-sm ">male</p>
             </div>
           </div>
-          {/* ))} */}
 
           <div className="px-5 py-5 bg-white rounded-lg mt-4 mb-4">
             <p className="text-sm font-[500]">
@@ -163,7 +176,6 @@ const UserCustomer = () => {
           {cart.map((cartItem, index) => (
             <div className="flex  lg:flex-row justify-between " key={index}>
               <div className="flex items-start gap-6">
-                
                 <img
                   src={cartItem.productId[0]?.image}
                   alt=""
@@ -193,10 +205,13 @@ const UserCustomer = () => {
               </div>
               <div>
                 <h1 className="text-ld font-[600]">
-                  ${cartItem.productId[0].price}
+                  ${cartItem.productId[0]?.price}
                 </h1>
-                <span className="text-sm font-bold text-red-700 cursor-pointer">
-                  Remove
+                <span
+                  className="text-sm font-bold text-red-700 cursor-pointer "
+                  onClick={removeCart}
+                >
+                  {loading ? <p>wait...</p> : "Remove"}
                 </span>
               </div>
             </div>
@@ -210,9 +225,9 @@ const UserCustomer = () => {
               <p className=" text-gray-600 ">Total: </p>
             </div>
             <div>
-              <p>$600 </p>
-              <p>%0 </p>
-              <p>$600 </p>
+              <p>${totalAmount} </p>
+              <p>${totalAmount + shiping}</p>
+              <p>${totalAmount ? totalAmount + shiping : 0}</p>
             </div>
           </div>
           <div className="btn bg-black text-center cursor-pointer">ChekOut</div>

@@ -3,9 +3,16 @@ import { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import formatDate from "../../../components/date/Date";
 import PulseLoader from "react-spinners/PulseLoader";
+import { ToastContainer, toast } from "react-toastify";
 const Testimonioals = () => {
   const [testimonials, Settestimonials] = useState([]);
   const [loading, setIsloading] = useState(false);
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   useEffect(() => {
     const getTestimonials = async () => {
       try {
@@ -23,8 +30,67 @@ const Testimonioals = () => {
     };
     getTestimonials();
   }, []);
+
+  const deleteData = async (id) => {
+    try {
+      setIsloading(true);
+      const removeMesage = await axios.delete(
+        `https://blissmothies.onrender.com/blissmothies/Testmoniols/delete/${id}`,
+        config
+      );
+      if (removeMesage.status === 201) {
+        notify();
+        setIsloading(false);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      }
+    } catch (error) {
+      console.log("failed", error);
+      eror();
+      setIsloading(false);
+    }
+  };
+  // Delete Testimoniols
+  const notify = () => {
+    toast.success("Deleted Succesfully!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
+  const eror = () => {
+    toast.error("Try Again Please!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
   return (
     <div className="flex flex-col">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div className="overflow-hidden">
@@ -75,10 +141,18 @@ const Testimonioals = () => {
                           <div
                             className="rounded-sm py-2 px-2 bg-btnColor text-white w-fit"
                             onClick={(e) => {
-                              //   deleteData(item._id);
+                              deleteData(test._id);
                             }}
                           >
-                            <AiFillDelete />
+                            {loading ? (
+                              <PulseLoader
+                                color="#FFF"
+                                loading={loading}
+                                size={2}
+                              />
+                            ) : (
+                              <AiFillDelete />
+                            )}
                           </div>
                         </div>
                       </td>

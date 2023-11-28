@@ -57,6 +57,9 @@ const Login = () => {
             navigate("/Dashboard");
           } else if (loginData.data.users.role === "user") {
             localStorage.setItem("userP", loginData.data.users.userProfile);
+            localStorage.setItem("userName", loginData.data.users.fullName);
+            localStorage.setItem("userEmail", loginData.data.users.email);
+            localStorage.setItem("userGender", loginData.data.users.gender);
             navigate("/");
           } else {
             // Handle other roles if needed

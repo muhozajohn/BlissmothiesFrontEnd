@@ -6,6 +6,9 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 const UserCustomer = () => {
   const userP = localStorage.getItem("userP");
+  const userName = localStorage.getItem("userName");
+  const userGender = localStorage.getItem("userGender");
+  const userEmail = localStorage.getItem("userEmail");
   const [loading, isLoading] = useState(false);
   const value = 1;
   const [itemCount, setItemCount] = useState(value);
@@ -54,7 +57,7 @@ const UserCustomer = () => {
   };
 
   const eror = () => {
-    toast.error("Try Again Please!", {
+    toast.error("Please! First Login", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -73,15 +76,10 @@ const UserCustomer = () => {
     const getCart = async () => {
       try {
         isLoading(true);
-
-        // Check if the user is logged in
-        if (!token) {
-          SetCart([]); // Set an empty cart for non-logged-in users
-          isLoading(false);
-          return;
-        }
         const getAllCart = await axios.get(
-          `https://blissmothies.onrender.com/blissmothies/cart/Readcart`
+          // `https://blissmothies.onrender.com/blissmothies/cart/Readcart`
+          `http://localhost:4300/blissmothies/cart/Readcart`,
+          config
         );
         const response = await getAllCart.data.data;
         if (response) {
@@ -99,7 +97,7 @@ const UserCustomer = () => {
       }
     };
     getCart();
-  }, [token]); // Added token as a dependency
+  }, []);
   // delete
   const removeCart = async (id) => {
     try {
@@ -119,9 +117,6 @@ const UserCustomer = () => {
     }
   };
   const shiping = 3.5;
-  if (!token) {
-    return null; // Render null for non-logged-in users
-  }
 
   const isAuthenticated = localStorage.getItem("token") !== null;
   if (!isAuthenticated) {
@@ -144,12 +139,12 @@ const UserCustomer = () => {
       <div className="container grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
           <div className="px-5 py-5 flex flex-col gap-6 lg:flex-row  bg-white rounded-lg">
-            <img src={userP} alt="" className="rounded-xl w-full lg:w-1/2" />
+            <img src={userP} alt="" className="rounded-xl w-full lg:w-32" />
 
             <div className="mt-4">
-              <p className=" text-sm font-[600] ">They Call Me Zxus</p>
-              <p className=" text-sm ">zxus@gmail.com</p>
-              <p className="text-sm ">male</p>
+              <p className=" text-sm font-[600] ">{userName}</p>
+              <p className=" text-sm ">{userEmail}</p>
+              <p className="text-sm ">{userGender}</p>
             </div>
           </div>
 

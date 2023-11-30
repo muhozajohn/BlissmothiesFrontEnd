@@ -61,6 +61,7 @@ const Login = () => {
             localStorage.setItem("userEmail", loginData.data.users.email);
             localStorage.setItem("userGender", loginData.data.users.gender);
             navigate("/");
+            window.location.reload();
           } else {
             // Handle other roles if needed
             console.error("Unknown user role:", loginData.data.users.role);

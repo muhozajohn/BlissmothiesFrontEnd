@@ -4,14 +4,14 @@ import "react-toastify/dist/ReactToastify.css";
 import PulseLoader from "react-spinners/PulseLoader";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+import Cart from "../components/Card/Cart";
 const UserCustomer = () => {
   const userP = localStorage.getItem("userP");
   const userName = localStorage.getItem("userName");
   const userGender = localStorage.getItem("userGender");
   const userEmail = localStorage.getItem("userEmail");
   const [loading, isLoading] = useState(false);
-  const value = 1;
-  const [itemCount, setItemCount] = useState(value);
+
   const [comment, SetComment] = useState("");
   const [totalAmount, setTotalAmount] = useState(0);
   const token = localStorage.getItem("token");
@@ -78,8 +78,8 @@ const UserCustomer = () => {
         isLoading(true);
         const getAllCart = await axios.get(
           `https://blissmothies.onrender.com/blissmothies/cart/Readcart`,
+
           config
-          // `http://localhost:4300/blissmothies/cart/Readcart`,
         );
         const response = await getAllCart.data.data;
         if (response) {
@@ -98,44 +98,27 @@ const UserCustomer = () => {
     };
     getCart();
   }, []);
-  // delete
-  const removeCart = async (id) => {
-    try {
-      isLoading(true);
-      const deleteCart = await axios.delete(
-        `https://blissmothies.onrender.com/blissmothies/cart/delete/${id}`,
-        config
-      );
-      if (deleteCart.status === 200) {
-        isLoading(false);
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
-      }
-    } catch (error) {
-      console.log("Failed to Delete", error);
-    }
-  };
+
   const shiping = 3.5;
 
   const isAuthenticated = localStorage.getItem("token") !== null;
   if (!isAuthenticated) {
     return <Navigate to="/home" />;
   }
+  <ToastContainer
+    position="top-right"
+    autoClose={3000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="dark"
+  />;
   return (
     <section>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
       <div className="container grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
           <div className="px-5 py-5 flex flex-col gap-6 lg:flex-row  bg-white rounded-lg">
@@ -182,53 +165,9 @@ const UserCustomer = () => {
         </div>
         <div className="px-5 py-5 flex flex-col gap-6  justify-between  bg-white rounded-lg h-full ">
           <div className="text-lg font-[800] ">CART Items</div>
-          {cart.length
-            ? cart.map((cartItem, index) => (
-                <div className="flex  lg:flex-row justify-between " key={index}>
-                  <div className="flex items-start gap-6">
-                    <img
-                      src={cartItem.productId[0]?.image}
-                      alt=""
-                      className="rounded-xl  w-1/5"
-                    />
-                    <div className="flex flex-col">
-                      <p className="text-sm font-[600]">
-                        {cartItem.productId[0]?.title}
-                      </p>
-                      <small className=" mt-[-1] text-xs">Add More Items</small>
-                      <div className="flex gap-2 mt-2 items-start ">
-                        <button
-                          onClick={() => setItemCount((prev) => prev - 1)}
-                          className="bg-black text-white font-sm px-2"
-                        >
-                          -
-                        </button>
-                        <h1 className="text-lg font-[600]">{itemCount}</h1>
-                        <button
-                          onClick={() => setItemCount((prev) => prev + 1)}
-                          className="bg-orange-600 text-white font-sm px-2"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <h1 className="text-ld font-[600]">
-                      ${cartItem.productId[0]?.price}
-                    </h1>
-                    <span
-                      className="text-sm font-bold text-red-700 cursor-pointer "
-                      onClick={(e) => {
-                        removeCart(cartItem._id);
-                      }}
-                    >
-                      {loading ? <p>wait.....</p> : "Remove"}
-                    </span>
-                  </div>
-                </div>
-              ))
-            : null}
+          {cart.map((cartItems, index) => (
+            <Cart key={index} cartItem={cartItems} />
+          ))}
 
           <hr />
           <div className="flex  lg:flex-row justify-between ">

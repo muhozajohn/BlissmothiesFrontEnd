@@ -1,5 +1,12 @@
-  import logo from "../../assets/images/logok.png";
-import { FaWhatsapp, FaTwitter, FaInstagram,FaFacebook,FaYoutube,FaLinkedin } from "react-icons/fa";
+import logo from "../../assets/images/logok.png";
+import {
+  FaWhatsapp,
+  FaTwitter,
+  FaInstagram,
+  FaFacebook,
+  FaYoutube,
+  FaLinkedin,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -32,7 +39,7 @@ const Footer = () => {
             <p className="text-white text-sm">KG 18 Ave, </p>
             <p className="text-white text-sm">Call +250 788 671 767 </p>
             <p className="text-white text-[13px]">
-              kellerblissfullsmoothies@outlook.com{" "}
+              kellerblissfullsmoothies@outlook.com
             </p>
           </div>
         </div>
@@ -63,20 +70,18 @@ const Footer = () => {
         </div>
         <div className="mt-[30px] flex flex-col gap-6 text-white">
           <div>
-            <h1 className=" text-sm font-[800] text-white ">
-              Useful Links
-            </h1>
+            <h1 className=" text-sm font-[800] text-white ">Useful Links</h1>
           </div>
           <div>
             <ul className="flex flex-col gap-3 cursor-pointer">
               <li className="text-sm">
-                <Link to="/payment">Payment & Tax</Link>
+                <Link to="/about">Payment & Tax</Link>
               </li>
               <li className="text-sm">
                 <Link to="/about">Terms and Service</Link>
               </li>
               <li className="text-sm">
-                <Link to="/carts-items">Privacy Policy</Link>
+                <Link to="/about">Privacy Policy</Link>
               </li>
               <li className="text-sm">
                 <Link to="/about">About Us</Link>
@@ -91,10 +96,10 @@ const Footer = () => {
           <div>
             <h5 className="mb-4">Working Hours </h5>
             <div className="flex flex-col gap-3">
-              <p className="text-sm">Monday – Friday:09:00 – 23:30</p>
-              <p className="text-sm">Saturday:09:00 – 00:30</p>
+              <p className="text-sm">Monday – Friday:09:00 – 01:30</p>
+              <p className="text-sm">Saturday:09:00 – 01:30</p>
               <p className="text-sm">Sunday:11:00 – 00:00 </p>
-              <p className="text-sm">*We are closed on holidays.</p>
+              <p className="text-sm">*We are Open on holidays.</p>
             </div>
           </div>
         </div>
@@ -104,27 +109,49 @@ const Footer = () => {
           <div>
             <p>Copyright &copy; {year} Blissmothies</p>
           </div>
-          <div className="flex justify-center"><p>Special Thanks To &copy; <Link to="muhoza.vercel.app" target="_blanck">Muhoza John</Link> </p></div>
+          <div className="flex justify-center">
+            <p>
+              Special Thanks To &copy;{" "}
+              <Link to="https://www.muhoza.vercel.app" target="_blanck">
+                Muhoza John
+              </Link>
+            </p>
+          </div>
 
           <div className="flex items-center gap-4 justify-end">
             <span className="text-[1.6rem] bg-btnColor text-white px-1 py-1 rounded cursor-pointer hover:text-footerColor">
-              <Link to="muhoza" target="_blanck"><FaInstagram /></Link>
+              <Link to="https://www.instagram.com/mjohn_rw" target="_blanck">
+                <FaInstagram />
+              </Link>
             </span>
             <span className="text-[1.6rem] bg-btnColor text-white px-1 py-1 rounded cursor-pointer hover:text-footerColor">
-              <Link to="" target="_blanck"><FaTwitter /></Link>
+              <Link to="https://twitter.com/John1_250" target="_blanck">
+                <FaTwitter />
+              </Link>
             </span>
             <span className="text-[1.6rem] bg-btnColor text-white px-1 py-1 rounded cursor-pointer hover:text-footerColor">
-              <Link to="" target="_blanck"><FaFacebook /></Link>
+              <Link to="https://www.facebook.com/MJohn250" target="_blanck">
+                <FaFacebook />
+              </Link>
             </span>
             <span className="text-[1.6rem] bg-btnColor text-white px-1 py-1 rounded cursor-pointer hover:text-footerColor">
-              <Link to="" target="_blanck"><FaYoutube /></Link>
+              <Link
+                to="https://www.linkedin.com/in/muhoza-john-26077824a/"
+                target="_blanck"
+              >
+                <FaYoutube />
+              </Link>
             </span>
             <span className="text-[1.6rem] bg-btnColor text-white px-1 py-1 rounded cursor-pointer hover:text-footerColor">
-              <Link to="" target="_blanck"><FaLinkedin /></Link>
+              <Link
+                to="https://www.linkedin.com/in/muhoza-john-26077824a/"
+                target="_blanck"
+              >
+                <FaLinkedin />
+              </Link>
             </span>
           </div>
         </div>
-        {/* <div className="w-1/2 mx-auto text-center mt-4 mb-4"> <p>coded by &copy; <Link to="muhoza.vercel.app" target="_blanck">Muhoza John</Link> </p> </div> */}
       </div>
     </footer>
   );

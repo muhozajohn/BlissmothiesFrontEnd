@@ -71,14 +71,12 @@ const UserCustomer = () => {
 
   // getCart
   const [cart, SetCart] = useState([]);
-  console.log("Alll Cart", cart);
   useEffect(() => {
     const getCart = async () => {
       try {
         isLoading(true);
         const getAllCart = await axios.get(
           `https://blissmothies.onrender.com/blissmothies/cart/Readcart`,
-
           config
         );
         const response = await getAllCart.data.data;
@@ -86,7 +84,7 @@ const UserCustomer = () => {
           SetCart(response);
           let amount = 0;
           response.forEach((item) => {
-            amount += parseFloat(item.productId[0].price);
+            amount += parseFloat(item.totalPrice);
           });
           setTotalAmount(amount);
           isLoading(false);

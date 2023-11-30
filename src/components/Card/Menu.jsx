@@ -22,6 +22,9 @@ const Menu = ({ item }) => {
       if (add.status === 201) {
         notify();
         setIsloading(false);
+      } else if (add.status === 200) {
+        notify();
+        setIsloading(false);
       }
     } catch (error) {
       console.log("Failed to Add it", error);

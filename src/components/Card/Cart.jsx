@@ -3,8 +3,6 @@ import { useState } from "react";
 
 const Cart = ({ cartItem }) => {
   const [loading, isLoading] = useState(false);
-  const value = 1;
-  const [itemCount, setItemCount] = useState(value);
   // delete
   const token = localStorage.getItem("token");
   const config = {
@@ -46,14 +44,14 @@ const Cart = ({ cartItem }) => {
           </small>
           <div className="flex gap-2 mt-2 items-start ">
             <button
-              onClick={() => setItemCount((prev) => prev - 1)}
+              onClick={() => setItemCount((prev) => prev - quantity)}
               className="bg-black text-white font-sm px-2"
             >
               -
             </button>
-            <h1 className="text-lg font-[600]">{itemCount}</h1>
+            <h1 className="text-lg font-[600]">{cartItem?.quantity}</h1>
             <button
-              onClick={() => setItemCount((prev) => prev + 1)}
+              onClick={() => setItemCount((prev) => prev + quantity)}
               className="bg-orange-600 text-white font-sm px-2"
             >
               +
@@ -62,7 +60,7 @@ const Cart = ({ cartItem }) => {
         </div>
       </div>
       <div>
-        <h1 className="text-ld font-[600]">${cartItem.productId[0]?.price}</h1>
+        <h1 className="text-ld font-[600]">${cartItem?.totalPrice}</h1>
         <span
           className="text-sm font-bold text-red-700 cursor-pointer "
           onClick={(e) => {

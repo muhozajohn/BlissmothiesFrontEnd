@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import PulseLoader from "react-spinners/PulseLoader";
+import Dashboard from "../Pages/Dashboard";
 import { Navigate } from "react-router-dom";
 const Logout = () => {
   const isAuthenticated = localStorage.getItem("token") !== null;
@@ -9,22 +8,22 @@ const Logout = () => {
   }
 
   const [loading, setIsloading] = useState(false);
-  const navigate = useNavigate();
-
   useEffect(() => {
-    if (signout === " ") {
-      navigate("/home");
-    }
-    setIsloading(true);
-    setTimeout(() => {
-      setIsloading(false);
-    }, 2000);
-  }, []);
+    const handleLogout = () => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userP");
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userEmail");
+      localStorage.removeItem("userGender");
+      setTimeout(() => {
+        window.location.reload();
+      }, 200);
+    };
+    handleLogout();
+  }, [isAuthenticated]);
   return (
     <div>
-      <div className="flex justify-center items-center h-screen w-full text-center  ">
-        <PulseLoader color="#F06C05" loading={loading} size={20} />
-      </div>
+      <Dashboard />
     </div>
   );
 };

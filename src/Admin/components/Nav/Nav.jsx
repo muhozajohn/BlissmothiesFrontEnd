@@ -7,6 +7,7 @@ import { MdNotificationsActive } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
 import React, { useState } from "react";
 import DashLink from "../../../assets/dashLinks";
+import { Navigate } from "react-router-dom";
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpeni, setIsOpeni] = useState(false);
@@ -17,6 +18,16 @@ const Nav = () => {
   const toggleDropdowni = () => {
     setIsOpeni(!isOpeni);
   };
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  if (!isAuthenticated) {
+    return <Navigate to="/home" />;
+  }
+  const handleLogout = () => {
+    // removing token in localstorage
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   return (
     <div>
       <nav className="flex justify-between items-center gap-2 lg:gap-6 px-2 py-3  bg-white fixed w-screen z-40 shadow-lg ">
@@ -37,7 +48,11 @@ const Nav = () => {
                   {DashLink.map((link, index) => (
                     <li key={index} className="hover:bg-slate-100 px-2 py-2">
                       <NavLink
-                        onClick={(prev) => !prev(isOpeni)}
+                        onClick={() => {
+                          if (link?.display === "Logout") {
+                            handleLogout();
+                          } else setIsOpeni(false);
+                        }}
                         to={link.path}
                         className={(navClass) =>
                           navClass.isActive
@@ -49,7 +64,6 @@ const Nav = () => {
                       </NavLink>
                     </li>
                   ))}
-                  
                 </ul>
               </div>
             </div>

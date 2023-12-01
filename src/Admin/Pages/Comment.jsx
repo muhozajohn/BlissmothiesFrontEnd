@@ -1,5 +1,30 @@
-import { AiFillDelete } from "react-icons/ai";
+import { useEffect, useState } from "react";
+import CommentTable from "../components/Table/CommentTable";
+import PulseLoader from "react-spinners/PulseLoader";
+import axios from "axios";
 const Comment = () => {
+  const [comment, setComment] = useState([]);
+  const [loading, isLoading] = useState(false);
+  console.log("Comments", comment);
+  useEffect(() => {
+    const getComment = async () => {
+      try {
+        isLoading(true);
+        const comment = await axios.get(
+          "https://blissmothies.onrender.com/blissmothies/blog/readComment"
+        );
+        const response = await comment.data.data;
+        if (response) {
+          setComment(response);
+          isLoading(false);
+        }
+      } catch (error) {
+        console.log("Failed to Get it", error);
+        isLoading(false);
+      }
+    };
+    getComment();
+  }, []);
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -26,26 +51,15 @@ const Comment = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-300">
-                  <td className="whitespace-nowrap px-6 py-4 font-medium">1</td>
-                  <td className="whitespace-nowrap px-6 py-4">Zxus</td>
-                  <td className="whitespace-nowrap px-6 py-4">keller</td>
-                  <td className="whitespace-nowrap px-6 py-4">01/ 02 /2023</td>
-                  <td className="whitespace-nowrap px-6 py-4">
-                    <div className="flex items-center gap-1">
-                      <div
-                        className="rounded-sm py-2 px-2 bg-btnColor text-white w-fit"
-                        onClick={(e) => {
-                          //   deleteData(item._id);
-                        }}
-                      >
-                        <AiFillDelete />
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
+              {comment.length ? (
+                comment.map((item, index) => (
+                  <CommentTable key={index} commentItem={item} />
+                ))
+              ) : (
+                <div className=" mt-5 flex justify-center items-center w-full text-center  ">
+                  <PulseLoader color="#F06C05" loading={loading} size={10} />
+                </div>
+              )}
             </table>
           </div>
         </div>

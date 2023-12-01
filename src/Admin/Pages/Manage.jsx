@@ -2,7 +2,7 @@ import Testimonioals from "../components/Table/Testimonioals";
 import Blog from "../components/Table/Blog";
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import Comment from "../components/Table/Comment";
+import Comment from "../../Admin/Pages/Comment";
 const Manage = () => {
   const isAuthenticated = localStorage.getItem("token") !== null;
   if (!isAuthenticated) {

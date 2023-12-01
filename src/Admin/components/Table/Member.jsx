@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PulseLoader from "react-spinners/PulseLoader";
+import formatDate from "../../../components/date/Date";
 const Member = () => {
   const [loading, setIsloading] = useState(false);
   const [users, setUsers] = useState([]);
@@ -85,7 +86,7 @@ const Member = () => {
                       </td>
 
                       <td className="whitespace-nowrap px-6 py-4">
-                        {item.updatedAt}
+                        {formatDate(item.createdAt)}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {item.role}

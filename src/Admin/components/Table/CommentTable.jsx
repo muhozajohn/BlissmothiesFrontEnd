@@ -4,7 +4,8 @@ import "react-toastify/dist/ReactToastify.css";
 import PulseLoader from "react-spinners/PulseLoader";
 import { useState } from "react";
 import axios from "axios";
-const CommentTable = ({ commentItem }) => {
+import formatDate from "../../../components/date/Date";
+const CommentTable = ({ commentItem, index }) => {
   const [loading, Setloading] = useState(false);
   const notify = () => {
     toast.success("Deleted Succesfully!", {
@@ -67,14 +68,19 @@ const CommentTable = ({ commentItem }) => {
   return (
     <tbody>
       <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-300">
-        <td className="whitespace-nowrap px-6 py-4 font-medium">{1}</td>
+        <td className="whitespace-nowrap px-6 py-4 font-medium">
+          {(index += 1)}
+        </td>
         <td className="whitespace-nowrap px-6 py-4">
           {commentItem?.author.fullName}
         </td>
         <td className="whitespace-nowrap px-6 py-4">
           {commentItem?.postComment}
         </td>
-        <td className="whitespace-nowrap px-6 py-4">01/ 02 /2023</td>
+        <td className="whitespace-nowrap px-6 py-4">
+          {" "}
+          {formatDate(commentItem?.createdAt)}
+        </td>
         <td className="whitespace-nowrap px-6 py-4">
           <div className="flex items-center gap-1">
             <div

@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import PulseLoader from "react-spinners/PulseLoader";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import formatDate from "../../../components/date/Date";
 const ProductsTable = () => {
   // getProduct
   const [product, setProduct] = useState([]);
@@ -124,6 +125,7 @@ const ProductsTable = () => {
       if (result) {
         setSingle(result);
         setPrice(result.price);
+        setPrice(result.title);
         setCategory(result.category);
         setContent(result.content);
         setImage(result.image);
@@ -177,7 +179,7 @@ const ProductsTable = () => {
     draggable
     pauseOnHover
     theme="dark"
-  />
+  />;
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -239,7 +241,7 @@ const ProductsTable = () => {
                         ${item.price}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
-                        {item.createdAt}
+                        {formatDate(item.createdAt)}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">Available</td>
                       <td className="whitespace-nowrap px-6 py-4">

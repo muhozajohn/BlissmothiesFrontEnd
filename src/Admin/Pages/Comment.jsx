@@ -53,7 +53,7 @@ const Comment = () => {
               </thead>
               {comment.length ? (
                 comment.map((item, index) => (
-                  <CommentTable key={index} commentItem={item} />
+                  <CommentTable key={index} commentItem={item} index={index} />
                 ))
               ) : (
                 <div className=" mt-5 flex justify-center items-center w-full text-center  ">

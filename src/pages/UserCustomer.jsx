@@ -176,7 +176,7 @@ const UserCustomer = () => {
             </div>
             <div>
               <p>${totalAmount} </p>
-              <p>${totalAmount + shiping}</p>
+              <p>${shiping}</p>
               <p>${totalAmount ? totalAmount + shiping : 0}</p>
             </div>
           </div>

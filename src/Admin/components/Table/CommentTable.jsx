@@ -32,18 +32,7 @@ const CommentTable = ({ commentItem, index }) => {
       theme: "colored",
     });
   };
-  <ToastContainer
-    position="top-right"
-    autoClose={3000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme="dark"
-  />;
+ 
 
   // delete
   const deleteData = async (id) => {
@@ -67,6 +56,18 @@ const CommentTable = ({ commentItem, index }) => {
   };
   return (
     <tbody>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-300">
         <td className="whitespace-nowrap px-6 py-4 font-medium">
           {(index += 1)}

@@ -57,56 +57,59 @@ const Menu = ({ item }) => {
       theme: "colored",
     });
   };
-  <ToastContainer
-    position="top-right"
-    autoClose={3000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme="dark"
-  />;
+
   return (
-    <div className="px-4 py-4 relative bg-white rounded-lg flex flex-col justify-between gap-5">
-      <div className="flex justify-between items-center relative">
-        <div>
-          <h5 className="text-[14px] font-[600]">{item.title}</h5>
-          <div className="flex gap-3 items-center cursor-pointer text-[12px]">
-            <span className="flex flex-col">
-              <AiOutlineHeart />
-            </span>
-            <p className="flex items-center  gap-1">
-              <AiFillStar className="text-btnColor" /> 4.5
-            </p>
+    <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+      <div className="px-4 py-4 relative bg-white rounded-lg flex flex-col justify-between gap-5">
+        <div className="flex justify-between items-center relative">
+          <div>
+            <h5 className="text-[14px] font-[600]">{item.title}</h5>
+            <div className="flex gap-3 items-center cursor-pointer text-[12px]">
+              <span className="flex flex-col">
+                <AiOutlineHeart />
+              </span>
+              <p className="flex items-center  gap-1">
+                <AiFillStar className="text-btnColor" /> 4.5
+              </p>
+            </div>
           </div>
+          <img
+            src={item.image}
+            alt=""
+            className="w-20 h-20 absolute rounded-2xl right-0 top-[-1.7rem]"
+          />
         </div>
-        <img
-          src={item.image}
-          alt=""
-          className="w-20 h-20 absolute rounded-2xl right-0 top-[-1.7rem]"
-        />
-      </div>
-      <p className="mt-3 leading-6">
-        {item.content?.length > 100
-          ? `${item.content?.substring(0, 100)}.....`
-          : item.content}
-      </p>
-      <div className="flex justify-between items-center">
-        <p>${item.price}</p>
-        <div
-          className="flex items-center justify-center border border-black px-2 rounded-xl py-1 cursor-pointer hover:bg-btnColor hover:border-btnColor hover:text-white"
-          onClick={(e) => {
-            AddToCart(item._id);
-          }}
-        >
-          {loading ? (
-            <PulseLoader color="#F06C05" loading={loading} size={10} />
-          ) : (
-            "Add to Cart"
-          )}
+        <p className="mt-3 leading-6">
+          {item.content?.length > 100
+            ? `${item.content?.substring(0, 100)}.....`
+            : item.content}
+        </p>
+        <div className="flex justify-between items-center">
+          <p>${item.price}</p>
+          <div
+            className="flex items-center justify-center border border-black px-2 rounded-xl py-1 cursor-pointer hover:bg-btnColor hover:border-btnColor hover:text-white"
+            onClick={(e) => {
+              AddToCart(item._id);
+            }}
+          >
+            {loading ? (
+              <PulseLoader color="#F06C05" loading={loading} size={10} />
+            ) : (
+              "Add to Cart"
+            )}
+          </div>
         </div>
       </div>
     </div>

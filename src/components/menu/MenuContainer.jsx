@@ -29,6 +29,16 @@ const MenuContainer = () => {
             <Link>All</Link>
           </li>
           <li
+            onClick={() => setActiveTab("all")}
+            className={
+              activeTab === "all"
+                ? `rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center`
+                : "rounded-xl bg-transparent border border-btnColor text-black px-[30px] py-[10px] font-[600] flex items-center justify-center "
+            }
+          >
+            <Link>Main Course</Link>
+          </li>
+          <li
             onClick={() => setActiveTab("breakfast")}
             className={
               activeTab === "breakfast"

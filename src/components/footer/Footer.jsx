@@ -49,21 +49,33 @@ const Footer = () => {
           </div>
           <div className="flex flex-col gap-3">
             <div className="flex gap-4 items-center">
-              <span className="text-btnColor text-[1.7rem] font-[800]">
+              <Link
+                className="text-btnColor text-[1.7rem] font-[800]"
+                to="https://api.whatsapp.com/send?phone=%2B250788671767&data=ARCO4xaVFL1RkNn2gegJrRtkD3LoNzf963jAFJOm9MpJH38HbIqj_DkycK3_3fuJiEJ3zndW24oBx5IrxRlArBsHCnEjRQCIyUTFTCvqOUYNJpMyYQbAy_sUSnL4iVWnGYplBKZ-jZ1QgYLPtgWokQIk7g&source=FB_Page&app=facebook&entry_point=page_cta"
+                target="_blanck"
+              >
                 <FaWhatsapp />
-              </span>
+              </Link>
               <p className=" text-sm">+250 788 671 767</p>
             </div>
             <div className="flex gap-4 items-center">
-              <span className="text-btnColor text-[1.7rem] font-[800]">
+              <Link
+                className="text-btnColor text-[1.7rem] font-[800]"
+                to="https://twitter.com/BlissfullSmoot1"
+                target="_blanck"
+              >
                 <FaTwitter />
-              </span>
+              </Link>
               <p className=" text-sm">blissfullsmoot1</p>
             </div>
             <div className="flex gap-4 items-center">
-              <span className="text-btnColor text-[1.7rem] font-[800]">
+              <Link
+                className="text-btnColor text-[1.7rem] font-[800]"
+                to="https://www.instagram.com/blissfulsmoothies"
+                target="_blanck"
+              >
                 <FaInstagram />
-              </span>
+              </Link>
               <p className=" text-[13px]">kellerblissfulls</p>
             </div>
           </div>

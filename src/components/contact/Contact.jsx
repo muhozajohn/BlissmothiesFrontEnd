@@ -33,33 +33,70 @@ const Contact = () => {
     });
   };
 
-  const onSubmit = async () => {
+  // const onSubmit = async () => {
+  //   const formData = {
+  //     name: formik.values.name,
+  //     email: formik.values.email,
+  //     subject: formik.values.subject,
+  //     message: formik.values.message,
+  //   };
+  //   try {
+  //     setLoading(true);
+  //     const response = await axios.post(
+  //       "https://blissmothies.onrender.com/blissmothies/contact/send",
+  //       formData
+  //     );
+  //     if (response.status === 200) {
+  //       const responsedata = response.data.data;
+  //       console.log("responsedata", responsedata);
+  //       notify();
+  //       formik.resetForm();
+  //       setLoading(false);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     const errordata = error.message;
+  //     console.log(errordata);
+  //     eror();
+  //     setLoading(false);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  const onSubmit = async (values, { setSubmitting }) => {
+    // Check if the form is valid
+    if (!formik.isValid) {
+      console.error("Form has validation errors. Please fix them.");
+      return;
+    }
+
     const formData = {
-      name: formik.values.name,
-      email: formik.values.email,
-      subject: formik.values.subject,
-      message: formik.values.message,
+      name: values.name,
+      email: values.email,
+      subject: values.subject,
+      message: values.message,
     };
+
     try {
+      setSubmitting(true); // Set submitting to true before the API request
       setLoading(true);
       const response = await axios.post(
         "https://blissmothies.onrender.com/blissmothies/contact/send",
         formData
       );
+
       if (response.status === 200) {
-        const responsedata = response.data.data;
-        console.log("responsedata", responsedata);
+        const responseData = response.data.data;
+        console.log("responseData", responseData);
         notify();
         formik.resetForm();
-        setLoading(false);
       }
     } catch (error) {
-      console.log(error);
-      const errordata = error.message;
-      console.log(errordata);
+      console.error("API Request Error:", error);
       eror();
-      setLoading(false);
     } finally {
+      setSubmitting(false); // Set submitting back to false after API request
       setLoading(false);
     }
   };
@@ -105,6 +142,19 @@ const Contact = () => {
 
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+
       <div className=" w-full bgg bg-cover bg-no-repeat bg-center h-[40vh]   top-0 z-[-10] rounded-b-xl">
         <div className=" w-full h-full rounded-b-3xl flex justify-center items-center">
           <h1 className="text-white font-semibold text-5xl">Contact</h1>
@@ -117,19 +167,6 @@ const Contact = () => {
           </div>
           <div className="flex flex-col gap-6 md:mt-[-28rem] lg:mt-0  mt-[-13rem]">
             <p className="text-xl font-bold">Contact Us</p>
-
-            <ToastContainer
-              position="top-right"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="dark"
-            />
 
             <form
               action=""
@@ -205,7 +242,7 @@ const Contact = () => {
                 {loading ? (
                   <PulseLoader size={5} color={"#ffffff"} loading={loading} />
                 ) : (
-                  "Send Message"
+                  "Submit"
                 )}
               </button>
             </form>

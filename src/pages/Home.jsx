@@ -61,7 +61,7 @@ const Home = () => {
     });
   };
   const eror = () => {
-    toast.error("Try Again Please!", {
+    toast.error("First Login Please!", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,

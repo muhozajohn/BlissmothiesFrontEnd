@@ -10,6 +10,7 @@ const NewProduct = () => {
   const [loading, setIsloading] = useState(false);
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
+  const [Subtitle, setSubtitle] = useState();
   const [price, setPrice] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
@@ -26,6 +27,7 @@ const NewProduct = () => {
     const galleryImage = imageInput.files[0]; // Get the selected image file
     const formData = new FormData();
     formData.append("title", title);
+    formData.append("Subtitle", Subtitle);
     formData.append("price", price);
     formData.append("category", category);
     formData.append("content", content);
@@ -121,6 +123,13 @@ const NewProduct = () => {
                 placeholder="Title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
+              />
+              <input
+                type="text"
+                placeholder="SubTitle"
+                value={Subtitle}
+                onChange={(e) => setSubtitle(e.target.value)}
                 className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
               />
               <div className="flex flex-col lg:flex-row items-center gap-4 justify-between ">

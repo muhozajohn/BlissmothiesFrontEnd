@@ -1,7 +1,7 @@
 import logo from "../../../assets/images/logok.png";
 import { SiMinutemailer } from "react-icons/si";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { FaCartPlus } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { FiSearch } from "react-icons/fi";
 import { MdNotificationsActive } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
@@ -9,9 +9,9 @@ import React, { useState } from "react";
 import DashLink from "../../../assets/dashLinks";
 import { Navigate } from "react-router-dom";
 const Nav = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [isOpeni, setIsOpeni] = useState(false);
   const IPICA = localStorage.getItem("image");
+  const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };

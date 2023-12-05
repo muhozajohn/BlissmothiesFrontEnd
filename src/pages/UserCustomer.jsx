@@ -176,9 +176,9 @@ const UserCustomer = () => {
               <p className=" text-gray-600 ">Total: </p>
             </div>
             <div>
-              <p>${totalAmount} </p>
-              <p>${shiping}</p>
-              <p>${totalAmount ? totalAmount + shiping : 0}</p>
+              <p>{totalAmount} Frw</p>
+              <p>{shiping} Frw</p>
+              <p>{totalAmount ? totalAmount + shiping : 0} Frw</p>
             </div>
           </div>
           <div className="btn bg-black text-center cursor-pointer">ChekOut</div>

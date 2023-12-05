@@ -109,6 +109,7 @@ const ProductsTable = () => {
   const [single, setSingle] = useState({});
 
   const [title, setTitle] = useState();
+  const [Subtitle, setSubtitle] = useState();
   const [image, setImage] = useState();
   const [price, setPrice] = useState();
   const [content, setContent] = useState();
@@ -126,6 +127,7 @@ const ProductsTable = () => {
         setSingle(result);
         setPrice(result.price);
         setPrice(result.title);
+        setPrice(result.Subtitle);
         setCategory(result.category);
         setContent(result.content);
         setImage(result.image);
@@ -141,6 +143,7 @@ const ProductsTable = () => {
     const galleryImage = imageInput.files[0]; // Get the selected image file
     const formData = new FormData();
     formData.append("title", title);
+    formData.append("Subtitle", Subtitle);
     formData.append("price", price);
     formData.append("category", category);
     formData.append("content", content);
@@ -238,7 +241,7 @@ const ProductsTable = () => {
                         {item.category}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
-                        ${item.price}
+                        {item.price} Frw
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {formatDate(item.createdAt)}
@@ -311,6 +314,13 @@ const ProductsTable = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
               />
+              <input
+                type="text"
+                placeholder="SubTitle"
+                value={Subtitle ? Subtitle : single.Subtitle}
+                onChange={(e) => setSubtitle(e.target.value)}
+                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
+              />
               <div className="flex flex-col lg:flex-row items-center gap-4 justify-between ">
                 <input
                   type="text"
@@ -328,10 +338,11 @@ const ProductsTable = () => {
                 >
                   <option>{category ? category : single.category}</option>
                   <option>Breakfast</option>
-                  <option>Lunch</option>
-                  <option>Deserts</option>
-                  <option>Dinner</option>
-                  <option>Supper</option>
+                  <option>MainCourse</option>
+                  <option>Salad</option>
+                  <option>Pasta</option>
+                  <option>Snacks</option>
+                  <option>Accompagne</option>
                   <option>Beverages</option>
                 </select>
               </div>

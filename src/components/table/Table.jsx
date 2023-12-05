@@ -15,23 +15,25 @@ const Table = () => {
   };
   const sendReq = async () => {
     try {
-      const formData = {
-        DateArrival: formik.values.DateArrival,
-        peaple: formik.values.peaple,
-        time: formik.values.time,
-        tel: formik.values.tel,
-      };
-      IsLoading(true);
-      const AddRequest = await axios.post(
-        "https://blissmothies.onrender.com/blissmothies/reservation/send",
+      if (formik.isValid) {
+        const formData = {
+          DateArrival: formik.values.DateArrival,
+          peaple: formik.values.peaple,
+          time: formik.values.time,
+          tel: formik.values.tel,
+        };
+        IsLoading(true);
+        const AddRequest = await axios.post(
+          "https://blissmothies.onrender.com/blissmothies/reservation/send",
 
-        formData,
-        config
-      );
-      if (AddRequest.status === 201) {
-        notify();
-        formik.resetForm(); 
-        IsLoading(false);
+          formData,
+          config
+        );
+        if (AddRequest.status === 201) {
+          notify();
+          formik.resetForm();
+          IsLoading(false);
+        }
       }
     } catch (error) {
       console.log("Failed to request", error);
@@ -79,8 +81,8 @@ const Table = () => {
     if (!values.DateArrival) {
       errors.DateArrival = "Date Required";
     }
-    if (!values.people) {
-      errors.people = "People Required";
+    if (!values.people || values.people === "Person") {
+      errors.peaple = "Please select the number of people";
     }
     if (!values.time) {
       errors.time = "Time Required";
@@ -99,31 +101,29 @@ const Table = () => {
   const formik = useFormik({
     validate,
     initialValues,
-    sendReq,
+    onSubmit: sendReq,
   });
-  <ToastContainer
-    position="top-right"
-    autoClose={3000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme="dark"
-  />
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="bgt py-5">
         <div className="container grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white lg:px-5 py-5 px-5 flex flex-col gap-5 items-center justify-center">
             <h2 className="text-2xl font-bold">Make Reservation</h2>
             <form
               className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full"
-              onSubmit={(e) => {
-                formik.handleSubmit;
-              }}
+              onSubmit={formik.handleSubmit}
             >
               <div className="flex flex-col gap-2">
                 <label htmlFor="" className="text-sm font-semibold">
@@ -231,9 +231,9 @@ const Table = () => {
                 <label htmlFor="" className="text-sm font-semibold">
                   Person
                 </label>
-                {formik.touched.peaple && formik.errors.peaple ? (
+                {formik.touched.people && formik.errors.people ? (
                   <div className=" text-sm text-red-800 font-extralight ">
-                    {formik.errors.peaple}
+                    {formik.errors.people}
                   </div>
                 ) : null}
                 <select
@@ -241,7 +241,7 @@ const Table = () => {
                   id="peaple"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.peaple}
+                  value={formik.values.people}
                   placeholder="phone"
                   className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  w-full"
                 >
@@ -256,7 +256,7 @@ const Table = () => {
             </form>
             <div
               className="btn w-full text-center py-3 cursor-pointer rounded-sm"
-              onClick={sendReq}
+              onClick={() => formik.submitForm()}
             >
               {loading ? (
                 <PulseLoader size={5} color={"#ffffff"} loading={loading} />

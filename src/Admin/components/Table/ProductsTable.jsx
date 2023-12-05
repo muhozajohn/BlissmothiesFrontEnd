@@ -168,7 +168,6 @@ const ProductsTable = () => {
     }
   };
 
-
   return (
     <div className="flex flex-col">
       <ToastContainer

@@ -140,10 +140,11 @@ const NewProduct = () => {
                 >
                   <option value="">--- Category ---</option>
                   <option>Breakfast</option>
-                  <option>Lunch</option>
-                  <option>Deserts</option>
-                  <option>Dinner</option>
-                  <option>Supper</option>
+                  <option>MainCourse</option>
+                  <option>Salad</option>
+                  <option>Pasta</option>
+                  <option>Snacks</option>
+                  <option>Accompagne</option>
                   <option>Beverages</option>
                 </select>
               </div>

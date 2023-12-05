@@ -21,9 +21,11 @@ const Products = () => {
           >
             <option>All</option>
             <option>Breakfast</option>
-            <option>Lunch</option>
-            <option>Desserts</option>
-            <option>Dinner</option>
+            <option>MainCourse</option>
+            <option>Salad</option>
+            <option>Pasta</option>
+            <option>Snacks</option>
+            <option>Accompagne</option>
             <option>Beverages</option>
           </select>
           <BsFilterRight className=" text-btnColor font-extrabold text-sm " />

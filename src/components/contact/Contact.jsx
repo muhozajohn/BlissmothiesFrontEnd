@@ -125,10 +125,6 @@ const Contact = () => {
       errors.subject = "Subject Required";
     }
 
-    if (!values.subject) {
-      errors.message = "Message Required"; // Should be "errors.message" instead of "errors.subject"
-    }
-
     if (!values.message) {
       errors.message = "Message Required";
     }

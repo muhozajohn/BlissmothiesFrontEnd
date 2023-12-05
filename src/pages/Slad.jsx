@@ -2,9 +2,8 @@ import Menu from "../components/Card/Menu";
 import { useEffect, useState } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
 import axios from "axios";
-const Supper = () => {
+const Slad = () => {
   const [menu, setMenu] = useState([]);
-  console.log("Suppers ", menu);
   const [loading, setIsloading] = useState(false);
   useEffect(() => {
     const getAll = async () => {
@@ -14,8 +13,8 @@ const Supper = () => {
           "https://blissmothies.onrender.com/blissmothies/menu/read"
         );
         const response = await getMenu.data.data;
-        const Supper = response.filter((menu) => menu.category === "Supper");
-        setMenu(Supper);
+        const Deserts = response.filter((menu) => menu.category === "Slad");
+        setMenu(Deserts);
         setIsloading(false);
       } catch (error) {
         console.log("Failed to Get Menu", error);
@@ -39,4 +38,4 @@ const Supper = () => {
   );
 };
 
-export default Supper;
+export default Slad;

@@ -10,23 +10,23 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import axios from "axios";
+import { useFormik } from "formik";
+
 const Home = () => {
   const [loading, IsLoading] = useState(false);
-  const [DateArrival, seTDateArrival] = useState("");
-  const [DateDeparture, seTDateDeparture] = useState("");
-  const [peaple, seTpeaple] = useState("");
-  const formData = {
-    DateArrival,
-    DateDeparture,
-    peaple,
-  };
   const token = localStorage.getItem("token");
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
+
   const sendReq = async () => {
+    const formData = {
+      DateArrival: formik.values.DateArrival,
+      DateDeparture: formik.values.DateDeparture,
+      peaple: formik.values.peaple,
+    };
     try {
       IsLoading(true);
       const AddRequest = await axios.post(
@@ -36,9 +36,7 @@ const Home = () => {
       );
       if (AddRequest.status === 201) {
         notify();
-        seTDateArrival("")
-        seTDateDeparture("");
-        seTpeaple("");
+        formik.resetForm();
         IsLoading(false);
       }
     } catch (error) {
@@ -72,6 +70,35 @@ const Home = () => {
       theme: "colored",
     });
   };
+
+  const initialValues = {
+    DateArrival: "",
+    DateDeparture: "",
+    peaple: "",
+  };
+
+  const validate = (values) => {
+    let errors = {};
+
+    if (!values.DateArrival) {
+      errors.DateArrival = "Date Arrival is required";
+    }
+
+    if (!values.DateDeparture) {
+      errors.DateDeparture = "Date Departure is required";
+    }
+
+    if (!values.peaple || values.peaple === "# of Person") {
+      errors.peaple = "Please select the number of people";
+    }
+
+    return errors;
+  };
+  const formik = useFormik({
+    initialValues,
+    validate,
+    onSubmit: sendReq, // Assuming sendReq is the function to handle form submission
+  });
   return (
     <>
       <ToastContainer
@@ -113,38 +140,49 @@ const Home = () => {
             </div>
           </div>
           <div className="container">
-            <div className="  rounded-xl lg:mt-[11rem] md:mt-[10rem] mt-[5rem] mb-8 w-full lg:w-[80%] mx-auto bg-white flex flex-col lg:flex-row items-center lg:flex gap-8 lg:justify-between px-5 py-5">
+            <div className="rounded-xl lg:mt-[11rem] md:mt-[10rem] mt-[5rem] mb-8 w-full lg:w-[80%] mx-auto bg-white flex flex-col lg:flex-row items-center lg:flex gap-8 lg:justify-between px-5 py-5">
               <div className="grid grid-cols-1 w-full lg:w-auto  lg:grid-cols-3 gap-5">
-                <div className=" bg-textColor px-4 py-1 w-full lg:w-[13vw] rounded-xl flex flex-col items-left justify-between">
+                <div className="bg-textColor px-4 py-1 w-full lg:w-[13vw] rounded-xl flex flex-col items-left justify-between">
                   <p className="text-sm font-semibold">Date Arrival </p>
-
                   <input
-                    value={DateArrival}
-                    onChange={(e) => seTDateArrival(e.target.value)}
+                    name="DateArrival"
+                    value={formik.values.DateArrival}
+                    onChange={formik.handleChange}
                     type="date"
                     className="w-full h-full bg-transparent outline-none active:outline-none text-xs"
                   />
+                  {formik.errors.DateArrival && (
+                    <div className="text-red-800 font-extralight text-sm">
+                      {formik.errors.DateArrival}
+                    </div>
+                  )}
                 </div>
-                <div className=" bg-textColor px-4 py-1 w-full lg:w-[13vw] rounded-xl flex flex-col items-left justify-between">
+
+                <div className="bg-textColor px-4 py-1 w-full lg:w-[13vw] rounded-xl flex flex-col items-left justify-between">
                   <p className="text-sm font-semibold">Date Departure </p>
-
                   <input
-                    value={DateDeparture}
-                    onChange={(e) => seTDateDeparture(e.target.value)}
+                    name="DateDeparture"
+                    value={formik.values.DateDeparture}
+                    onChange={formik.handleChange}
                     type="date"
                     className="w-full h-full bg-transparent outline-none active:outline-none text-xs"
                   />
+                  {formik.errors.DateDeparture && (
+                    <div className="text-red-800 font-extralight text-sm">
+                      {formik.errors.DateDeparture}
+                    </div>
+                  )}
                 </div>
-                <div className=" bg-textColor px-4 py-1 w-full lg:w-[13vw] rounded-xl flex flex-col items-left justify-between">
+
+                <div className="bg-textColor px-4 py-1 w-full lg:w-[13vw] rounded-xl flex flex-col items-left justify-between">
                   <p className="flex gap-1 text-sm font-semibold">
                     <FaUser /> #People
                   </p>
                   <select
-                    name=""
-                    id=""
-                    value={peaple}
-                    onChange={(e) => seTpeaple(e.target.value)}
-                    className=" w-full h-full bg-transparent outline-none active:outline-none text-xs"
+                    name="peaple"
+                    value={formik.values.peaple}
+                    onChange={formik.handleChange}
+                    className="w-full h-full bg-transparent outline-none active:outline-none text-xs"
                   >
                     <option># of Person</option>
                     <option>1</option>
@@ -153,15 +191,24 @@ const Home = () => {
                     <option>4</option>
                     <option>5+</option>
                   </select>
+                  {formik.errors.peaple && (
+                    <div className="text-red-800 font-extralight text-sm">
+                      {formik.errors.peaple}
+                    </div>
+                  )}
                 </div>
               </div>
 
               <div
-                className=" bg-btnColor flex items-center w-full justify-center cursor-pointer text-white py-3  lg:w-[13vw] rounded-xl font-[600] "
-                onClick={sendReq}
+                className="bg-btnColor flex items-center w-full justify-center cursor-pointer text-white py-3  lg:w-[13vw] rounded-xl font-[600] "
+                onClick={formik.handleSubmit}
               >
-                {loading ? (
-                  <PulseLoader size={5} color={"#ffffff"} loading={loading} />
+                {formik.isSubmitting ? (
+                  <PulseLoader
+                    size={5}
+                    color={"#ffffff"}
+                    loading={formik.isSubmitting}
+                  />
                 ) : (
                   "Send Request"
                 )}

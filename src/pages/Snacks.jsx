@@ -2,7 +2,7 @@ import Menu from "../components/Card/Menu";
 import { useEffect, useState } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
 import axios from "axios";
-const Launch = () => {
+const Snacks = () => {
   const [menu, setMenu] = useState([]);
   const [loading, setIsloading] = useState(false);
   useEffect(() => {
@@ -13,7 +13,7 @@ const Launch = () => {
           "https://blissmothies.onrender.com/blissmothies/menu/read"
         );
         const response = await getMenu.data.data;
-        const Launch = response.filter((menu) => menu.category === "Lunch");
+        const Launch = response.filter((menu) => menu.category === "Snacks");
         setMenu(Launch);
         setIsloading(false);
       } catch (error) {
@@ -38,4 +38,4 @@ const Launch = () => {
   );
 };
 
-export default Launch;
+export default Snacks;

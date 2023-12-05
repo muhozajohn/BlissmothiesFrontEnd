@@ -41,8 +41,9 @@ const Signup = () => {
       "Content-Type": "multipart/form-data",
     },
   };
-  const signUp = async () => {
-    try {
+const signUp = async () => {
+  try {
+    if (formik.isValid) {
       const formData = new FormData();
       formData.append("fullName", formik.values.fullName);
       formData.append("email", formik.values.email);
@@ -64,12 +65,14 @@ const Signup = () => {
           navigate("/login");
         }, 3000);
       }
-    } catch (error) {
-      setLoading(false);
-      eror();
-      console.log("Failed To Sign up", error);
     }
-  };
+  } catch (error) {
+    setLoading(false);
+    eror();
+    console.log("Failed To Sign up", error);
+  }
+};
+
 
   const initialValues = {
     email: "",
@@ -78,31 +81,48 @@ const Signup = () => {
     userProfile: "",
     gender: "",
   };
-  const validate = (values) => {
-    let errors = {};
-    if (!values.password) {
-      errors.password = "Password Required";
-    }
-    if (!values.fullName) {
-      errors.fullName = "Fullname Required";
-    }
-    if (!values.userProfile) {
-      errors.userProfile = "Image Required";
-    }
-    if (!values.gender) {
-      errors.userProfile = "Image Required";
-    }
-    if (!values.email) {
-      errors.email = "Email Required";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = "Invalid email address";
-    }
-    return errors;
-  };
+ const validate = (values) => {
+   let errors = {};
+
+   if (!values.password) {
+     errors.password = "Password Required";
+   } else if (values.password.length < 8) {
+     errors.password = "Password must be at least 8 characters long";
+   } else if (!/[a-z]/.test(values.password)) {
+     errors.password = "Password must contain at least one lowercase letter";
+   } else if (!/[A-Z]/.test(values.password)) {
+     errors.password = "Password must contain at least one uppercase letter";
+   } else if (!/\d/.test(values.password)) {
+     errors.password = "Password must contain at least one digit";
+   } else if (!/[@$!%*?&]/.test(values.password)) {
+     errors.password = "Password must contain at least one special character";
+   }
+
+   if (!values.fullName) {
+     errors.fullName = "Fullname Required";
+   }
+
+   if (!values.userProfile) {
+     errors.userProfile = "Image Required";
+   }
+
+   if (!values.gender) {
+     errors.gender = "Gender Required";
+   }
+
+   if (!values.email) {
+     errors.email = "Email Required";
+   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+     errors.email = "Invalid email address";
+   }
+
+   return errors;
+ };
+
   const formik = useFormik({
     validate,
     initialValues,
-    signUp,
+    onSubmit: signUp,
   });
 
   return (
@@ -131,9 +151,7 @@ const Signup = () => {
             action=""
             encType="multipart/form-data" // Add this line for file uploads
             className="flex flex-col gap-6 mt-4"
-            onSubmit={(e) => {
-              formik.handleSubmit;
-            }}
+            onSubmit={formik.handleSubmit}
           >
             {formik.touched.fullName && formik.errors.fullName ? (
               <div className=" text-sm text-red-800 font-extralight ">
@@ -218,7 +236,7 @@ const Signup = () => {
             />
             <button
               className="btn cursor-pointer py-3 px-3 rounded-sm w-full"
-              onClick={signUp}
+              onClick={() => formik.submitForm()}
               disabled={loading}
               type="submit"
             >

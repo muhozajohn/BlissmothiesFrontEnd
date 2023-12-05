@@ -1,13 +1,15 @@
 import MenuCards from "../../pages/MenuCards";
 import BreakFast from "../../pages/BreakFast";
 import { Link } from "react-router-dom";
-import Launch from "../../pages/Launch";
-import Dinner from "../../pages/Dinner";
-import Desserts from "../../pages/Desserts";
-import Beverages from "../../pages/Beverages";
-import Supper from "../../pages/Supper";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { useState } from "react";
+import Starter from "../../pages/Starter";
+import Beverages from "../../pages/Beverages";
+import Slad from "../../pages/Slad";
+import Pasta from "../../pages/Pasta";
+import Snacks from "../../pages/Snacks";
+import Accompagne from "../../pages/Accompagne";
+import MainCourse from "../../pages/MainCourse";
 const MenuContainer = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +19,7 @@ const MenuContainer = () => {
   return (
     <>
       <div className="container flex flex-col gap-6 mt-10">
-        <ul className=" w-full gap-6 items-center cursor-pointer hidden lg:flex">
+        <ul className=" w-full gap-[0.4rem] items-center cursor-pointer hidden lg:flex">
           <li
             onClick={() => setActiveTab("all")}
             className={
@@ -29,14 +31,14 @@ const MenuContainer = () => {
             <Link>All</Link>
           </li>
           <li
-            onClick={() => setActiveTab("all")}
+            onClick={() => setActiveTab("MainCourse")}
             className={
-              activeTab === "all"
+              activeTab === "MainCourse"
                 ? `rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center`
                 : "rounded-xl bg-transparent border border-btnColor text-black px-[30px] py-[10px] font-[600] flex items-center justify-center "
             }
           >
-            <Link>Main Course</Link>
+            <Link className=" whitespace-nowrap ">Main Course</Link>
           </li>
           <li
             onClick={() => setActiveTab("breakfast")}
@@ -49,44 +51,54 @@ const MenuContainer = () => {
             <Link>Breakfast</Link>
           </li>
           <li
-            onClick={() => setActiveTab("lunch")}
+            onClick={() => setActiveTab("starter")}
             className={
-              activeTab === "lunch"
+              activeTab === "starter"
                 ? `rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center`
                 : "rounded-xl bg-transparent border border-btnColor text-black px-[30px] py-[10px] font-[600] flex items-center justify-center "
             }
           >
-            <Link>Lunch</Link>
+            <Link>Starter</Link>
           </li>
           <li
-            onClick={() => setActiveTab("Dinner")}
+            onClick={() => setActiveTab("Salad")}
             className={
-              activeTab === "Dinner"
+              activeTab === "Salad"
                 ? `rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center`
                 : "rounded-xl bg-transparent border border-btnColor text-black px-[30px] py-[10px] font-[600] flex items-center justify-center "
             }
           >
-            <Link>Dinner</Link>
+            <Link>Salad</Link>
           </li>
           <li
-            onClick={() => setActiveTab("Deserts")}
+            onClick={() => setActiveTab("Pasta")}
             className={
-              activeTab === "Deserts"
+              activeTab === "Pasta"
                 ? `rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center`
                 : "rounded-xl bg-transparent border border-btnColor text-black px-[30px] py-[10px] font-[600] flex items-center justify-center "
             }
           >
-            <Link>Deserts</Link>
+            <Link>Pasta</Link>
           </li>
           <li
-            onClick={() => setActiveTab("Supper")}
+            onClick={() => setActiveTab("Snacks")}
             className={
-              activeTab === "Supper"
+              activeTab === "Snacks"
                 ? `rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center`
                 : "rounded-xl bg-transparent border border-btnColor text-black px-[30px] py-[10px] font-[600] flex items-center justify-center "
             }
           >
-            <Link>Supper</Link>
+            <Link>Snacks</Link>
+          </li>
+          <li
+            onClick={() => setActiveTab("Accompagne")}
+            className={
+              activeTab === "Accompagne"
+                ? `rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center`
+                : "rounded-xl bg-transparent border border-btnColor text-black px-[30px] py-[10px] font-[600] flex items-center justify-center "
+            }
+          >
+            <Link>Accompagne</Link>
           </li>
           <li
             onClick={() => setActiveTab("Beverages")}
@@ -129,6 +141,19 @@ const MenuContainer = () => {
                 </li>
                 <li
                   onClick={() => {
+                    setActiveTab("MainCourse");
+                    setIsOpen(false);
+                  }}
+                  className={
+                    activeTab === "MainCourse"
+                      ? ` font-[600] text-btnColor flex items-center `
+                      : " text-black font-[600] flex items-center hover:text-btnColor"
+                  }
+                >
+                  <Link className=" whitespace-nowrap ">Main Course</Link>
+                </li>
+                <li
+                  onClick={() => {
                     setActiveTab("breakfast");
                     setIsOpen(false);
                   }}
@@ -142,42 +167,68 @@ const MenuContainer = () => {
                 </li>
                 <li
                   onClick={() => {
-                    setActiveTab("lunch");
+                    setActiveTab("starter");
                     setIsOpen(false);
                   }}
                   className={
-                    activeTab === "lunch"
+                    activeTab === "starter"
                       ? ` font-[600] text-btnColor flex items-center `
                       : " text-black font-[600] flex items-center hover:text-btnColor"
                   }
                 >
-                  <Link>Lunch</Link>
+                  <Link>Starter</Link>
                 </li>
                 <li
                   onClick={() => {
-                    setActiveTab("Dinner");
+                    setActiveTab("Salad");
                     setIsOpen(false);
                   }}
                   className={
-                    activeTab === "Dinner"
+                    activeTab === "Salad"
                       ? ` font-[600] text-btnColor flex items-center `
                       : " text-black font-[600] flex items-center hover:text-btnColor"
                   }
                 >
-                  <Link>Dinner</Link>
+                  <Link>Salad</Link>
                 </li>
                 <li
                   onClick={() => {
-                    setActiveTab("Deserts");
+                    setActiveTab("Pasta");
                     setIsOpen(false);
                   }}
                   className={
-                    activeTab === "Deserts"
+                    activeTab === "Pasta"
                       ? ` font-[600] text-btnColor flex items-center `
                       : " text-black font-[600] flex items-center hover:text-btnColor"
                   }
                 >
-                  <Link>Desserts</Link>
+                  <Link>Pasta</Link>
+                </li>
+                <li
+                  onClick={() => {
+                    setActiveTab("Snacks");
+                    setIsOpen(false);
+                  }}
+                  className={
+                    activeTab === "Snacks"
+                      ? ` font-[600] text-btnColor flex items-center `
+                      : " text-black font-[600] flex items-center hover:text-btnColor"
+                  }
+                >
+                  <Link>Snacks</Link>
+                </li>
+                <li
+                  onClick={() => {
+                    setActiveTab("Accompagne");
+                    setIsOpen(false);
+                  }}
+                  className={
+                    activeTab === "Accompagne"
+                      ? ` font-[600] text-btnColor flex items-center `
+                      : " text-black font-[600] flex items-center hover:text-btnColor"
+                  }
+                >
+                  <Link>Accompagne</Link>
                 </li>
                 <li
                   onClick={() => {
@@ -201,11 +252,13 @@ const MenuContainer = () => {
       <div className="container mt-10">
         {activeTab === "all" && <MenuCards />}
         {activeTab === "breakfast" && <BreakFast />}
-        {activeTab === "lunch" && <Launch />}
-        {activeTab === "Dinner" && <Dinner />}
-        {activeTab === "Deserts" && <Desserts />}
+        {activeTab === "starter" && <Starter />}
+        {activeTab === "MainCourse" && <MainCourse />}
+        {activeTab === "Salad" && <Slad />}
+        {activeTab === "Pasta" && <Pasta />}
+        {activeTab === "Snacks" && <Snacks />}
+        {activeTab === "Accompagne" && <Accompagne />}
         {activeTab === "Beverages" && <Beverages />}
-        {activeTab === "Supper" && <Supper />}
       </div>
     </>
   );

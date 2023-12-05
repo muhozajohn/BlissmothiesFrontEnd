@@ -75,7 +75,8 @@ const Menu = ({ item }) => {
       <div className="px-4 py-4 relative bg-white rounded-lg flex flex-col justify-between gap-5">
         <div className="flex justify-between items-center relative">
           <div>
-            <h5 className="text-[14px] font-[600]">{item.title}</h5>
+            <h2 className="text-sm font-[600]">{item?.title}</h2>
+            <h5 className="text-xs font-[500]">{item?.Subtitle}</h5>
             <div className="flex gap-3 items-center cursor-pointer text-[12px]">
               <span className="flex flex-col">
                 <AiOutlineHeart />
@@ -97,7 +98,7 @@ const Menu = ({ item }) => {
             : item.content}
         </p>
         <div className="flex justify-between items-center">
-          <p>${item.price}</p>
+          <p>{item.price} Frw</p>
           <div
             className="flex items-center justify-center border border-black px-2 rounded-xl py-1 cursor-pointer hover:bg-btnColor hover:border-btnColor hover:text-white"
             onClick={(e) => {
@@ -105,7 +106,9 @@ const Menu = ({ item }) => {
             }}
           >
             {loading ? (
-              <PulseLoader color="#F06C05" loading={loading} size={10} />
+              <div className="flex items-center h-[1.5rem] w-fit hover:text-white">
+                <PulseLoader color="#000000" loading={loading} size={10} />
+              </div>
             ) : (
               "Add to Cart"
             )}

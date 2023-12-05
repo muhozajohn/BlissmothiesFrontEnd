@@ -69,7 +69,7 @@ const Events = () => {
                     </div>
                     <div className="flex flex-col gap-6 text-left">
                       <div>
-                        <h5 className="text-btnColor ">${item.price}</h5>
+                        <h5 className="text-btnColor ">{item.price} Frw</h5>
                         <h2 className="text-lg font-bold">{item.title}</h2>
                       </div>
                       <div>

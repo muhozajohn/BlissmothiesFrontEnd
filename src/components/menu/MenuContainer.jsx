@@ -10,12 +10,23 @@ import Pasta from "../../pages/Pasta";
 import Snacks from "../../pages/Snacks";
 import Accompagne from "../../pages/Accompagne";
 import MainCourse from "../../pages/MainCourse";
+import Chiken from "../../pages/Chiken";
+import Beef from "../../pages/Beef";
+import Pork from "../../pages/Pork";
+import Goat from "../../pages/Goat";
+import Fish from "../../pages/Fish";
+import Vegetarian from "../../pages/Vegetarian";
 const MenuContainer = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+  const [isOpeni, setIsOpeni] = useState(false);
+  const toggleDropdowni = () => {
+    setIsOpeni(!isOpeni);
+  };
+
   return (
     <>
       <div className="container flex flex-col gap-6 mt-10">
@@ -31,7 +42,7 @@ const MenuContainer = () => {
             <Link>All</Link>
           </li>
           <li
-            onClick={() => setActiveTab("MainCourse")}
+            onClick={toggleDropdown}
             className={
               activeTab === "MainCourse"
                 ? `rounded-xl bg-btnColor px-[30px] py-[10px] font-[600] text-white flex items-center justify-center`
@@ -39,6 +50,48 @@ const MenuContainer = () => {
             }
           >
             <Link className=" whitespace-nowrap ">Main Course</Link>
+            {isOpen && (
+              <div className="origin-top-right absolute z-10  mt-[17rem] w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="py-1">
+                  <Link
+                    onClick={() => setActiveTab("Chiken")}
+                    className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <span>Chiken</span>
+                  </Link>
+                  <Link
+                    onClick={() => setActiveTab("Beef")}
+                    className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <span>Beef</span>
+                  </Link>
+                  <Link
+                    onClick={() => setActiveTab("Pork")}
+                    className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <span>Pork</span>
+                  </Link>
+                  <Link
+                    onClick={() => setActiveTab("Goat")}
+                    className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <span>Goat</span>
+                  </Link>
+                  <Link
+                    onClick={() => setActiveTab("Fish")}
+                    className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <span>Fish</span>
+                  </Link>
+                  <Link
+                    onClick={() => setActiveTab("Vegetarian")}
+                    className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <span>Vegetarian</span>
+                  </Link>
+                </div>
+              </div>
+            )}
           </li>
           <li
             onClick={() => setActiveTab("breakfast")}
@@ -141,8 +194,8 @@ const MenuContainer = () => {
                 </li>
                 <li
                   onClick={() => {
-                    setActiveTab("MainCourse");
-                    setIsOpen(false);
+                    toggleDropdowni();
+                    // setIsOpen(false);
                   }}
                   className={
                     activeTab === "MainCourse"
@@ -151,6 +204,48 @@ const MenuContainer = () => {
                   }
                 >
                   <Link className=" whitespace-nowrap ">Main Course</Link>
+                  {isOpeni && (
+                    <div className="origin-top-right absolute right-0 z-10  mt-[17rem] w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <div className="py-1">
+                        <Link
+                          onClick={() => setActiveTab("Chiken")}
+                          className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          <span>Chiken</span>
+                        </Link>
+                        <Link
+                          onClick={() => setActiveTab("Beef")}
+                          className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          <span>Beef</span>
+                        </Link>
+                        <Link
+                          onClick={() => setActiveTab("Pork")}
+                          className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          <span>Pork</span>
+                        </Link>
+                        <Link
+                          onClick={() => setActiveTab("Goat")}
+                          className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          <span>Goat</span>
+                        </Link>
+                        <Link
+                          onClick={() => setActiveTab("Fish")}
+                          className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          <span>Fish</span>
+                        </Link>
+                        <Link
+                          onClick={() => setActiveTab("Vegetarian")}
+                          className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          <span>Vegetarian</span>
+                        </Link>
+                      </div>
+                    </div>
+                  )}
                 </li>
                 <li
                   onClick={() => {
@@ -259,6 +354,12 @@ const MenuContainer = () => {
         {activeTab === "Snacks" && <Snacks />}
         {activeTab === "Accompagne" && <Accompagne />}
         {activeTab === "Beverages" && <Beverages />}
+        {activeTab === "Chiken" && <Chiken />}
+        {activeTab === "Beef" && <Beef />}
+        {activeTab === "Pork" && <Pork />}
+        {activeTab === "Goat" && <Goat />}
+        {activeTab === "Fish" && <Fish />}
+        {activeTab === "Vegetarian" && <Vegetarian />}
       </div>
     </>
   );

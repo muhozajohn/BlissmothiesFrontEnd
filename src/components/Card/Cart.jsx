@@ -75,7 +75,7 @@ const Cart = ({ cartItem }) => {
         <img
           src={cartItem.productId[0]?.image}
           alt=""
-          className="rounded-xl h-fit  w-[5.5rem]"
+          className="rounded-xl h-[4.5rem] overflow-hidden  w-[5.5rem]"
         />
         <div className="flex flex-col">
           <p className="text-sm font-[600] whitespace-nowrap ">

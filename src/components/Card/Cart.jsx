@@ -75,11 +75,11 @@ const Cart = ({ cartItem }) => {
         <img
           src={cartItem.productId[0]?.image}
           alt=""
-          className="rounded-xl  w-1/3"
+          className="rounded-xl h-fit  w-[5.5rem]"
         />
         <div className="flex flex-col">
           <p className="text-sm font-[600] whitespace-nowrap ">
-            {cartItem.productId[0]?.title}
+            {cartItem?.productId[0]?.Subtitle}
           </p>
           <small className=" mt-[-1] text-xs whitespace-nowrap">
             Add More Items
@@ -114,7 +114,9 @@ const Cart = ({ cartItem }) => {
         </div>
       </div>
       <div>
-        <h1 className="text-ld font-[600]">${cartItem?.totalPrice}</h1>
+        <h1 className="text-sm whitespace-nowrap font-[600]">
+          {cartItem?.totalPrice} Frw
+        </h1>
         <span
           className="text-sm font-bold text-red-700 cursor-pointer "
           onClick={(e) => {

@@ -97,7 +97,7 @@ const UserCustomer = () => {
     getCart();
   }, []);
 
-  const shiping = 3.5;
+  const shiping = 3500;
 
   const isAuthenticated = localStorage.getItem("token") !== null;
   if (!isAuthenticated) {

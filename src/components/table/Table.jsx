@@ -78,11 +78,16 @@ const Table = () => {
   };
   const validate = (values) => {
     let errors = {};
+    const currentDate = new Date();
+    const selectedDate = new Date(values.DateArrival);
+
     if (!values.DateArrival) {
       errors.DateArrival = "Date Required";
+    } else if (selectedDate < currentDate) {
+      errors.DateArrival = "Please select a future date";
     }
     if (!values.people || values.people === "Person") {
-      errors.peaple = "Please select the number of people";
+      errors.people = "Please select the number of people";
     }
     if (!values.time) {
       errors.time = "Time Required";
@@ -220,11 +225,55 @@ const Table = () => {
                   className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  w-full"
                 >
                   <option className="text-sm font-bold">Time</option>
+
                   <option>12:00 am</option>
                   <option>12:30 am</option>
                   <option>1:00 am</option>
+                  <option>1:30 am</option>
                   <option>2:00 am</option>
+                  <option>2:30 am</option>
+                  <option>3:00 am</option>
                   <option>3:30 am</option>
+                  <option>4:00 am</option>
+                  <option>4:30 am</option>
+                  <option>5:00 am</option>
+                  <option>5:30 am</option>
+                  <option>6:00 am</option>
+                  <option>6:30 am</option>
+                  <option>7:00 am</option>
+                  <option>7:30 am</option>
+                  <option>8:00 am</option>
+                  <option>8:30 am</option>
+                  <option>9:00 am</option>
+                  <option>9:30 am</option>
+                  <option>10:00 am</option>
+                  <option>10:30 am</option>
+                  <option>11:00 am</option>
+                  <option>11:30 am</option>
+                  <option>12:00 pm</option>
+                  <option>12:30 pm</option>
+                  <option>1:00 pm</option>
+                  <option>1:30 pm</option>
+                  <option>2:00 pm</option>
+                  <option>2:30 pm</option>
+                  <option>3:00 pm</option>
+                  <option>3:30 pm</option>
+                  <option>4:00 pm</option>
+                  <option>4:30 pm</option>
+                  <option>5:00 pm</option>
+                  <option>5:30 pm</option>
+                  <option>6:00 pm</option>
+                  <option>6:30 pm</option>
+                  <option>7:00 pm</option>
+                  <option>7:30 pm</option>
+                  <option>8:00 pm</option>
+                  <option>8:30 pm</option>
+                  <option>9:00 pm</option>
+                  <option>9:30 pm</option>
+                  <option>10:00 pm</option>
+                  <option>10:30 pm</option>
+                  <option>11:00 pm</option>
+                  <option>11:30 pm</option>
                 </select>
               </div>
               <div className="flex flex-col gap-2">
@@ -238,7 +287,7 @@ const Table = () => {
                 ) : null}
                 <select
                   name=""
-                  id="peaple"
+                  id="people"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.people}

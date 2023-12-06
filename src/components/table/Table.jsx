@@ -18,7 +18,7 @@ const Table = () => {
       if (formik.isValid) {
         const formData = {
           DateArrival: formik.values.DateArrival,
-          peaple: formik.values.peaple,
+          peaple: formik.values.people,
           time: formik.values.time,
           tel: formik.values.tel,
         };

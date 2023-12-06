@@ -80,12 +80,23 @@ const Home = () => {
   const validate = (values) => {
     let errors = {};
 
+    const currentDate = new Date();
+    const selectedDate = new Date(values.DateArrival);
+    const selectedDat = new Date(values.DateDeparture);
+    currentDate.setHours(0, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
+    console.log("Current Date:", currentDate);
+    console.log("Selected Date:", selectedDate);
     if (!values.DateArrival) {
-      errors.DateArrival = "Date Arrival is required";
+      errors.DateArrival = "Date Arrival Required";
+    } else if (selectedDate < currentDate) {
+      errors.DateArrival = "Please select a future date or Current";
     }
 
     if (!values.DateDeparture) {
       errors.DateDeparture = "Date Departure is required";
+    } else if (selectedDat < currentDate) {
+      errors.DateDeparture = "Please select a future date or Current";
     }
 
     if (!values.peaple || values.peaple === "# of Person") {

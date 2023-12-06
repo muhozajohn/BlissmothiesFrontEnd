@@ -121,12 +121,22 @@ const UserCustomer = () => {
       <div className="container grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
           <div className="px-5 py-5 flex flex-col gap-6 lg:flex-row  bg-white rounded-lg">
-            <img src={userP} alt="" className="rounded-xl w-full lg:w-32" />
+            <img
+              src={userP}
+              alt=""
+              className="rounded-xl h-full aspect-square   w-[5.5rem]"
+            />
 
             <div className="mt-4">
-              <p className=" text-sm font-[600] ">{userName}</p>
-              <p className=" text-sm ">{userEmail}</p>
-              <p className="text-sm ">{userGender}</p>
+              <span className="flex  gap-1 items-center text-sm font-[600]">
+                Name: <p className=" text-xs font-[500] ">{userName}</p>
+              </span>
+              <span className="flex gap-1 items-center text-sm font-[600]">
+                Email: <p className=" text-xs font-[500] ">{userEmail}</p>
+              </span>
+              <span className="flex gap-1 items-center text-sm font-[600]">
+                Gender: <p className=" text-xs font-[500]">{userGender}</p>
+              </span>
             </div>
           </div>
 

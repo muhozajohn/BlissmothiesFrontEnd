@@ -54,10 +54,10 @@ const MenuContainer = () => {
               <div className="origin-top-right absolute z-10  mt-[17rem] w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="py-1">
                   <Link
-                    onClick={() => setActiveTab("Chiken")}
+                    onClick={() => setActiveTab("Chicken")}
                     className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
-                    <span>Chiken</span>
+                    <span>Chicken</span>
                   </Link>
                   <Link
                     onClick={() => setActiveTab("Beef")}
@@ -205,40 +205,58 @@ const MenuContainer = () => {
                 >
                   <Link className=" whitespace-nowrap ">Main Course</Link>
                   {isOpeni && (
-                    <div className="origin-top-right absolute right-0 z-10  mt-[17rem] w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div className="origin-top-right absolute right-0 z-10  mt-[14rem] w-36 rounded-md shadow-lg bg-white mr-32 ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <div className="py-1">
                         <Link
-                          onClick={() => setActiveTab("Chiken")}
+                          onClick={() => {
+                            setActiveTab("Chicken");
+                            setIsOpen(false);
+                          }}
                           className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
-                          <span>Chiken</span>
+                          <span>Chicken</span>
                         </Link>
                         <Link
-                          onClick={() => setActiveTab("Beef")}
+                          onClick={() => {
+                            setActiveTab("Beef");
+                            setIsOpen(false);
+                          }}
                           className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           <span>Beef</span>
                         </Link>
                         <Link
-                          onClick={() => setActiveTab("Pork")}
+                          onClick={() => {
+                            setActiveTab("Pork");
+                            setIsOpen(false);
+                          }}
                           className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           <span>Pork</span>
                         </Link>
                         <Link
-                          onClick={() => setActiveTab("Goat")}
+                          onClick={() => {
+                            setActiveTab("Goat");
+                            setIsOpen(false);
+                          }}
                           className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           <span>Goat</span>
                         </Link>
                         <Link
-                          onClick={() => setActiveTab("Fish")}
+                          onClick={() => {
+                            setActiveTab("Fish");
+                            setIsOpen(false);
+                          }}
                           className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           <span>Fish</span>
                         </Link>
                         <Link
-                          onClick={() => setActiveTab("Vegetarian")}
+                          onClick={() => {
+                            setActiveTab("Vegetarian");
+                            setIsOpen(false);
+                          }}
                           className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           <span>Vegetarian</span>
@@ -354,7 +372,7 @@ const MenuContainer = () => {
         {activeTab === "Snacks" && <Snacks />}
         {activeTab === "Accompagne" && <Accompagne />}
         {activeTab === "Beverages" && <Beverages />}
-        {activeTab === "Chiken" && <Chiken />}
+        {activeTab === "Chicken" && <Chiken />}
         {activeTab === "Beef" && <Beef />}
         {activeTab === "Pork" && <Pork />}
         {activeTab === "Goat" && <Goat />}

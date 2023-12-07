@@ -14,7 +14,7 @@ const Vegetarian = () => {
         );
         const response = await getMenu.data.data;
         const Vegetarian = response.filter(
-          (menu) => menu.title === "Vegetarian"
+          (menu) => menu.title === "Vegetarian" || menu.title === "vegetarian"
         );
         setMenu(Vegetarian);
         setIsloading(false);

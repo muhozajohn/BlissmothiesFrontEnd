@@ -19,7 +19,7 @@ const Deserts = () => {
             <div>
               <p className=" font-semibold ">Cherry Muffin</p>
               <small className=" font-medium ">
-                Price : <span className="text-btnColor">50000 Frw</span>
+                Price : <span className="text-btnColor">5000 Frw</span>
               </small>
             </div>
           </div>
@@ -28,7 +28,7 @@ const Deserts = () => {
             <div>
               <p className=" font-semibold ">Rosse Muffin</p>
               <small className=" font-medium ">
-                Price : <span className="text-btnColor">50000 Frw</span>
+                Price : <span className="text-btnColor">5000 Frw</span>
               </small>
             </div>
           </div>
@@ -37,7 +37,7 @@ const Deserts = () => {
             <div>
               <p className=" font-semibold ">Choko Cake</p>
               <small className=" font-medium ">
-                Price : <span className="text-btnColor">50000 Frw</span>
+                Price : <span className="text-btnColor">5000 Frw</span>
               </small>
             </div>
           </div>
@@ -46,7 +46,7 @@ const Deserts = () => {
             <div>
               <p className=" font-semibold ">Sweet Donut</p>
               <small className=" font-medium ">
-                Price : <span className="text-btnColor">50000 Frw</span>
+                Price : <span className="text-btnColor">5000 Frw</span>
               </small>
             </div>
           </div>

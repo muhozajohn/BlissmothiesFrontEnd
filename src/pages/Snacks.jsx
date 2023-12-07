@@ -13,7 +13,9 @@ const Snacks = () => {
           "https://blissmothies.onrender.com/blissmothies/menu/read"
         );
         const response = await getMenu.data.data;
-        const Launch = response.filter((menu) => menu.category === "Snacks");
+        const Launch = response.filter(
+          (menu) => menu.category === "Snacks" || menu.category === "snacks"
+        );
         setMenu(Launch);
         setIsloading(false);
       } catch (error) {

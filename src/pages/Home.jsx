@@ -85,8 +85,6 @@ const Home = () => {
     const selectedDat = new Date(values.DateDeparture);
     currentDate.setHours(0, 0, 0, 0);
     selectedDate.setHours(0, 0, 0, 0);
-    console.log("Current Date:", currentDate);
-    console.log("Selected Date:", selectedDate);
     if (!values.DateArrival) {
       errors.DateArrival = "Date Arrival Required";
     } else if (selectedDate < currentDate) {

@@ -126,8 +126,8 @@ const ProductsTable = () => {
       if (result) {
         setSingle(result);
         setPrice(result.price);
-        setPrice(result.title);
-        setPrice(result.Subtitle);
+        setTitle(result.title);
+        setSubtitle(result.Subtitle);
         setCategory(result.category);
         setContent(result.content);
         setImage(result.image);
@@ -230,7 +230,7 @@ const ProductsTable = () => {
                           <img src={item.image} alt="" className="w-12" />
                           <div className=" text-xs font-medium ">
                             <h2>{item.title}</h2>
-                            <span>#{item.category}</span>
+                            <span>#{item.Subtitle}</span>
                           </div>
                         </div>
                       </td>

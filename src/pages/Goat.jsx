@@ -13,7 +13,9 @@ const Goat = () => {
           "https://blissmothies.onrender.com/blissmothies/menu/read"
         );
         const response = await getMenu.data.data;
-        const Goat = response.filter((menu) => menu.title === "Goat");
+        const Goat = response.filter(
+          (menu) => menu.title === "Goat" || menu.title === "goat"
+        );
         setMenu(Goat);
         setIsloading(false);
       } catch (error) {

@@ -97,7 +97,7 @@ const UserCustomer = () => {
     getCart();
   }, []);
 
-  const shiping = 3500;
+  const shiping = 2000;
 
   const isAuthenticated = localStorage.getItem("token") !== null;
   if (!isAuthenticated) {
@@ -124,7 +124,7 @@ const UserCustomer = () => {
             <img
               src={userP}
               alt=""
-              className="rounded-xl h-full aspect-square   w-[5.5rem]"
+              className="rounded-xl h-full  w-full   lg:w-[5.5rem]"
             />
 
             <div className="mt-4">
@@ -182,7 +182,7 @@ const UserCustomer = () => {
           <div className="flex  lg:flex-row justify-between ">
             <div>
               <p className=" text-gray-600 ">SubTotal: </p>
-              <p className=" text-gray-600 ">Shiping: </p>
+              <p className=" text-gray-600 ">Delivery: </p>
               <p className=" text-gray-600 ">Total: </p>
             </div>
             <div>

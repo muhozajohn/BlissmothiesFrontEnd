@@ -13,7 +13,9 @@ const Slad = () => {
           "https://blissmothies.onrender.com/blissmothies/menu/read"
         );
         const response = await getMenu.data.data;
-        const Deserts = response.filter((menu) => menu.category === "Slad");
+        const Deserts = response.filter(
+          (menu) => menu.category === "Salad" || menu.category === "salad"
+        );
         setMenu(Deserts);
         setIsloading(false);
       } catch (error) {

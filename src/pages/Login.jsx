@@ -135,7 +135,7 @@ const Login = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
-              placeholder="Username"
+              placeholder="Email.."
               className="py-3 px-3 border border-solid border-gray-400 rounded-sm outline-none active:outline-none text-sm"
             />
             {formik.touched.password && formik.errors.password ? (

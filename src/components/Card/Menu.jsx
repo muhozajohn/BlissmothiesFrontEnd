@@ -72,7 +72,7 @@ const Menu = ({ item }) => {
         pauseOnHover
         theme="dark"
       />
-      <div className="px-4 py-4 relative bg-white rounded-lg flex flex-col justify-between gap-5">
+      <div className="px-4 py-4 relative h-72 bg-white rounded-lg flex flex-col justify-between gap-5">
         <div className="flex justify-between items-center relative">
           <div>
             <h2 className="text-sm font-[600]">{item?.title}</h2>

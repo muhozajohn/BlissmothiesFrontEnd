@@ -73,14 +73,13 @@ const Table = () => {
     people: "",
     time: "",
     tel: "",
-    firstname: "",
-    lastname: "",
   };
   const validate = (values) => {
     let errors = {};
     const currentDate = new Date();
     const selectedDate = new Date(values.DateArrival);
-
+    currentDate.setHours(0, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
     if (!values.DateArrival) {
       errors.DateArrival = "Date Required";
     } else if (selectedDate < currentDate) {
@@ -91,12 +90,6 @@ const Table = () => {
     }
     if (!values.time) {
       errors.time = "Time Required";
-    }
-    if (!values.firstname) {
-      errors.firstname = "firstname Required";
-    }
-    if (!values.lastname) {
-      errors.lastname = "lastname Required";
     }
     if (!values.tel) {
       errors.tel = "Tel Required";
@@ -130,44 +123,6 @@ const Table = () => {
               className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full"
               onSubmit={formik.handleSubmit}
             >
-              <div className="flex flex-col gap-2">
-                <label htmlFor="" className="text-sm font-semibold">
-                  Firstname
-                </label>
-                {formik.touched.firstname || formik.errors.firstname ? (
-                  <div className=" text-sm text-red-800 font-extralight ">
-                    {formik.errors.firstname}
-                  </div>
-                ) : null}
-                <input
-                  type="text"
-                  placeholder="Firstname"
-                  id="firstname"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.firstname}
-                  className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  w-full"
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="" className="text-sm font-semibold">
-                  Lastname
-                </label>
-                {formik.touched.lastname && formik.errors.lastname ? (
-                  <div className=" text-sm text-red-800 font-extralight ">
-                    {formik.errors.lastname}
-                  </div>
-                ) : null}
-                <input
-                  type="text"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.lastname}
-                  id="lastname"
-                  placeholder="Lastname"
-                  className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm  w-full"
-                />
-              </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="" className="text-sm font-semibold">
                   Phone

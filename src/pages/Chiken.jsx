@@ -13,7 +13,9 @@ const Chiken = () => {
           "https://blissmothies.onrender.com/blissmothies/menu/read"
         );
         const response = await getMenu.data.data;
-        const chiken = response.filter((menu) => menu.title === "Chicken");
+        const chiken = response.filter(
+          (menu) => menu.title === "Chicken" || menu.title === "chicken"
+        );
         setMenu(chiken);
         setIsloading(false);
       } catch (error) {

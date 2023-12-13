@@ -1,6 +1,7 @@
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { MdSpaceDashboard } from "react-icons/md";
 import { BsFillImageFill } from "react-icons/bs";
+import { MdEventNote } from "react-icons/md";
 import { GiHelp } from "react-icons/gi";
 import {
   AiFillFolderOpen,
@@ -29,6 +30,11 @@ export const DashLink = [
     path: "/Products",
     display: "Products",
     icon: <BsFillBagFill />,
+  },
+  {
+    path: "/event",
+    display: "Events",
+    icon: <MdEventNote />,
   },
   {
     path: "/Customers",

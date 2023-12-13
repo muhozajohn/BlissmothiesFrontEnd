@@ -23,6 +23,7 @@ import Logout from "../Admin/Pages/Logout";
 import Settings from "../Admin/Pages/Settings";
 import Emails from "../Admin/Pages/Emails";
 import GalleryD from "../Admin/Pages/GalleryD";
+import DashEvents from "../Admin/Pages/DashEvents";
 import Manage from "../Admin/Pages/Manage";
 const Routers = () => {
   return (
@@ -49,6 +50,7 @@ const Routers = () => {
           <Route path="/Orders" element={<Orders />} />
           <Route path="/Customers" element={<Customers />} />
           <Route path="/Products" element={<Products />} />
+          <Route path="/event" element={<DashEvents />} />
           <Route path="/GetHelp" element={<GetHelp />} />
           <Route path="/Reports" element={<Reports />} />
           <Route path="/Logout" element={<Logout />} />

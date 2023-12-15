@@ -10,10 +10,8 @@ const EventModal = () => {
   const [loading, setIsloading] = useState(false);
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
-  const [Subtitle, setSubtitle] = useState();
   const [price, setPrice] = useState("");
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
 
   const token = localStorage.getItem("token");
   const config = {
@@ -27,16 +25,14 @@ const EventModal = () => {
     const galleryImage = imageInput.files[0]; // Get the selected image file
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("Subtitle", Subtitle);
     formData.append("price", price);
-    formData.append("category", category);
     formData.append("content", content);
     formData.append("image", galleryImage);
     console.log("FormData", formData);
     try {
       setIsloading(true);
       const upData = await axios.post(
-        `https://blissmothies.onrender.com/blissmothies/menu/create`,
+        `https://blissmothies.onrender.com/blissmothies/event/create`,
         formData,
         config
       );
@@ -60,7 +56,7 @@ const EventModal = () => {
     setModal(!modal);
   };
   const notify = () => {
-    toast.success("Product Added Well!", {
+    toast.success("Event Added Well!", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -125,20 +121,14 @@ const EventModal = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
               />
-              <input
-                type="text"
-                placeholder="SubTitle"
-                value={Subtitle}
-                onChange={(e) => setSubtitle(e.target.value)}
-                className="py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
-              />
+
               <div className="flex flex-col lg:flex-row items-center gap-4 justify-between ">
                 <input
                   type="text"
                   placeholder="Price"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                  className=" w-full lg:w-1/2  py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
+                  className=" w-full  py-3 px-3 border border-solid border-gray-500 rounded-sm bg-transparent placeholder-black outline-none active:outline-none text-sm"
                 />
               </div>
 

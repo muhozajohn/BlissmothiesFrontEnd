@@ -35,48 +35,6 @@ const Login = () => {
       theme: "colored",
     });
   };
-  // const signIn = async () => {
-  //   try {
-  //     if (formik.isValid) {
-  //       const formData = {
-  //         email: formik.values.email,
-  //         password: formik.values.password,
-  //       };
-  //       setLoading(true);
-  //       const loginData = await axios.post(
-  //         "https://blissmothies.onrender.com/blissmothies/users/login/",
-  //         formData
-  //       );
-
-  //       if (loginData.status === 200) {
-  //         localStorage.setItem("token", loginData.data.token);
-  //         setLoading(false);
-  //         notify();
-  //         setTimeout(() => {
-  //           if (loginData.data.users.role === "admin") {
-  //             localStorage.setItem("image", loginData.data.users.userProfile);
-  //             navigate("/Dashboard");
-  //           } else if (loginData.data.users.role === "user") {
-  //             localStorage.setItem("userP", loginData.data.users.userProfile);
-  //             localStorage.setItem("userName", loginData.data.users.fullName);
-  //             localStorage.setItem("userEmail", loginData.data.users.email);
-  //             localStorage.setItem("userGender", loginData.data.users.gender);
-  //             navigate("/");
-  //             window.location.reload();
-  //           } else {
-  //             // Handle other roles if needed
-  //             console.error("Unknown user role:", loginData.data.users.role);
-  //           }
-  //         }, 3000);
-  //         // Check the user's role and navigate accordingly
-  //       }
-  //     }
-  //   } catch (error) {
-  //     setLoading(false);
-  //     eror();
-  //     console.log("Failed To Login", error);
-  //   }
-  // };
 
   const signIn = async () => {
     try {
@@ -196,7 +154,7 @@ const Login = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
-              placeholder="Email.."
+              placeholder="johndoe@gmail.com"
               className="py-3 px-3 border border-solid border-gray-400 rounded-sm outline-none active:outline-none text-sm"
             />
             {formik.touched.password && formik.errors.password ? (
@@ -210,7 +168,7 @@ const Login = () => {
               value={formik.values.password}
               type="password"
               id="password"
-              placeholder="Password"
+              placeholder="****************"
               className="py-3 px-3 border border-gray-400 rounded-sm outline-none active:outline-none text-sm"
             />
 

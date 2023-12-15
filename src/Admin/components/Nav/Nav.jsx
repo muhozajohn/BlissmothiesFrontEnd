@@ -30,7 +30,7 @@ const Nav = () => {
 
   return (
     <div>
-      <nav className="flex justify-between items-center gap-2 lg:gap-6 px-2 py-3  bg-white fixed w-screen z-40 shadow-lg ">
+      <nav className="flex  justify-between items-center gap-2 lg:gap-6 px-2 py-3  bg-white fixed w-screen z-40 shadow-lg ">
         <div className="lg:hidden relative inline-block text-left">
           <div>
             <button
@@ -73,7 +73,7 @@ const Nav = () => {
           <Link to="/Dashboard">
             <img src={logo} alt="" className=" h-[50px] " />
           </Link>
-          <p className=" text-sm font-[700] ">Blissmothies</p>
+          <p className=" text-sm font-[700] ">Blissfulsmoothies</p>
         </div>
         <div className="flex justify-between items-center w-full">
           <p className="hidden md:block lg:block text-sm font-[700] ">

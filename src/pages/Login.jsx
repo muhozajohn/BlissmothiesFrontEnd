@@ -35,6 +35,49 @@ const Login = () => {
       theme: "colored",
     });
   };
+  // const signIn = async () => {
+  //   try {
+  //     if (formik.isValid) {
+  //       const formData = {
+  //         email: formik.values.email,
+  //         password: formik.values.password,
+  //       };
+  //       setLoading(true);
+  //       const loginData = await axios.post(
+  //         "https://blissmothies.onrender.com/blissmothies/users/login/",
+  //         formData
+  //       );
+
+  //       if (loginData.status === 200) {
+  //         localStorage.setItem("token", loginData.data.token);
+  //         setLoading(false);
+  //         notify();
+  //         setTimeout(() => {
+  //           if (loginData.data.users.role === "admin") {
+  //             localStorage.setItem("image", loginData.data.users.userProfile);
+  //             navigate("/Dashboard");
+  //           } else if (loginData.data.users.role === "user") {
+  //             localStorage.setItem("userP", loginData.data.users.userProfile);
+  //             localStorage.setItem("userName", loginData.data.users.fullName);
+  //             localStorage.setItem("userEmail", loginData.data.users.email);
+  //             localStorage.setItem("userGender", loginData.data.users.gender);
+  //             navigate("/");
+  //             window.location.reload();
+  //           } else {
+  //             // Handle other roles if needed
+  //             console.error("Unknown user role:", loginData.data.users.role);
+  //           }
+  //         }, 3000);
+  //         // Check the user's role and navigate accordingly
+  //       }
+  //     }
+  //   } catch (error) {
+  //     setLoading(false);
+  //     eror();
+  //     console.log("Failed To Login", error);
+  //   }
+  // };
+
   const signIn = async () => {
     try {
       if (formik.isValid) {
@@ -68,13 +111,31 @@ const Login = () => {
               console.error("Unknown user role:", loginData.data.users.role);
             }
           }, 3000);
-          // Check the user's role and navigate accordingly
         }
       }
     } catch (error) {
       setLoading(false);
-      eror();
-      console.log("Failed To Login", error);
+      if (error.response) {
+        if (error.response.status === 401) {
+          // Unauthorized - Incorrect password
+          formik.setErrors({
+            password: "Incorrect password. Try again.",
+          });
+        } else if (error.response.status === 422) {
+          // Unprocessable Entity - Validation error (e.g., incorrect username)
+          formik.setErrors({
+            email: "Incorrect email address. Check and try again.",
+          });
+        } else {
+          // Other errors
+          eror("Failed to login. Please try again.");
+          console.log("Failed To Login", error);
+        }
+      } else {
+        // Network error or other unexpected errors
+        eror("Failed to login. Please try again.");
+        console.log("Failed To Login", error);
+      }
     }
   };
 

@@ -128,6 +128,7 @@ const Blog = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
+    formData.append("ingridents", ingridents);
     formData.append("image", galleryImage);
     console.log("FormData", formData);
     try {
@@ -138,7 +139,7 @@ const Blog = () => {
         config
       );
 
-      if (upData.status === 200) {
+      if (upData.status === 201) {
         notif();
         setIsloading(false);
         setTimeout(() => {

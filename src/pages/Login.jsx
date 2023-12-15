@@ -56,6 +56,11 @@ const Login = () => {
           setTimeout(() => {
             if (loginData.data.users.role === "admin") {
               localStorage.setItem("image", loginData.data.users.userProfile);
+              localStorage.setItem("Name", loginData.data.users.fullName);
+              localStorage.setItem("Email", loginData.data.users.email);
+              localStorage.setItem("Gender", loginData.data.users.gender);
+              localStorage.setItem("Pass", loginData.data.users.password);
+              localStorage.setItem("AdminID", loginData.data.users._id);
               navigate("/Dashboard");
             } else if (loginData.data.users.role === "user") {
               localStorage.setItem("userP", loginData.data.users.userProfile);

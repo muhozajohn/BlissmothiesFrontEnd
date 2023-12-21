@@ -25,6 +25,7 @@ import Emails from "../Admin/Pages/Emails";
 import GalleryD from "../Admin/Pages/GalleryD";
 import DashEvents from "../Admin/Pages/DashEvents";
 import Manage from "../Admin/Pages/Manage";
+import SingleCard from "../pages/SingleCard";
 const Routers = () => {
   return (
     <>
@@ -41,6 +42,7 @@ const Routers = () => {
           <Route path="/blog" element={<OneBlog />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/product-desc/:id" element={<SingleCard />} />
           <Route path="/carts-items" element={<UserCustomer />} />
           <Route path="*" element={<NotFound />} />
         </Route>

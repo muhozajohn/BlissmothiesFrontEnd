@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
 import { ToastContainer, toast } from "react-toastify";
 const Menu = ({ item }) => {
@@ -92,11 +93,13 @@ const Menu = ({ item }) => {
             className="w-20 h-20 absolute rounded-2xl right-0 top-[-1.7rem]"
           />
         </div>
-        <p className="mt-3 leading-6">
-          {item.content?.length > 100
-            ? `${item.content?.substring(0, 100)}.....`
-            : item.content}
-        </p>
+        <Link to={`/product-desc/${item?._id}`}>
+          <p className="mt-3 leading-6">
+            {item.content?.length > 100
+              ? `${item.content?.substring(0, 100)}.....`
+              : item.content}
+          </p>
+        </Link>
         <div className="flex justify-between items-center">
           <p>{item.price} Frw</p>
           <div

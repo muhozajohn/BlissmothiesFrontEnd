@@ -77,9 +77,7 @@ const Orders = () => {
                     <th scope="col" className="whitespace-nowrap px-6 py-4">
                       Customer
                     </th>
-                    <th scope="col" className="whitespace-nowrap px-6 py-4">
-                      Product Owner
-                    </th>
+                  
                     <th scope="col" className="whitespace-nowrap px-6 py-4">
                       Total Items
                     </th>

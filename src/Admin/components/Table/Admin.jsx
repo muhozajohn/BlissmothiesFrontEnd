@@ -71,7 +71,7 @@ const Admin = () => {
                         <img
                           src={item.userProfile}
                           alt=""
-                          className=" h-10 w-12 rounded-md"
+                          className="w-8 rounded-md h-8"
                         />
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">

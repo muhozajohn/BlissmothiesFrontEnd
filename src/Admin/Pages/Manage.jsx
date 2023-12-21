@@ -10,7 +10,7 @@ const Manage = () => {
   }
   const [activeTab, setActiveTab] = useState("Blog");
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 ">
       <div className="flex items-center justify-between px-2 py-2 ">
         <h2>#Manage</h2>
         <ul className="flex  gap-2 items-center">

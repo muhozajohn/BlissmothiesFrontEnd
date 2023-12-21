@@ -68,11 +68,12 @@ const Member = () => {
                       <td className="whitespace-nowrap px-6 py-4 font-medium">
                         {index + 1}
                       </td>
+
                       <td className="whitespace-nowrap px-6 py-4">
                         <img
                           src={item.userProfile}
                           alt=""
-                          className="w-12 rounded-md"
+                          className="w-8 rounded-md h-8"
                         />
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">

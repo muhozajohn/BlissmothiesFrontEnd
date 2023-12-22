@@ -5,7 +5,9 @@ import { BiMenu } from "react-icons/bi";
 import { FaCartPlus } from "react-icons/fa";
 import logo from "../../assets/images/logok.png";
 import { RiLogoutCircleRLine } from "react-icons/ri";
+import { useCart } from "../../components/Card/CartContext";
 const Header = () => {
+  const { notificationCount } = useCart();
   const storedImage = localStorage.getItem("userP");
   const name = localStorage.getItem("userName");
   const imageUrl = storedImage
@@ -82,9 +84,14 @@ const Header = () => {
               {isAuthenticated ? (
                 <Link
                   to="/carts-items"
-                  className="bg-btnColor rounded-lg px-2 py-2  lg:hidden "
+                  className="bg-btnColor rounded-lg px-2 py-2  lg:hidden relative"
                 >
                   <FaCartPlus className="text-lg font-bold" />
+                  {notificationCount >= 0 && (
+                    <span className="absolute max-w-8 max-h-6 -top-2 -right-3 bg-btnColor text-white rounded-full px-2 flex justify-center items-center">
+                      {notificationCount}
+                    </span>
+                  )}
                 </Link>
               ) : null}
             </ul>
@@ -122,9 +129,14 @@ const Header = () => {
             {isAuthenticated ? (
               <Link
                 to="/carts-items"
-                className="bg-btnColor rounded-lg px-2 py-2 hidden lg:block "
+                className="bg-btnColor rounded-lg px-2 py-2 hidden lg:block relative "
               >
                 <FaCartPlus className="text-lg font-bold" />
+                {notificationCount >= 0 && (
+                  <span className="absolute max-w-8 max-h-6 -top-2 -right-3 bg-btnColor text-white rounded-full px-2 flex justify-center items-center">
+                    {notificationCount}
+                  </span>
+                )}
               </Link>
             ) : null}
 

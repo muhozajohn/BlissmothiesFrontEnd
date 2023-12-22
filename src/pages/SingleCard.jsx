@@ -28,14 +28,14 @@ const SingleCard = () => {
     getProduct();
   }, [id]);
 
-  const userP = localStorage.getItem("userP");
   return (
     <section>
       <div className="container flex flex-col gap-2">
         <h1 className=" text-center font-bold text-lg">Product Description</h1>
         <h2 className=" text-lg font-medium mt-8">
           {" "}
-          <span className="  font-semibold ">Product  </span>{">"} {menu?.category} {">"} {menu?.title}
+          <span className="  font-semibold ">Product </span>
+          {">"} {menu?.category} {">"} {menu?.title}
         </h2>
         <div className=" flex flex-col lg:flex-row gap-6 items-start ">
           <div className="w-full lg:w-1/2">
@@ -48,9 +48,9 @@ const SingleCard = () => {
           <div className="w-full lg:w-1/2  rounded-lg flex flex-col gap-2  ">
             <div className="flex items-center gap-3 w-10 ">
               <img
-                src={userP}
+                src={menu?.ownerP}
                 alt=""
-                className=" rounded-full h-8 w-8 border border-btnColor "
+                className=" rounded-full aspect-square h-10 w-10 border-2 border-white "
               />
               <p className=" whitespace-nowrap text-sm font-medium ">
                 {menu?.owner}

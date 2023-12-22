@@ -4,7 +4,9 @@ import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
 import { ToastContainer, toast } from "react-toastify";
+import { useCart } from "./CartContext";
 const Menu = ({ item }) => {
+  const { increaseNotificationCount } = useCart();
   const [loading, setIsloading] = useState(false);
   const token = localStorage.getItem("token");
   const config = {
@@ -20,12 +22,11 @@ const Menu = ({ item }) => {
         {},
         config
       );
-      if (add.status === 201) {
+      if (add.status === 201 || add.status === 200) {
         notify();
         setIsloading(false);
-      } else if (add.status === 200) {
-        notify();
-        setIsloading(false);
+        // Update the notification count
+        increaseNotificationCount();
       }
     } catch (error) {
       console.log("Failed to Add it", error);

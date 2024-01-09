@@ -26,6 +26,7 @@ import GalleryD from "../Admin/Pages/GalleryD";
 import DashEvents from "../Admin/Pages/DashEvents";
 import Manage from "../Admin/Pages/Manage";
 import SingleCard from "../pages/SingleCard";
+import Payment from "../pages/Payment";
 const Routers = () => {
   return (
     <>
@@ -44,6 +45,7 @@ const Routers = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/product-desc/:id" element={<SingleCard />} />
           <Route path="/carts-items" element={<UserCustomer />} />
+          <Route path="/payment" element={<Payment />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route element={<DashLayout />}>

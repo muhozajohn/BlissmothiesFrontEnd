@@ -94,7 +94,7 @@ const Blog = () => {
               key={number}
               className={`bg-white  border border-orange-500 cursor-pointer font-medium py-1 px-3 rounded-lg text-btnColor ${
                 currentPage === number
-                  ? "bg-orange-800 text-white"
+                  ? "!bg-btnColor text-white border-white"
                   : "hover:bg-btnColor hover:text-white hover:border-white"
               }`}
               onClick={() => paginate(number)}

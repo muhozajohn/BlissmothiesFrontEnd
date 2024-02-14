@@ -185,7 +185,7 @@ const Home = () => {
 
                 <div className="bg-textColor px-4 py-1 w-full lg:w-[13vw] rounded-xl flex flex-col items-left justify-between">
                   <p className="flex gap-1 text-sm font-semibold">
-                    <FaUser /> #People
+                    <FaUser /> People
                   </p>
                   <select
                     name="peaple"
@@ -193,7 +193,7 @@ const Home = () => {
                     onChange={formik.handleChange}
                     className="w-full h-full bg-transparent outline-none active:outline-none text-xs"
                   >
-                    <option># of Person</option>
+                    <option>Number of Person</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
